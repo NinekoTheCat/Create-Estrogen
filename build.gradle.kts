@@ -1,5 +1,6 @@
 @file:Suppress("PropertyName", "UnstableApiUsage")
 
+import dev.mayaqq.multijarfixer.FixMultiRelease
 import net.msrandom.stubs.GenerateStubApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -74,7 +75,6 @@ cloche {
         mixins.from(file("src/main/createestrogen.mixins.json"))
 
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
-
         dependencies {
             compileOnly(libs.mixin)
             implementation(libs.kotlinx.serialization.json)
@@ -88,8 +88,15 @@ cloche {
 
             modCompileOnly(libs.kritter)
             modCompileOnly(libs.cynosure)
-
             implementation(libs.mixinConstrains)
+            modCompileOnly(libs.forge.create) {
+                artifact {
+                    classifier = "slim"
+                }
+                isTransitive = false
+            }
+
+
         }
     }
 
@@ -200,7 +207,6 @@ cloche {
         include(libs.forge.mixinExtras)
         include(libs.forge.kritter)
         include(libs.mixinConstrains)
-
         metadata {
             blurLogo = false
             modProperty("catalogueItemIcon", "estrogen:estrogen_pill")
@@ -223,6 +229,12 @@ cloche {
             modCompileOnly(libs.forge.emi)
             modImplementation(libs.forge.cynosure)
             modImplementation(libs.forge.kritter)
+            modImplementation(libs.forge.create) {
+                artifact {
+                    classifier = "slim"
+                }
+                isTransitive = false
+            }
             //modApi(libs.forge.kittyconfig)
 
             when(item_viewer) {
@@ -238,7 +250,26 @@ cloche {
     }
 }
 
+val fixedAttribute = Attribute.of("fixed-jar", Boolean::class.javaObjectType)
 
+dependencies {
+    registerTransform(FixMultiRelease::class) {
+        from.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE).attribute(fixedAttribute, false)
+        to.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE).attribute(fixedAttribute, true)
+    }
+
+    artifactTypes {
+        named(ArtifactTypeDefinition.JAR_TYPE) {
+            attributes.attribute(fixedAttribute, false)
+        }
+    }
+}
+
+configurations.named("forgeRuntimeClasspath") {
+    attributes {
+        attribute(fixedAttribute, true)
+    }
+}
 java {
     withSourcesJar()
 }

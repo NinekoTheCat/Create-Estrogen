@@ -2,7 +2,7 @@
 
 # Stuff
 kotlin = "2.0.0"
-cloche = "0.11.4"
+cloche = "0.11.6"
 
 # Minecraft
 minecraft = "1.20.1"
@@ -48,9 +48,9 @@ jei_file_id_fabric = "5101365"
 flk = "1.11.0+kotlin.2.0.0"
 
 # Forge Only Dependencies
-forge = "47.2.19"
-curios = "5.4.7+1.20.1"
-create_forge = "0.5.1.f-27"
+forge = "47.4.4"
+curios = "5.14.1+1.20.1"
+create_forge = "6.0.7-174"
 jei_file_id_forge = "4712868"
 kff = "4.11.0"
 
@@ -73,7 +73,6 @@ cynosure = { module = "dev.mayaqq.cynosure:cynosure-common", version.ref = "cyno
 kittyconfig = { module = "uwu.serenity.kittyconfig:kittyconfig-minecraft-common", version.ref = "kittyconfig-mc" }
 kittyconfig-ksp = { module = "uwu.serenity.kittyconfig:kittyconfig-ksp", version.ref = "kittyconfig-ksp" }
 mixinConstrains = { module = "com.moulberry:mixinconstraints", version.ref = "mixin_constrains" }
-
 # Fabric dependencies
 fabric-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "flk" }
 fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fapi" }
@@ -100,7 +99,7 @@ fabric-botarium = { module = "earth.terrarium.botarium:botarium-fabric-1.20.1", 
 
 # Forge depencencies
 forge-kotlin = { module = "thedarkcolour:kotlinforforge", version.ref = "kff" }
-forge-create = { module = "com.simibubi.create:create-1.20.1", version.ref = "create_forge" }
+forge-create = { group = "com.simibubi.create" ,name = "create-1.20.1", version.ref = "create_forge" }
 forge-baubly = { module = "earth.terrarium.baubly:baubly-forge-1.20.1", version.ref = "baubly" }
 forge-emi = { module = "dev.emi:emi-forge", version.ref = "emi" }
 forge-jei-api = { module = "mezz.jei:jei-1.20.1-forge-api", version.ref = "jei" }
