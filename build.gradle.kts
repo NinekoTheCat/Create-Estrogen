@@ -1,6 +1,7 @@
 @file:Suppress("PropertyName", "UnstableApiUsage")
 
 import dev.mayaqq.multijarfixer.FixMultiRelease
+import earth.terrarium.cloche.addMixinJavaAgent
 import net.msrandom.stubs.GenerateStubApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -72,7 +73,7 @@ cloche {
     }
 
     common {
-        mixins.from(file("src/main/createestrogen.mixins.json"))
+//        mixins.from(file("src/main/createestrogen.mixins.json"))
 
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
         dependencies {
@@ -101,7 +102,7 @@ cloche {
     }
 
     fabric {
-        mixins.from(file("src/main/createestrogen.mixins.json"))
+//        mixins.from(file("src/main/createestrogen.mixins.json"))
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
 
         loaderVersion = libs.versions.fabric
@@ -197,12 +198,11 @@ cloche {
     }
 
     forge {
-        mixins.from(file("src/main/createestrogen.mixins.json"))
+//        mixins.from(file("src/main/createestrogen.mixins.json"))
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
 
         loaderVersion = libs.versions.forge.get()
         minecraftVersion = libs.versions.minecraft.get()
-
         include(libs.forge.baubly) { exclude(group = "me.shedaniel") }
         include(libs.forge.mixinExtras)
         include(libs.forge.kritter)
@@ -235,6 +235,8 @@ cloche {
                 }
                 isTransitive = false
             }
+            modRuntimeOnly(libs.forge.ponder)
+            modRuntimeOnly(libs.forge.registrate)
             //modApi(libs.forge.kittyconfig)
 
             when(item_viewer) {
