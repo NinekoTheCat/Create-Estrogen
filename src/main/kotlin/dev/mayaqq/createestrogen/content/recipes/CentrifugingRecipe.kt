@@ -10,8 +10,8 @@ import dev.mayaqq.cynosure.core.bytecodecs.toByteCodec
 import dev.mayaqq.cynosure.core.codecs.fieldOf
 import earth.terrarium.botarium.common.fluid.base.FluidContainer
 import earth.terrarium.botarium.common.fluid.base.FluidHolder
-import earth.terrarium.botarium.common.fluid.utils.FluidIngredient
 import net.minecraft.core.RegistryAccess
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.Container
 import net.minecraft.world.entity.player.Player
@@ -46,7 +46,64 @@ data class CentrifugingContainer(val input :FluidContainer) : Container {
     override fun stillValid(p0: Player): Boolean = throw UnsupportedOperationException()
 }
 
-class CentrifugingRecipe(val _id: ResourceLocation, val processingTime: Int, val inputs: FluidIngredient, val result: FluidHolder) : Recipe<CentrifugingContainer>{
+/**
+ * an ingredient for a recipe that requires a throughput of fluid instead of a specific amount
+ * @property fluid the type of fluid to input
+ * @property amountPerTick the amount per tick this can output/input of the fluid
+ */
+data class RatioFluidIngredient(
+    val fluid: Fluid,
+    val amountPerTick: Long
+) {
+    val holder get() = FluidHolder.of(fluid,amountPerTick)
+
+    companion object {
+        fun codec(): Codec<RatioFluidIngredient> = RecordCodecBuilder.create {instance ->
+            instance.group(
+                BuiltInRegistries.FLUID.byNameCodec().fieldOf("fluid").forGetter(RatioFluidIngredient::fluid),
+                Codec.LONG.fieldOf(RatioFluidIngredient::amountPerTick)
+            ).apply(instance,::RatioFluidIngredient)
+        }
+        fun netCodec() : ByteCodec<RatioFluidIngredient> = ObjectByteCodec.create(
+            BuiltInRegistries.FLUID.byNameCodec().toByteCodec() fieldOf RatioFluidIngredient::fluid ,
+            ByteCodec.LONG fieldOf RatioFluidIngredient::amountPerTick,
+            ::RatioFluidIngredient
+
+        )
+    }
+
+
+}
+
+/**
+ * an output of an ingredient for a recipe that requires a throughput of fluid instead of a specific amount
+ * @property fluid fluid to output
+ * @property amountPerTick the amount per tick to output
+ */
+data class RatioFluidOutput(
+    val fluid: Fluid,
+    val amountPerTick: Long
+) {
+
+    val holder get() = FluidHolder.of(fluid,amountPerTick)
+    companion object {
+        fun codec(): Codec<RatioFluidOutput> = RecordCodecBuilder.create {instance ->
+            instance.group(
+                BuiltInRegistries.FLUID.byNameCodec().fieldOf(RatioFluidOutput::fluid),
+                Codec.LONG.fieldOf(RatioFluidOutput::amountPerTick)
+            ).apply(instance,::RatioFluidOutput)
+        }
+        fun netCodec() : ByteCodec<RatioFluidOutput> = ObjectByteCodec.create(
+            BuiltInRegistries.FLUID.byNameCodec().toByteCodec() fieldOf RatioFluidOutput::fluid ,
+            ByteCodec.LONG fieldOf RatioFluidOutput::amountPerTick,
+            ::RatioFluidOutput
+        )
+    }
+
+}
+class CentrifugingRecipe(val _id: ResourceLocation,
+                         val inputs: List<RatioFluidIngredient>,
+                         val result: RatioFluidOutput) : Recipe<CentrifugingContainer>{
     override fun matches(circumstance: CentrifugingContainer, p1: Level): Boolean {
         /// this is assuming that .fluids always returns merged fluids
         val actualFluidAmounts = mutableMapOf<Fluid,Long>()
@@ -61,7 +118,7 @@ class CentrifugingRecipe(val _id: ResourceLocation, val processingTime: Int, val
         }
         /// actualFluidAmounts should now have all the fluids without any slots business
         /// check if ALL the ingredients are satisfied
-        return inputs.fluids.all { ingredient -> ingredient.fluidAmount <= actualFluidAmounts.getOrDefault(ingredient.fluid,0) }
+        return inputs.all { ingredient -> ingredient.amountPerTick <= actualFluidAmounts.getOrDefault(ingredient.fluid,0) }
     }
 
     override fun getId(): ResourceLocation = _id
@@ -78,18 +135,16 @@ class CentrifugingRecipe(val _id: ResourceLocation, val processingTime: Int, val
         fun codec(id: ResourceLocation): Codec<CentrifugingRecipe> = RecordCodecBuilder.create { instance ->
             instance.group(
                 RecordCodecBuilder.point(id),
-                Codec.INT.fieldOf("processing_time").forGetter(CentrifugingRecipe::processingTime),
-                FluidIngredient.CODEC.fieldOf("ingredients").forGetter(CentrifugingRecipe::inputs),
-                FluidHolder.NEW_CODEC.fieldOf("result").forGetter(CentrifugingRecipe::result)
+                RatioFluidIngredient.codec().listOf().fieldOf("ingredients").forGetter(CentrifugingRecipe::inputs),
+               RatioFluidOutput.codec().fieldOf("result").forGetter(CentrifugingRecipe::result)
 
             ).apply(instance,::CentrifugingRecipe)
         }
 
         fun netCodec(id: ResourceLocation): ByteCodec<CentrifugingRecipe> = ObjectByteCodec.create(
             ByteCodecs.constantFieldOf(id),
-            ByteCodec.INT fieldOf CentrifugingRecipe::processingTime,
-            FluidIngredient.CODEC.toByteCodec() fieldOf CentrifugingRecipe::inputs,
-            FluidHolder.NEW_CODEC.toByteCodec() fieldOf CentrifugingRecipe::result,
+            RatioFluidIngredient.netCodec().listOf() fieldOf CentrifugingRecipe::inputs,
+            RatioFluidOutput.netCodec() fieldOf CentrifugingRecipe::result,
             ::CentrifugingRecipe
         )
     }
