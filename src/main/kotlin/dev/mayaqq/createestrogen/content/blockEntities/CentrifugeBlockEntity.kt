@@ -19,8 +19,8 @@ private class RecipeWithProgress(val recipe: CentrifugingRecipe) {
         private set
     val isFinished get() = progress >= recipe.processingTime
 
-    fun increment(rpm: Float) {
-        val processingSpeed = Mth.clamp(rpm / 24, 1f, 128f)
+    fun increment() {
+        val processingSpeed = 128f
         progress += processingSpeed
         progress.coerceIn(0f..recipe.processingTime.toFloat())
     }
@@ -37,7 +37,7 @@ class CentrifugeBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: Bloc
         if (currentRecipeWithProgress?.isFinished == true && outputFluidTank != null)
             finishRecipe(outputFluidTank)
         if (!isOverStressed) {
-            currentRecipeWithProgress?.increment(getSpeed())
+            currentRecipeWithProgress?.increment()
         }
         if (currentRecipeWithProgress != null || outputFluidTank == null) return
         val inputFluidTank = FluidContainer.of(currentLevel, blockPos, Direction.DOWN) ?: return
