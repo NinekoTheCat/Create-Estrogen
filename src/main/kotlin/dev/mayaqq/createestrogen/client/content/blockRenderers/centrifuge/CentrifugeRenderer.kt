@@ -19,65 +19,65 @@ import net.minecraft.world.level.block.state.BlockState
 class CentrifugeRenderer(ctx: BlockEntityRendererProvider.Context) : KineticBlockEntityRenderer<CentrifugeBlockEntity>(ctx) {
     override fun getRotatedModel(be: CentrifugeBlockEntity, state: BlockState): SuperByteBuffer
         = CachedBuffers.partial(CreateEstrogenRenderer.CENTRIFUGE_COG,state)
-
-
-    override fun renderSafe(
-        be: CentrifugeBlockEntity,
-        partialTicks: Float,
-        ms: PoseStack,
-        buffer: MultiBufferSource,
-        light: Int,
-        overlay: Int
-    ) {
-        super.renderSafe(be, partialTicks, ms, buffer, light, overlay)
-        val level: Level? = be.level
-        if (level == null || !level.isClientSide) return
-        val up: BlockEntity? = getBlockEntity(level, be.blockPos.above())
-        val down: BlockEntity? = getBlockEntity(level, be.blockPos.below())
-        renderFluid(up, true, buffer, ms, light)
-        renderFluid(down, false, buffer, ms, light)
-    }
-    private fun renderFluid(
-        blockEntity: BlockEntity?,
-        isTop: Boolean,
-        buffer: MultiBufferSource,
-        ms: PoseStack,
-        light: Int
-    ) {
-        if (blockEntity != null) {
-            val container = FluidContainer.of(blockEntity, null)
-            if (container != null) {
-                val fluid = container.firstFluid
-                if (fluid != null && !fluid.isEmpty) {
-                    val yMin = if (isTop) 0.71f else 0.01f
-                    val yMax = if (isTop) 0.97f else 0.3f
-                    renderCommonFluid(
-                        fluid,
-                        0.01f,
-                        yMin,
-                        0.01f,
-                        0.99f,
-                        yMax,
-                        0.99f,
-                        buffer,
-                        ms,
-                        light,
-                        false)
-                }
-            }
-        }
-    }
-    private fun getBlockEntity(level: Level, pos: BlockPos): BlockEntity? {
-        try {
-            val be = level.getBlockEntity(pos)
-            return if (be is FluidTankBlockEntity) {
-                be.controllerBE
-            } else {
-                be
-            }
-        } catch (ignored: Exception) {
-            return null
-        }
-    }
+//
+//
+//    override fun renderSafe(
+//        be: CentrifugeBlockEntity,
+//        partialTicks: Float,
+//        ms: PoseStack,
+//        buffer: MultiBufferSource,
+//        light: Int,
+//        overlay: Int
+//    ) {
+//        super.renderSafe(be, partialTicks, ms, buffer, light, overlay)
+//        val level: Level? = be.level
+//        if (level == null || !level.isClientSide) return
+//        val up: BlockEntity? = getBlockEntity(level, be.blockPos.above())
+//        val down: BlockEntity? = getBlockEntity(level, be.blockPos.below())
+//        renderFluid(up, true, buffer, ms, light)
+//        renderFluid(down, false, buffer, ms, light)
+//    }
+//    private fun renderFluid(
+//        blockEntity: BlockEntity?,
+//        isTop: Boolean,
+//        buffer: MultiBufferSource,
+//        ms: PoseStack,
+//        light: Int
+//    ) {
+//        if (blockEntity != null) {
+//            val container = FluidContainer.of(blockEntity, null)
+//            if (container != null) {
+//                val fluid = container.firstFluid
+//                if (fluid != null && !fluid.isEmpty) {
+//                    val yMin = if (isTop) 0.71f else 0.01f
+//                    val yMax = if (isTop) 0.97f else 0.3f
+//                    renderCommonFluid(
+//                        fluid,
+//                        0.01f,
+//                        yMin,
+//                        0.01f,
+//                        0.99f,
+//                        yMax,
+//                        0.99f,
+//                        buffer,
+//                        ms,
+//                        light,
+//                        false)
+//                }
+//            }
+//        }
+//    }
+//    private fun getBlockEntity(level: Level, pos: BlockPos): BlockEntity? {
+//        try {
+//            val be = level.getBlockEntity(pos)
+//            return if (be is FluidTankBlockEntity) {
+//                be.controllerBE
+//            } else {
+//                be
+//            }
+//        } catch (ignored: Exception) {
+//            return null
+//        }
+//    }
 
 }

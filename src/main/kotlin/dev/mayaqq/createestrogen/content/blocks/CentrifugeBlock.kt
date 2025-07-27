@@ -49,7 +49,6 @@ class CentrifugeBlock(properties: Properties) : KineticBlock(properties), IBE<Ce
 
     @Deprecated("Deprecated in Java")
     override fun getShape(p0: BlockState, p1: BlockGetter, p2: BlockPos, p3: CollisionContext): VoxelShape = Shapes.block()
-
     @Deprecated("Deprecated in Java")
     override fun updateShape(
         p0: BlockState,
@@ -58,7 +57,7 @@ class CentrifugeBlock(properties: Properties) : KineticBlock(properties), IBE<Ce
         p3: LevelAccessor,
         p4: BlockPos,
         p5: BlockPos
-    ): BlockState =p2
+    ): BlockState =p0
     override fun hasShaftTowards(world: LevelReader?, pos: BlockPos?, state: BlockState?, face: Direction): Boolean {
         return face == Direction.DOWN
     }
