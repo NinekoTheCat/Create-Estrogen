@@ -65,6 +65,42 @@ cloche {
         sources = "https://github.com/MayaqqDev/Create-Estrogen"
         author("Mayaqq")
         contributor("https://github.com/MayaqqDev/Estrogen/wiki/Credits")
+        dependency{
+            modId = "create"
+            required = true
+            version {
+                start = "6.0.6"
+                end = "6.1.0"
+            }
+        }
+        dependency {
+            modId = "cynosure"
+            required = true
+            version {
+                start = "0.1.0"
+            }
+        }
+        dependency {
+            modId = "botarium"
+            version {
+                start = "2.3.4"
+            }
+        }
+        dependency {
+            modId="kotlinforforge"
+        }
+        dependency {
+            modId="flywheel"
+            version {
+                start = "1.0"
+            }
+        }
+        dependency {
+            modId = "ponder"
+            version {
+                start="1.0"
+            }
+        }
     }
 
     mappings {
@@ -113,7 +149,8 @@ cloche {
 
         }
     }
-
+    // UNCOMMENT WHEN CREATE FABRIC 6.0 HAPPENS!!
+    // MOVE DATAGENS TO FABRIC WHEN CREATE 6.0 HAPPENS!!
 //    fabric {
 ////        mixins.from(file("src/main/createestrogen.mixins.json"))
 //        accessWideners.from(file("src/main/createestrogen.accessWidener"))
@@ -232,7 +269,7 @@ cloche {
 
         loaderVersion = libs.versions.forge.get()
         minecraftVersion = libs.versions.minecraft.get()
-        include(libs.forge.baubly) { exclude(group = "me.shedaniel") }
+//        include(libs.forge.baubly) { exclude(group = "me.shedaniel") }
         include(libs.forge.mixinExtras)
         include(libs.forge.kritter)
         include(libs.mixinConstrains)
@@ -260,7 +297,7 @@ cloche {
             api(libs.forge.kotlin)
             modCompileOnlyApi(libs.forge.flywheel.api)
             modImplementation(libs.forge.flywheel)
-            modImplementation(libs.forge.baubly) { exclude(group = "me.shedaniel") }
+//            modImplementation(libs.forge.baubly) { exclude(group = "me.shedaniel") }
             modCompileOnly(libs.forge.rei)
             implementation(libs.forge.mixinExtras)
             compileOnlyApi(libs.forge.jei)
