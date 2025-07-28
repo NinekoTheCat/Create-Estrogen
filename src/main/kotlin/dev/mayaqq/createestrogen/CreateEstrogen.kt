@@ -19,6 +19,7 @@ internal inline fun id(path: String) = ResourceLocation(MOD_ID, path)
 object CreateEstrogen : Logger by LoggerFactory.getLogger(MOD_NAME),  RegistryManager by RegistryManager(MOD_ID) {
     fun init() {
         CreateEstrogenRecipes.register()
+        CreateEstrogenRecipes.Serializers.register()
         CreateEstrogenBlocks.register()
         CreateEstrogenBlockEntities.register()
         PonderIndex.addPlugin(CreateEstrogenPonderPlugin)

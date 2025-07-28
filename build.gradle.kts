@@ -53,9 +53,6 @@ val devauth_enabled: String by project
 dependencies {
 //    ksp(libs.kittyconfig.ksp)
 }
-tasks.compileKotlin {
-    enabled = false
-}
 cloche {
 
     metadata {
@@ -76,6 +73,9 @@ cloche {
     }
 
     common {
+        data {
+
+        }
         test {
 
         }
@@ -222,6 +222,9 @@ cloche {
 //        }
 //    }
     forge {
+        data {
+
+        }
         test {
 
         }
@@ -241,6 +244,9 @@ cloche {
         }
 
         runs {
+            data {
+
+            }
             client {
 //                setProperty("mixin.env.remapRefMap",true)
 //                setProperty("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
@@ -313,6 +319,9 @@ java {
         languageVersion = JavaLanguageVersion.of(17)
     }
     withSourcesJar()
+}
+tasks.compileJava {
+    options.compilerArgs.add("-AgenerateExpectStubs")
 }
 
 tasks.withType<KotlinCompile> {

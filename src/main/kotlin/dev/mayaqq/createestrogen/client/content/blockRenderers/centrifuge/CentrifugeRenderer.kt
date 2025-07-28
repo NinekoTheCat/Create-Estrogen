@@ -3,7 +3,7 @@ package dev.mayaqq.createestrogen.client.content.blockRenderers.centrifuge
 import com.mojang.blaze3d.vertex.PoseStack
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer
-import dev.mayaqq.createestrogen.client.platforms.renderCommonFluid
+import dev.mayaqq.createestrogen.client.platforms.CreateEstrogenFluidRenderer
 import dev.mayaqq.createestrogen.content.blockEntities.CentrifugeBlockEntity
 import earth.terrarium.botarium.common.fluid.base.FluidContainer
 import net.createmod.catnip.render.CachedBuffers
@@ -51,7 +51,7 @@ class CentrifugeRenderer(ctx: BlockEntityRendererProvider.Context) : KineticBloc
                 if (fluid != null && !fluid.isEmpty) {
                     val yMin = if (isTop) 0.71f else 0.01f
                     val yMax = if (isTop) 0.97f else 0.3f
-                    renderCommonFluid(
+                    CreateEstrogenFluidRenderer.renderCommonFluid(
                         fluid,
                         0.01f,
                         yMin,

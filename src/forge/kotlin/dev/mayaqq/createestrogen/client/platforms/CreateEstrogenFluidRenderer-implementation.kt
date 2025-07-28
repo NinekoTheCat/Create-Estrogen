@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.MultiBufferSource
 import net.minecraftforge.fluids.FluidStack
 import net.msrandom.stub.Stub
 
-@Stub
-actual fun renderCommonFluid(
+
+ fun renderCommonFluid(
 fluid: FluidHolder,
 xMin: Float,
 yMin: Float,
