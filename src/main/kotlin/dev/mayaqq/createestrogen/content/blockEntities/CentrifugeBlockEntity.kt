@@ -1,6 +1,7 @@
 package dev.mayaqq.createestrogen.content.blockEntities
 
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity
+import dev.mayaqq.createestrogen.CreateEstrogen
 import dev.mayaqq.createestrogen.content.CreateEstrogenRecipes
 import dev.mayaqq.createestrogen.content.recipes.CentrifugingContainer
 import dev.mayaqq.createestrogen.content.recipes.CentrifugingRecipe
@@ -21,8 +22,8 @@ class CentrifugeBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: Bloc
         super.tick()
         if (isVirtual || level?.isClientSide == true || speed.absoluteValue < 256) return
         val currentLevel = level as ServerLevel
-        val outputFluidTank = FluidContainer.of(currentLevel, blockPos, Direction.UP) ?: return
-        val inputFluidTank = FluidContainer.of(currentLevel, blockPos, Direction.DOWN) ?: return
+        val outputFluidTank = FluidContainer.of(currentLevel, blockPos.above(), Direction.DOWN) ?: return
+        val inputFluidTank = FluidContainer.of(currentLevel, blockPos.below(), Direction.UP) ?: return
         if (!inputFluidTank.allowsExtraction()) return
         if (!outputFluidTank.allowsInsertion()) return
         val foundRecipe = findApplicableRecipes(currentLevel, inputFluidTank).firstOrNull() ?: return

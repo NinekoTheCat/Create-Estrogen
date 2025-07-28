@@ -8,7 +8,7 @@ class CreateEstrogenCentrifugingRecipesGen(output: PackOutput?
 ) : CentrifugingRecipesGen(output, MOD_ID) {
     var TEST = create("test") {
         addInput(Fluids.LAVA,1)
-        addOutput(Fluids.WATER,2)
+        addOutput(Fluids.WATER,20)
     }
 }
 

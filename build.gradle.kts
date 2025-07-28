@@ -12,6 +12,7 @@ plugins {
 }
 
 
+
 repositories {
     cloche.librariesMinecraft()
     maven(url = "https://maven.parchmentmc.org") { name = "Parchment" }
@@ -54,7 +55,6 @@ dependencies {
 //    ksp(libs.kittyconfig.ksp)
 }
 cloche {
-
     metadata {
         modId = "createestrogen"
         name = "Create: Estrogen"
@@ -222,9 +222,8 @@ cloche {
 //        }
 //    }
     forge {
-        data {
-
-        }
+        datagenDirectory = file("src/main/generated")
+        data()
         test {
 
         }
@@ -244,9 +243,7 @@ cloche {
         }
 
         runs {
-            data {
-
-            }
+            data()
             client {
 //                setProperty("mixin.env.remapRefMap",true)
 //                setProperty("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")

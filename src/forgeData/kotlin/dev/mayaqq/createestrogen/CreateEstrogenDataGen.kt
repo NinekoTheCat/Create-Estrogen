@@ -19,7 +19,7 @@ class CreateEstrogenDataGen() {
         @SubscribeEvent
         @JvmStatic
         fun gatherData(event: GatherDataEvent) {
-            CreateEstrogen.info("FUCK")
+            CreateEstrogen.info("starting datagens forge...")
             val generator = event.generator
             val output = generator.packOutput
             generator.addProvider(event.includeServer(),CreateEstrogenRecipeProvider(output))

@@ -1,0 +1,13 @@
+{
+  "type": "createestrogen:centrifuging",
+  "ingredients": [
+    {
+      "amount_per_tick": 1000,
+      "fluid": "minecraft:lava"
+    }
+  ],
+  "result": {
+    "amountPerTick": 1000,
+    "fluid": "minecraft:water"
+  }
+}

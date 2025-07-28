@@ -6,6 +6,7 @@ import com.simibubi.create.content.kinetics.base.KineticBlock
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour
 import com.simibubi.create.foundation.block.IBE
+import dev.mayaqq.createestrogen.CreateEstrogen
 import dev.mayaqq.createestrogen.content.CreateEstrogenBlockEntities
 import dev.mayaqq.createestrogen.content.blockEntities.CentrifugeBlockEntity
 import net.minecraft.core.BlockPos
@@ -17,6 +18,7 @@ import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelAccessor
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.entity.BlockEntityTicker
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.pathfinder.PathComputationType
@@ -62,4 +64,13 @@ class CentrifugeBlock(properties: Properties) : KineticBlock(properties), IBE<Ce
         return face == Direction.DOWN
     }
     override fun getMinimumRequiredSpeedLevel(): IRotate.SpeedLevel = IRotate.SpeedLevel.of(256f)
+
+    override fun <S : BlockEntity?> getTicker(
+        level: Level,
+        state: BlockState,
+        blockEntityType: BlockEntityType<S>
+    ): BlockEntityTicker<S>? {
+        CreateEstrogen.info("hgoaoijioasdjo")
+        return super.getTicker(level, state, blockEntityType)
+    }
 }

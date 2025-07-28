@@ -51,6 +51,7 @@ data class CentrifugingContainer(val input :FluidContainer) : Container {
  * @property fluid the type of fluid to input
  * @property amountPerTick the amount per tick this can output/input of the fluid
  */
+@JvmRecord
 data class RatioFluidIngredient(
     val fluid: Fluid,
     val amountPerTick: Long
@@ -61,7 +62,7 @@ data class RatioFluidIngredient(
         fun codec(): Codec<RatioFluidIngredient> = RecordCodecBuilder.create {instance ->
             instance.group(
                 BuiltInRegistries.FLUID.byNameCodec().fieldOf("fluid").forGetter(RatioFluidIngredient::fluid),
-                Codec.LONG.fieldOf(RatioFluidIngredient::amountPerTick)
+                Codec.LONG.fieldOf("amount_per_tick").forGetter(RatioFluidIngredient::amountPerTick)
             ).apply(instance,::RatioFluidIngredient)
         }
         fun netCodec() : ByteCodec<RatioFluidIngredient> = ObjectByteCodec.create(
@@ -137,7 +138,6 @@ class CentrifugingRecipe(val _id: ResourceLocation,
                 RecordCodecBuilder.point(id),
                 RatioFluidIngredient.codec().listOf().fieldOf("ingredients").forGetter(CentrifugingRecipe::inputs),
                RatioFluidOutput.codec().fieldOf("result").forGetter(CentrifugingRecipe::result)
-
             ).apply(instance,::CentrifugingRecipe)
         }
 

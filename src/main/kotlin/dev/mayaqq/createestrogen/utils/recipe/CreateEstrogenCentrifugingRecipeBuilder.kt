@@ -2,13 +2,13 @@ package dev.mayaqq.createestrogen.utils.recipe
 
 import com.google.gson.JsonObject
 import com.mojang.serialization.JsonOps
-import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder
+import dev.mayaqq.createestrogen.CreateEstrogen
 import dev.mayaqq.createestrogen.content.recipes.CentrifugingRecipe
 import dev.mayaqq.createestrogen.content.recipes.RatioFluidIngredient
 import dev.mayaqq.createestrogen.content.recipes.RatioFluidOutput
-import dev.mayaqq.createestrogen.id
 import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.resources.ResourceLocation
+import net.minecraft.util.GsonHelper
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.level.material.Fluid
 import java.util.function.Consumer
@@ -38,7 +38,16 @@ class CreateEstrogenCentrifugingRecipeBuilder(val _id: ResourceLocation) {
     }
     class DataGenResult(val recipe: CentrifugingRecipe) : FinishedRecipe {
         override fun serializeRecipeData(json: JsonObject)  {
-            CentrifugingRecipe.codec(recipe.id).encode(recipe,JsonOps.INSTANCE,json)
+            val r = CentrifugingRecipe.codec(recipe.id).encode(recipe,JsonOps.INSTANCE,json).getOrThrow(true) {
+                CreateEstrogen.error(
+                    "Error encoding codec recipe: $it"
+                )
+            }
+            json.entrySet().clear()
+            r.asJsonObject.entrySet().forEach {
+                json.add(it.key,it.value)
+            }
+
         }
             override fun getId(): ResourceLocation  = ResourceLocation(recipe.id.namespace, "centrifuging/${recipe.id.path}")
 
