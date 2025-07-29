@@ -1,9 +1,6 @@
 package dev.mayaqq.createestrogen
 
-import dev.mayaqq.createestrogen.content.CreateEstrogenBlockEntities
-import dev.mayaqq.createestrogen.content.CreateEstrogenBlocks
-import dev.mayaqq.createestrogen.content.CreateEstrogenPonderPlugin
-import dev.mayaqq.createestrogen.content.CreateEstrogenRecipes
+import dev.mayaqq.createestrogen.content.*
 import dev.mayaqq.cynosure.events.api.EventSubscriber
 import net.createmod.ponder.foundation.PonderIndex
 import net.minecraft.resources.ResourceLocation
@@ -22,6 +19,8 @@ object CreateEstrogen : Logger by LoggerFactory.getLogger(MOD_NAME),  RegistryMa
         CreateEstrogenRecipes.Serializers.register()
         CreateEstrogenBlocks.register()
         CreateEstrogenBlockEntities.register()
+        CreateEstrogenItems.register()
+        CreateEstrogenCreativeTab.register()
         PonderIndex.addPlugin(CreateEstrogenPonderPlugin)
     }
 }

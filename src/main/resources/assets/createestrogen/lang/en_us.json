@@ -1,3 +1,6 @@
 {
-  "block.createestrogen.centrifuge": "Centrifuge"
+  "block.createestrogen.centrifuge": "Centrifuge",
+  "itemGroup.createestrogen.createestrogen": "Create: Estrogen",
+  "item.createestrogen.incomplete_estrogen_patches": "Incomplete Estrogen Patch",
+  "item.createestrogen.incomplete_uwu": "Incomplete UwU"
 }
