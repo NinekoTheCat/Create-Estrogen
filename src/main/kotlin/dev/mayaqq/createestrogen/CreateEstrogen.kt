@@ -21,6 +21,5 @@ object CreateEstrogen : Logger by LoggerFactory.getLogger(MOD_NAME),  RegistryMa
         CreateEstrogenBlockEntities.register()
         CreateEstrogenItems.register()
         CreateEstrogenCreativeTab.register()
-        PonderIndex.addPlugin(CreateEstrogenPonderPlugin)
     }
 }

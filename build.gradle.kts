@@ -285,10 +285,8 @@ cloche {
 //                setProperty("mixin.env.remapRefMap",true)
 //                setProperty("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
             }
-            test() {
-                client {
+            test {
 
-                }
             }
             server()
         }
