@@ -13,6 +13,7 @@ object CreateEstrogenCreativeTab: Registrar<CreativeModeTab> by CreateEstrogen..
         icon { CreateEstrogenBlocks.Centrifuge.asItem().defaultInstance }
         displayItems {
             accept(CreateEstrogenBlocks.Centrifuge)
+            accept(CreateEstrogenBlocks.MothSeat)
         }
     }
 }
