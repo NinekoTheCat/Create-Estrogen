@@ -15,6 +15,7 @@ plugins {
 
 repositories {
     cloche.librariesMinecraft()
+    maven("https://repo.nyon.dev/releases")
     maven(url = "https://maven.parchmentmc.org") { name = "Parchment" }
     maven(url = "https://maven.fabricmc.net") { name = "FabricMC" }
     maven(url = "https://maven.terraformersmc.com/releases/") { name = "TerraformersMC" }
@@ -96,6 +97,12 @@ cloche {
             }
         }
         dependency {
+            modId = "estrogen"
+            version {
+                start = "5.0"
+            }
+        }
+        dependency {
             modId = "ponder"
             version {
                 start="1.0"
@@ -129,7 +136,7 @@ cloche {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.coroutines.core)
             api(libs.flywheel.api)
-//            modImplementation(libs.baubly)
+            modImplementation(libs.baubly)
             modCompileOnly(libs.createNewAge)
 //            modImplementation(libs.kittyconfig)
             implementation(libs.mixinExtras)
@@ -137,6 +144,8 @@ cloche {
             modCompileOnly(libs.kritter)
             modCompileOnly(libs.cynosure)
             modCompileOnly(libs.ponder)
+            modCompileOnly(libs.estrogen)
+
             implementation(libs.mixinConstrains)
             modCompileOnly(libs.forge.create) {
                 artifact {
@@ -261,19 +270,16 @@ cloche {
     forge {
         datagenDirectory = file("src/main/generated")
         data()
-        test {
-
-        }
+//        test()
 //        mixins.from(file("src/main/createestrogen.mixins.json"))
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
 
         loaderVersion = libs.versions.forge.get()
         minecraftVersion = libs.versions.minecraft.get()
-//        include(libs.forge.baubly) { exclude(group = "me.shedaniel") }
-        include(libs.forge.mixinExtras)
-        include(libs.forge.kritter)
-        include(libs.mixinConstrains)
+
         metadata {
+            modLoader = "javafml"
+            loaderVersion("47")
             blurLogo = false
 //            modProperty("catalogueItemIcon", "estrogen:estrogen_pill")
 //            modProperty("catalogueBackground", "estrogen_background.png")
@@ -285,17 +291,22 @@ cloche {
 //                setProperty("mixin.env.remapRefMap",true)
 //                setProperty("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
             }
-            test {
-
-            }
+//            test {
+//
+//            }
             server()
         }
 
         dependencies {
-            api(libs.forge.kotlin)
+            include(libs.forge.baubly) { exclude(group = "me.shedaniel") }
+
+            include(libs.forge.mixinExtras)
+            include(libs.forge.kritter)
+            include(libs.mixinConstrains)
+            api(libs.forge.kotlin.lang)
             modCompileOnlyApi(libs.forge.flywheel.api)
             modImplementation(libs.forge.flywheel)
-//            modImplementation(libs.forge.baubly) { exclude(group = "me.shedaniel") }
+            modImplementation(libs.forge.baubly) { exclude(group = "me.shedaniel") }
             modCompileOnly(libs.forge.rei)
             implementation(libs.forge.mixinExtras)
             compileOnlyApi(libs.forge.jei)
@@ -308,6 +319,7 @@ cloche {
                 }
                 isTransitive = false
             }
+            modImplementation(libs.forge.estrogen)
             modApi(libs.forge.botarium)
             modImplementation(libs.forge.ponder)
             modImplementation(libs.forge.registrate)
@@ -348,7 +360,7 @@ configurations.named("forgeRuntimeClasspath") {
 }
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(21)
     }
     withSourcesJar()
 }
@@ -368,10 +380,11 @@ kotlin {
         languageVersion = KotlinVersion.KOTLIN_2_0
         freeCompilerArgs = listOf("-Xmulti-platform", "-Xno-check-actual", "-Xexpect-actual-classes")
     }
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 tasks.named("createCommonApiStub", GenerateStubApi::class) {
     excludes.add(libs.kritter.get().group)
     excludes.add(libs.cynosure.get().group)
+    excludes.add(libs.estrogen.get().group)
 }

@@ -6,7 +6,6 @@ import com.simibubi.create.content.kinetics.base.KineticBlock
 import com.simibubi.create.content.kinetics.simpleRelays.ICogWheel
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour
 import com.simibubi.create.foundation.block.IBE
-import dev.mayaqq.createestrogen.CreateEstrogen
 import dev.mayaqq.createestrogen.content.CreateEstrogenBlockEntities
 import dev.mayaqq.createestrogen.content.blockEntities.CentrifugeBlockEntity
 import net.minecraft.core.BlockPos
@@ -70,7 +69,6 @@ class CentrifugeBlock(properties: Properties) : KineticBlock(properties), IBE<Ce
         state: BlockState,
         blockEntityType: BlockEntityType<S>
     ): BlockEntityTicker<S>? {
-        CreateEstrogen.info("hgoaoijioasdjo")
         return super.getTicker(level, state, blockEntityType)
     }
 }

@@ -91,12 +91,12 @@ data class RatioFluidOutput(
         fun codec(): Codec<RatioFluidOutput> = RecordCodecBuilder.create {instance ->
             instance.group(
                 BuiltInRegistries.FLUID.byNameCodec().fieldOf(RatioFluidOutput::fluid),
-                Codec.LONG.fieldOf(RatioFluidOutput::amountPerTick)
+                Codec.LONG.fieldOf("amount_per_tick").forGetter(RatioFluidOutput::amountPerTick)
             ).apply(instance,::RatioFluidOutput)
         }
         fun netCodec() : ByteCodec<RatioFluidOutput> = ObjectByteCodec.create(
             BuiltInRegistries.FLUID.byNameCodec().toByteCodec() fieldOf RatioFluidOutput::fluid ,
-            ByteCodec.LONG fieldOf RatioFluidOutput::amountPerTick,
+            (ByteCodec.LONG fieldOf RatioFluidOutput::amountPerTick),
             ::RatioFluidOutput
         )
     }

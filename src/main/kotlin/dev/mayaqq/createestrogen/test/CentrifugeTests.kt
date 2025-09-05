@@ -1,15 +1,17 @@
 package dev.mayaqq.createestrogen.test
 
 import dev.mayaqq.createestrogen.MOD_ID
+import dev.mayaqq.estrogen.content.EstrogenFluids
 import earth.terrarium.botarium.common.fluid.base.FluidContainer
 import earth.terrarium.botarium.common.fluid.base.FluidHolder
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.gametest.framework.GameTest
+import net.minecraft.gametest.framework.GameTestAssertPosException
 import net.minecraft.gametest.framework.GameTestHelper
-import net.minecraft.world.level.material.Fluids
 import net.minecraftforge.gametest.GameTestHolder
 import net.minecraftforge.gametest.PrefixGameTestTemplate
+
 // TODO: replace with whatever is fabric's version of this
 @GameTestHolder(MOD_ID)
 class CentrifugeTests {
@@ -22,12 +24,21 @@ class CentrifugeTests {
         val inputTank  = FluidContainer.of(gameTestHelper.level,centrifugeInputTankPosition,Direction.UP)!!
 
         val outputTank  = FluidContainer.of(gameTestHelper.level,centrifugeOutputTankPosition,Direction.DOWN)!!
-        inputTank.insertFluid(FluidHolder.of(Fluids.LAVA,1000),false)
+        inputTank.insertFluid(FluidHolder.of(EstrogenFluids.FiltratedHorseUrine.value, 81), false)
         gameTestHelper.succeedWhen {
-            if (outputTank.extractFluid(FluidHolder.of(Fluids.WATER,1000),true).fluidAmount == 1000L) {
+            if (outputTank.extractFluid(
+                    FluidHolder.of(EstrogenFluids.LiquidEstrogen.value, 81),
+                    true
+                ).fluidAmount == 81L
+            ) {
                 gameTestHelper.assertTrue(inputTank.isEmpty,"Input tank has to have been used up")
             } else {
-                gameTestHelper.fail("output tank hasn't got any water")
+                throw GameTestAssertPosException(
+                    "output tank hasn't got any estrogen!",
+                    centrifugeOutputTankPosition,
+                    gameTestHelper.relativePos(centrifugeOutputTankPosition),
+                    gameTestHelper.tick
+                )
             }
         }
 

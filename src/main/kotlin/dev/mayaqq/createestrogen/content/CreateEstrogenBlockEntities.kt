@@ -15,7 +15,7 @@ import uwu.serenity.kritter.stdlib.blockEntity
 object CreateEstrogenBlockEntities : Registrar<BlockEntityType<*>> by CreateEstrogen..Registries.BLOCK_ENTITY_TYPE {
     val factory: SimpleBlockEntityVisualizer.Factory<CentrifugeBlockEntity> = SingleAxisRotatingVisual.of(CreateEstrogenRenderer.CENTRIFUGE_COG)
     val Centrifuge : BlockEntityType<CentrifugeBlockEntity> by blockEntity("centrifuge", ::CentrifugeBlockEntity){
-        validBlock(CreateEstrogenBlocks::Centrifuge)
+        validBlock(CreateEstrogenBlocks.Centrifuge)
         renderer(::CentrifugeRenderer)
         visual( factory::create)
 
