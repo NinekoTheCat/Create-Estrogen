@@ -1,0 +1,96 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:paper"
+  },
+  "loops": 5,
+  "results": [
+    {
+      "chance": 120.0,
+      "item": "estrogen:estrogen_patches",
+      "nbt": {
+        "BotariumData": {
+          "StoredFluids": [
+            {
+              "Amount": "1000L",
+              "Fluid": "estrogen:liquid_estrogen"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "chance": 16.0,
+      "item": "estrogen:estrogen_pill"
+    },
+    {
+      "chance": 5.0,
+      "item": "minecraft:paper"
+    },
+    {
+      "chance": 5.0,
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "chance": 4.0,
+      "item": "estrogen:horse_urine_bottle"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "createestrogen:incomplete_estrogen_patches"
+        },
+        {
+          "amount": 250,
+          "fluid": "estrogen:molten_slime",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "createestrogen:incomplete_estrogen_patches"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "createestrogen:incomplete_estrogen_patches"
+        },
+        {
+          "amount": 250,
+          "fluid": "estrogen:liquid_estrogen",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "createestrogen:incomplete_estrogen_patches"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createestrogen:incomplete_estrogen_patches"
+        },
+        {
+          "item": "minecraft:paper"
+        }
+      ],
+      "results": [
+        {
+          "item": "createestrogen:incomplete_estrogen_patches"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "createestrogen:incomplete_estrogen_patches"
+  }
+}

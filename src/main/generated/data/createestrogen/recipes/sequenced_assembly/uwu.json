@@ -1,0 +1,104 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "loops": 10,
+  "results": [
+    {
+      "item": "estrogen:uwu"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        },
+        {
+          "item": "minecraft:nether_star"
+        }
+      ],
+      "results": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        }
+      ],
+      "results": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        },
+        {
+          "item": "minecraft:nether_star"
+        }
+      ],
+      "results": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        }
+      ],
+      "results": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        },
+        {
+          "item": "minecraft:nether_star"
+        }
+      ],
+      "results": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        }
+      ],
+      "results": [
+        {
+          "item": "createestrogen:incomplete_uwu"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "createestrogen:incomplete_uwu"
+  }
+}
