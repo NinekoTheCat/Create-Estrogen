@@ -128,7 +128,7 @@ cloche {
                 kotlin.srcDir("build/generated/ksp/main/stubs")
             }
         }
-//        mixins.from(file("src/main/createestrogen.mixins.json"))
+        mixins.from(file("src/main/createestrogen.mixins.json"))
 
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
         dependencies {
@@ -271,7 +271,7 @@ cloche {
         datagenDirectory = file("src/main/generated")
         data()
 //        test()
-//        mixins.from(file("src/main/createestrogen.mixins.json"))
+        mixins.from(file("src/main/createestrogen.mixins.json"))
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
 
         loaderVersion = libs.versions.forge.get()
@@ -286,10 +286,9 @@ cloche {
         }
 
         runs {
+
             data()
             client {
-//                setProperty("mixin.env.remapRefMap",true)
-//                setProperty("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
             }
 //            test {
 //
@@ -360,7 +359,7 @@ configurations.named("forgeRuntimeClasspath") {
 }
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(17)
     }
     withSourcesJar()
 }
@@ -380,7 +379,7 @@ kotlin {
         languageVersion = KotlinVersion.KOTLIN_2_0
         freeCompilerArgs = listOf("-Xmulti-platform", "-Xno-check-actual", "-Xexpect-actual-classes")
     }
-    jvmToolchain(21)
+    jvmToolchain(17)
 }
 
 tasks.named("createCommonApiStub", GenerateStubApi::class) {
