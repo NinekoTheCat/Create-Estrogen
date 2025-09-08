@@ -18,9 +18,11 @@ class CreateEstrogenItemModelProvider(output: PackOutput, existingFileHelper: Ex
             this.getBuilder(style.itemId.path)
                 .parent(ModelFile.UncheckedModelFile("create:item/package/cardboard$size"))
                 .texture("0", "createestrogen:item/package/estrogen_cardboard")
+                .texture("particle", "createestrogen:item/package/estrogen_cardboard_particle")
             this.getBuilder(style.riggingModel.path)
                 .parent(ModelFile.UncheckedModelFile("create:item/package/rigging_${style.width}x${style.height}"))
                 .texture("0", "createestrogen:item/package/estrogen_cardboard")
+                .texture("particle", "createestrogen:item/package/estrogen_cardboard_particle")
         }
 
     }

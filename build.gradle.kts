@@ -268,7 +268,6 @@ cloche {
 //        }
 //    }
     forge {
-        datagenDirectory = file("src/main/generated")
         data()
 //        test()
         mixins.from(file("src/main/createestrogen.mixins.json"))
