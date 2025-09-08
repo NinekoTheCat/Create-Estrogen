@@ -1,8 +1,6 @@
 package dev.mayaqq.createestrogen
 
-import dev.myaqq.createestrogen.datagen.CreateEstrogenBlockTagProvider
-import dev.myaqq.createestrogen.datagen.CreateEstrogenItemTagProvider
-import dev.myaqq.createestrogen.datagen.CreateEstrogenLanguageProvider
+import dev.myaqq.createestrogen.datagen.*
 import dev.myaqq.createestrogen.datagen.recipe.CreateEstrogenRecipeProvider
 import net.minecraftforge.data.event.GatherDataEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -25,6 +23,11 @@ class CreateEstrogenDataGen {
             CreateEstrogen.info("starting datagens forge...")
             val generator = event.generator
             val output = generator.packOutput
+            generator.addProvider(event.includeServer(), CreateEstrogenLootTableProvider(output))
+            generator.addProvider(
+                event.includeClient(),
+                CreateEstrogenItemModelProvider(output, event.existingFileHelper)
+            )
             generator.addProvider(event.includeServer(), CreateEstrogenRecipeProvider(output))
             generator.addProvider(event.includeClient(), CreateEstrogenLanguageProvider(output, "en_us"))
             val blockTagProvider =

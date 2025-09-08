@@ -1,11 +1,9 @@
 package dev.mayaqq.createestrogen.content
 
 
-import com.google.gson.JsonObject
 import dev.engine_room.flywheel.api.visual.BlockEntityVisual
 import dev.engine_room.flywheel.api.visualization.VisualizationContext
 import dev.engine_room.flywheel.lib.visualization.SimpleBlockEntityVisualizer
-import dev.mayaqq.cynosure.recipes.CodecRecipeSerializer
 import net.minecraft.world.level.block.entity.BlockEntity
 import uwu.serenity.kritter.client.stdlib.clientOnly
 import uwu.serenity.kritter.stdlib.BlockEntityBuilder
@@ -17,8 +15,10 @@ inline fun <BE : BlockEntity> BlockEntityBuilder<BE>.visual(crossinline factory:
         onRegister {
             val builder = SimpleBlockEntityVisualizer.builder(it)
                 .factory { ctx, be, f -> factory(ctx, be, f) }
-            predicate?.let { builder.skipVanillaRender(it) } ?: builder.neverSkipVanillaRender()
+            predicate.let { builder.skipVanillaRender(it) }
             builder.apply()
         }
     }
 }
+
+val matchIdRegex = Regex("[A-Za-z]+:.*")

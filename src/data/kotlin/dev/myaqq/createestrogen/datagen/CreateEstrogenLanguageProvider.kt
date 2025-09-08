@@ -26,6 +26,7 @@ class CreateEstrogenLanguageProvider(output: PackOutput, locale: String) :
         )
         add("createestrogen.ponder.basic.text_2", "You can input fluids from the bottom")
         add("createestrogen.ponder.basic.text_3", "And output fluids from the top")
+        add(CreateEstrogenItems.allEstrogenPillBoxes[0].value, "Estrogen Pill Package")
     }
 
 }
