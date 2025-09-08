@@ -1,7 +1,0 @@
-{
-  "parent": "create:item/package/cardboard_10x12",
-  "textures": {
-    "0": "createestrogen:item/package/estrogen_cardboard",
-    "particle": "createestrogen:item/package/estrogen_cardboard_particle"
-  }
-}
