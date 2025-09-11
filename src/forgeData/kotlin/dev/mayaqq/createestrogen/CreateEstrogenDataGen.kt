@@ -5,19 +5,16 @@ import dev.myaqq.createestrogen.datagen.recipe.CreateEstrogenRecipeProvider
 import net.minecraftforge.data.event.GatherDataEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 
 
 //@EventBusSubscriber(modid = "createestrogen", bus = EventBusSubscriber.Bus.MOD)
 @Mod("createestrogen")
-class CreateEstrogenDataGen {
+object CreateEstrogenDataGen {
     init {
         CreateEstrogen.init()
-        val eventBus = FMLJavaModLoadingContext.get().modEventBus
-        eventBus.addListener(::gatherData)
     }
-    companion object {
-        @SubscribeEvent
+
+    @SubscribeEvent
         @JvmStatic
         fun gatherData(event: GatherDataEvent) {
             CreateEstrogen.info("starting datagens forge...")
@@ -47,6 +44,5 @@ class CreateEstrogenDataGen {
             }
 
         }
-    }
 
 }

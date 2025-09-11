@@ -82,27 +82,29 @@ cloche {
             }
         }
         dependency {
+            required = true
             modId = "botarium"
             version {
                 start = "2.3.4"
             }
         }
+
         dependency {
-            modId="kotlinforforge"
-        }
-        dependency {
+            required = true
             modId="flywheel"
             version {
                 start = "1.0"
             }
         }
         dependency {
+            required = true
             modId = "estrogen"
             version {
                 start = "5.0"
             }
         }
         dependency {
+            required = true
             modId = "ponder"
             version {
                 start="1.0"
@@ -277,8 +279,11 @@ cloche {
         minecraftVersion = libs.versions.minecraft.get()
 
         metadata {
-            modLoader = "javafml"
-            loaderVersion("47")
+            modLoader = "klf"
+            loaderVersion {
+                startInclusive = true
+                start = "1"
+            }
             blurLogo = false
 //            modProperty("catalogueItemIcon", "estrogen:estrogen_pill")
 //            modProperty("catalogueBackground", "estrogen_background.png")
@@ -301,7 +306,7 @@ cloche {
             include(libs.forge.mixinExtras)
             include(libs.forge.kritter)
             include(libs.mixinConstrains)
-            api(libs.forge.kotlin.lang)
+            modImplementation(libs.forge.kotlin.lang)
             modCompileOnlyApi(libs.forge.flywheel.api)
             modImplementation(libs.forge.flywheel)
             modImplementation(libs.forge.baubly) { exclude(group = "me.shedaniel") }
