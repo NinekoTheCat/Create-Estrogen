@@ -54,7 +54,7 @@ curios = "5.14.1+1.20.1"
 create_forge = "6.0.6-168"
 jei_file_id_forge = "4712868"
 kff = "4.11.0"
-klf = "2.10.5-k2.2.10-2.0+forge"
+klf = "2.10.5-k2.2.20-2.0+forge"
 
 [libraries]
 
