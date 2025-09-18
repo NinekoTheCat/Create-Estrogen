@@ -15,34 +15,34 @@ object CreateEstrogenDataGen {
     }
 
     @SubscribeEvent
-        @JvmStatic
-        fun gatherData(event: GatherDataEvent) {
-            CreateEstrogen.info("starting datagens forge...")
-            val generator = event.generator
-            val output = generator.packOutput
-            generator.addProvider(event.includeServer(), CreateEstrogenLootTableProvider(output))
-            generator.addProvider(
-                event.includeClient(),
-                CreateEstrogenItemModelProvider(output, event.existingFileHelper)
+    @JvmStatic
+    fun gatherData(event: GatherDataEvent) {
+        CreateEstrogen.info("starting datagens forge...")
+        val generator = event.generator
+        val output = generator.packOutput
+        generator.addProvider(event.includeServer(), CreateEstrogenLootTableProvider(output))
+        generator.addProvider(
+            event.includeClient(),
+            CreateEstrogenItemModelProvider(output, event.existingFileHelper)
+        )
+        generator.addProvider(event.includeServer(), CreateEstrogenRecipeProvider(output))
+        generator.addProvider(event.includeClient(), CreateEstrogenLanguageProvider(output, "en_us"))
+        val blockTagProvider =
+            CreateEstrogenBlockTagProvider(output, event.lookupProvider, event.existingFileHelper)
+        generator.addProvider(event.includeServer(), blockTagProvider)
+        generator.addProvider(
+            event.includeServer(),
+            CreateEstrogenItemTagProvider(
+                output,
+                event.lookupProvider,
+                blockTagProvider.contentsGetter(),
+                event.existingFileHelper
             )
-            generator.addProvider(event.includeServer(), CreateEstrogenRecipeProvider(output))
-            generator.addProvider(event.includeClient(), CreateEstrogenLanguageProvider(output, "en_us"))
-            val blockTagProvider =
-                CreateEstrogenBlockTagProvider(output, event.lookupProvider, event.existingFileHelper)
-            generator.addProvider(event.includeServer(), blockTagProvider)
-            generator.addProvider(
-                event.includeServer(),
-                CreateEstrogenItemTagProvider(
-                    output,
-                    event.lookupProvider,
-                    blockTagProvider.contentsGetter(),
-                    event.existingFileHelper
-                )
-            )
-            if (event.includeServer()) {
-                CreateEstrogenRecipeProvider.registerAllProcessing(generator,output)
-            }
-
+        )
+        if (event.includeServer()) {
+            CreateEstrogenRecipeProvider.registerAllProcessing(generator,output)
         }
+
+    }
 
 }

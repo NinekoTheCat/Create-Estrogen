@@ -16,5 +16,4 @@ fun createEstrogenClient() {
         AllPartialModels.PACKAGES[style.itemId] = PartialModel.of(ResourceLocation(MOD_ID, "item/${style.itemId.path}"))
         AllPartialModels.PACKAGE_RIGGING[style.itemId] = PartialModel.of(style.riggingModel)
     }
-
 }

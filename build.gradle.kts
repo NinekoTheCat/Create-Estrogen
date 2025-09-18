@@ -61,7 +61,7 @@ cloche {
         name = "Create: Estrogen"
         description = "Create module for Estrogen"
         license = "LGPL-3.0"
-        icon = "assets/createestrogen/icon.png"
+        icon = "icon.png"
         url = "https://github.com/MayaqqDev/Create-Estrogen"
         sources = "https://github.com/MayaqqDev/Create-Estrogen"
         author("Mayaqq")
@@ -299,6 +299,7 @@ cloche {
 //            }
             server()
         }
+        data()
 
         dependencies {
             include(libs.forge.baubly) { exclude(group = "me.shedaniel") }

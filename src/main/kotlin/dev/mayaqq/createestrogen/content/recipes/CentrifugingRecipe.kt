@@ -4,7 +4,9 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.teamresourceful.bytecodecs.base.ByteCodec
 import com.teamresourceful.bytecodecs.base.`object`.ObjectByteCodec
+import dev.mayaqq.createestrogen.content.CreateEstrogenBlocks
 import dev.mayaqq.createestrogen.content.CreateEstrogenRecipes
+import dev.mayaqq.createestrogen.id
 import dev.mayaqq.cynosure.core.bytecodecs.ByteCodecs
 import dev.mayaqq.cynosure.core.bytecodecs.toByteCodec
 import dev.mayaqq.cynosure.core.codecs.fieldOf
@@ -16,6 +18,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.Container
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Recipe
 import net.minecraft.world.item.crafting.RecipeSerializer
 import net.minecraft.world.item.crafting.RecipeType
@@ -132,7 +135,7 @@ class CentrifugingRecipe(val _id: ResourceLocation,
     override fun getSerializer(): RecipeSerializer<*> = CreateEstrogenRecipes.Serializers.CENTRIFUGING_SERIALIZER
 
     override fun getType(): RecipeType<*> = CreateEstrogenRecipes.CENTRIFUGING
-    companion object RecipeViewerInfo {
+    companion object RecipeViewerInfo : dev.mayaqq.estrogen.content.recipes.viewers.RecipeViewerInfo {
         fun codec(id: ResourceLocation): Codec<CentrifugingRecipe> = RecordCodecBuilder.create { instance ->
             instance.group(
                 RecordCodecBuilder.point(id),
@@ -147,6 +150,19 @@ class CentrifugingRecipe(val _id: ResourceLocation,
             RatioFluidOutput.netCodec() fieldOf CentrifugingRecipe::result,
             ::CentrifugingRecipe
         )
+
+        override val display: ItemStack
+            get() = CreateEstrogenBlocks.Centrifuge.value.asItem().defaultInstance
+        override val catalyst: ItemStack
+            get() = Items.AIR.defaultInstance
+        override val id: ResourceLocation
+            get() = id("centrifuging")
+        override val width: Int
+            get() = 134
+        override val height: Int
+            get() = 80
+        override val type: RecipeType<*>
+            get() = CreateEstrogenRecipes.CENTRIFUGING
     }
 
 
