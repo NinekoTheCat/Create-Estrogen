@@ -5,7 +5,9 @@ import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer
 import dev.mayaqq.createestrogen.client.platforms.CreateEstrogenFluidRenderer
 import dev.mayaqq.createestrogen.content.blockEntities.CentrifugeBlockEntity
+import dev.mayaqq.estrogen.Estrogen
 import earth.terrarium.botarium.common.fluid.base.FluidContainer
+import net.createmod.catnip.platform.CatnipServices
 import net.createmod.catnip.render.CachedBuffers
 import net.createmod.catnip.render.SuperByteBuffer
 import net.minecraft.client.renderer.MultiBufferSource
@@ -51,8 +53,8 @@ class CentrifugeRenderer(ctx: BlockEntityRendererProvider.Context) : KineticBloc
                 if (fluid != null && !fluid.isEmpty) {
                     val yMin = if (isTop) 0.71f else 0.01f
                     val yMax = if (isTop) 0.97f else 0.3f
-                    CreateEstrogenFluidRenderer.renderCommonFluid(
-                        fluid,
+                    CatnipServices.FLUID_RENDERER.renderFluidBox(
+                        fluid.fluid.defaultFluidState(),
                         0.01f,
                         yMin,
                         0.01f,
@@ -62,7 +64,9 @@ class CentrifugeRenderer(ctx: BlockEntityRendererProvider.Context) : KineticBloc
                         buffer,
                         ms,
                         light,
-                        false)
+                        false,
+                        false
+                    )
                 }
             }
         }
