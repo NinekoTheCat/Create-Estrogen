@@ -25,7 +25,7 @@ import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.crafting.Recipe
 
 @JeiPlugin
-object JeiCreateEstrogenPlugin : IModPlugin {
+class JeiCreateEstrogenPlugin : IModPlugin {
     override fun getPluginUid(): ResourceLocation = id("jei_plugin")
 
     val recipeTypes = buildMap {

@@ -13,10 +13,10 @@ import dev.emi.emi.api.widget.WidgetHolder
 import dev.mayaqq.estrogen.client.content.textures.RecipeTextures
 import dev.mayaqq.createestrogen.compat.recipeviewers.GenericRecipeViewerPlugin
 import dev.mayaqq.estrogen.compat.recipeviewers.base.ingredient.RvIngredient
-@EmiEntrypoint
-object EmiCreateEstrogenPlugin : EmiPlugin {
-    override fun register(registry: EmiRegistry) {
 
+@EmiEntrypoint
+class EmiCreateEstrogenPlugin : EmiPlugin {
+    override fun register(registry: EmiRegistry) {
         GenericRecipeViewerPlugin.rvRecipes.forEach { rvrecipeinfo ->
             val category = EmiRecipeCategory(rvrecipeinfo.info.id) {graphics, offsetX, offsetY, partialTick ->
                 rvrecipeinfo.info.render(graphics, offsetX, offsetY, partialTick)
@@ -25,7 +25,7 @@ object EmiCreateEstrogenPlugin : EmiPlugin {
             registry.addCategory(category)
 
             registry.recipeManager.getRecipes().filter { it.type == rvrecipeinfo.info.type }.forEach { recipe ->
-                val rvrecipe = rvrecipeinfo.recipeClass.constructors.first().call(recipe)
+                val rvrecipe = rvrecipeinfo.recipeClass.constructors.first().call( recipe)
                 registry.addRecipe(object : BasicEmiRecipe(category, rvrecipeinfo.info.id, rvrecipeinfo.info.width, rvrecipeinfo.info.height) {
                     init {
                         rvrecipe.init()

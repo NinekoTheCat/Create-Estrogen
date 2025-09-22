@@ -31,7 +31,7 @@ import net.minecraft.network.chat.Component
 import java.util.*
 
 @REIPluginClient
-object ReiCreateEstrogenPlugin : REIClientPlugin {
+class ReiCreateEstrogenPlugin : REIClientPlugin {
     override fun getPluginProviderName(): String = id("rei_client").toString()
 
     override fun registerCategories(registry: CategoryRegistry) {

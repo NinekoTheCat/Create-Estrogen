@@ -164,6 +164,4 @@ class CentrifugingRecipe(val _id: ResourceLocation,
         override val type: RecipeType<*>
             get() = CreateEstrogenRecipes.CENTRIFUGING
     }
-
-
 }
