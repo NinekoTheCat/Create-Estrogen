@@ -7,9 +7,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 
 
-//@EventBusSubscriber(modid = "createestrogen", bus = EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = "createestrogen", bus = Mod.EventBusSubscriber.Bus.MOD)
 @Mod("createestrogen")
 object CreateEstrogenDataGen {
+
     init {
         CreateEstrogen.init()
     }
@@ -17,9 +18,10 @@ object CreateEstrogenDataGen {
     @SubscribeEvent
     @JvmStatic
     fun gatherData(event: GatherDataEvent) {
-        CreateEstrogen.info("starting datagens forge...")
+        CreateEstrogen.info("Firing Datagen")
         val generator = event.generator
         val output = generator.packOutput
+        if (generator.providersView.isNotEmpty()) return
         generator.addProvider(event.includeServer(), CreateEstrogenLootTableProvider(output))
         generator.addProvider(
             event.includeClient(),
