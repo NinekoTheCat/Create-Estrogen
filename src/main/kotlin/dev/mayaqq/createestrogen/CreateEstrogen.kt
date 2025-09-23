@@ -7,6 +7,7 @@ import dev.mayaqq.estrogen.api.EstrogenEntrypoint
 import dev.mayaqq.estrogen.api.EstrogenFlag
 import dev.mayaqq.estrogen.api.EstrogenModule
 import dev.mayaqq.estrogen.client.content.screen.EstrogenMenuScreen
+import dev.mayaqq.estrogen.client.content.screen.config.ConfigCategorySelectionScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
@@ -30,12 +31,10 @@ object CreateEstrogen : Logger by LoggerFactory.getLogger(MOD_NAME), RegistryMan
         CreateEstrogenCreativeTab.register()
     }
 
-    override val color: Color
-        get() = Color(0xFFC7A7)
-    override val description: String
-        get() = "Create module for Estrogen"
-    override val flags: Array<EstrogenFlag>
-        get() = arrayOf(EstrogenFlag.DISABLES_CAULDRON_ESTROGEN)
+    override val color: Color = Color(0xFFC7A7)
+    override val description: String = "Create module for Estrogen"
+    override val flags: Array<EstrogenFlag> = arrayOf(EstrogenFlag.DISABLES_CAULDRON_ESTROGEN)
 
-    override fun createConfigScreen(): (Screen) -> Screen = { EstrogenMenuScreen(it) }
+    //TODO: config categories here
+    override fun createConfigScreen(): (Screen) -> Screen = { ConfigCategorySelectionScreen(it, listOf()) }
 }

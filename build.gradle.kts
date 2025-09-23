@@ -313,7 +313,7 @@ cloche {
             modImplementation(libs.forge.baubly) { exclude(group = "me.shedaniel") }
             modCompileOnly(libs.forge.rei)
             implementation(libs.forge.mixinExtras)
-            compileOnlyApi(libs.forge.jei)
+            modCompileOnly(libs.forge.jei)
             modCompileOnly(libs.forge.emi)
             modImplementation(libs.forge.cynosure)
             modImplementation(libs.forge.kritter)

@@ -17,7 +17,6 @@ object CreateEstrogenBlockEntities : Registrar<BlockEntityType<*>> by CreateEstr
     val Centrifuge : BlockEntityType<CentrifugeBlockEntity> by blockEntity("centrifuge", ::CentrifugeBlockEntity){
         validBlock(CreateEstrogenBlocks.Centrifuge)
         renderer(::CentrifugeRenderer)
-        visual( factory::create)
-
+        visual(factory::create) { true }
     }
 }
