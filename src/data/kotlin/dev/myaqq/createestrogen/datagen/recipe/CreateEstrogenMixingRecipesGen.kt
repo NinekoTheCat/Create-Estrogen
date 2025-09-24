@@ -5,6 +5,7 @@ import com.simibubi.create.api.data.recipe.MixingRecipeGen
 import com.simibubi.create.content.kinetics.mixer.MixingRecipe
 import com.simibubi.create.content.processing.recipe.HeatCondition
 import dev.mayaqq.createestrogen.MOD_ID
+import dev.mayaqq.createestrogen.content.CreateEstrogenItems
 import dev.mayaqq.estrogen.content.EstrogenFluids
 import dev.mayaqq.estrogen.content.EstrogenItems
 import dev.myaqq.createestrogen.datagen.getFluidAmount
@@ -17,7 +18,7 @@ class CreateEstrogenMixingRecipesGen(packOutput: PackOutput) : MixingRecipeGen(p
             it.require(EstrogenFluids.HorseUrine.value, getFluidAmount(27000))
                 .require(AllItems.FILTER)
                 .output(EstrogenFluids.FiltratedHorseUrine.value, getFluidAmount(27000))
-                .output(EstrogenItems.UsedFilter)
+                .output(CreateEstrogenItems.UsedFilter)
         }
         create<MixingRecipe>("molten_amethyst") {
             it.require(Items.AMETHYST_SHARD)

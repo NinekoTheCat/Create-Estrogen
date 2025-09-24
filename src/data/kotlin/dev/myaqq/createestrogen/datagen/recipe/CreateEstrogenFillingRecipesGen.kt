@@ -4,6 +4,7 @@ import com.simibubi.create.AllItems
 import com.simibubi.create.api.data.recipe.FillingRecipeGen
 import com.simibubi.create.content.fluids.transfer.FillingRecipe
 import dev.mayaqq.createestrogen.MOD_ID
+import dev.mayaqq.createestrogen.content.CreateEstrogenItems
 import dev.mayaqq.estrogen.content.EstrogenFluids
 import dev.mayaqq.estrogen.content.EstrogenItems
 import dev.mayaqq.estrogen.content.EstrogenPotions
@@ -39,7 +40,7 @@ class CreateEstrogenFillingRecipesGen(packOutput: PackOutput) : FillingRecipeGen
             "filter"
         ) { builder ->
             builder
-                .require(EstrogenItems.UsedFilter)
+                .require(CreateEstrogenItems.UsedFilter)
                 .require(Fluids.WATER, getFluidAmount(27000))
                 .output(AllItems.FILTER, 1)
         }

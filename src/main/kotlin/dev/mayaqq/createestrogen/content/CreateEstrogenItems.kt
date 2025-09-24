@@ -10,8 +10,9 @@ import uwu.serenity.kritter.api.Registrar
 import uwu.serenity.kritter.api.entry.RegistryEntry
 import uwu.serenity.kritter.stdlib.item
 
-object CreateEstrogenItems: Registrar<Item> by CreateEstrogen..Registries.ITEM{
-    val IncompleteEstrogenPatch by  item("incomplete_estrogen_patches", ::SequencedAssemblyItem) {
+object CreateEstrogenItems: Registrar<Item> by CreateEstrogen..Registries.ITEM {
+    val UsedFilter by item("used_filter", ::Item)
+    val IncompleteEstrogenPatch by item("incomplete_estrogen_patches", ::SequencedAssemblyItem) {
         properties {
             stacksTo(1)
         }
