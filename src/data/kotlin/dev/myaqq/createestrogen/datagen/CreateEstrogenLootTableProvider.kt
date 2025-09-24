@@ -18,10 +18,10 @@ class CreateEstrogenLootTableProvider(
 
 class CreateEstrogenBlockLootTableSubProvider : BlockLootSubProvider(emptySet(), FeatureFlags.REGISTRY.allFlags()) {
     override fun generate() {
-        dropSelf(CreateEstrogenBlocks.Centrifuge.value)
-        dropSelf(CreateEstrogenBlocks.MothSeat.value)
+        dropSelf(CreateEstrogenBlocks.Centrifuge)
+        dropSelf(CreateEstrogenBlocks.MothSeat)
     }
 
     override fun getKnownBlocks(): MutableIterable<Block> =
-        mutableListOf(CreateEstrogenBlocks.MothSeat.value, CreateEstrogenBlocks.Centrifuge.value)
+        mutableListOf(CreateEstrogenBlocks.MothSeat, CreateEstrogenBlocks.Centrifuge)
 }

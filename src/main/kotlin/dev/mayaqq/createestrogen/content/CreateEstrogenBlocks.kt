@@ -22,7 +22,7 @@ import uwu.serenity.kritter.client.stdlib.renderType
 import uwu.serenity.kritter.stdlib.block
 
 object CreateEstrogenBlocks: Registrar<Block> by CreateEstrogen..Registries.BLOCK {
-    val Centrifuge = block("centrifuge", ::CentrifugeBlock)
+    val Centrifuge by block("centrifuge", ::CentrifugeBlock)
     {
         copyProperties(SharedProperties::copperMetal)
         properties{
@@ -38,7 +38,7 @@ object CreateEstrogenBlocks: Registrar<Block> by CreateEstrogen..Registries.BLOC
         simpleItem()
 
     }
-    val MothSeat = block("moth_seat", ::newMothSeat) {
+    val MothSeat by block("moth_seat", { SeatBlock(it, null) }) {
         copyProperties(Blocks::STRIPPED_SPRUCE_WOOD)
         properties {
             mapColor(MapColor.COLOR_ORANGE)
@@ -56,5 +56,4 @@ object CreateEstrogenBlocks: Registrar<Block> by CreateEstrogen..Registries.BLOC
 
 
     }
-    internal fun newMothSeat(p: BlockBehaviour.Properties) = SeatBlock(p,null)
 }

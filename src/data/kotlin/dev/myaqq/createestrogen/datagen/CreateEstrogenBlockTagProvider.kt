@@ -18,11 +18,11 @@ class CreateEstrogenBlockTagProvider(
 ) : BlockTagsProvider(output, lookupProvider, MOD_ID, existingFileHelper) {
     override fun addTags(provider: HolderLookup.Provider) {
         tag(EstrogenTags.Blocks.PICKAXE_MINABLE)
-            .add(CreateEstrogenBlocks.Centrifuge.value)
+            .add(CreateEstrogenBlocks.Centrifuge)
         tag(BlockTags.MINEABLE_WITH_AXE)
-            .add(CreateEstrogenBlocks.MothSeat.value)
+            .add(CreateEstrogenBlocks.MothSeat)
         tag(AllTags.AllBlockTags.SEATS.tag)
-            .add(CreateEstrogenBlocks.MothSeat.value)
+            .add(CreateEstrogenBlocks.MothSeat)
 
     }
 }

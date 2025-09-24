@@ -1,5 +1,6 @@
 package dev.mayaqq.createestrogen.compat.recipeviewers.recipes
 
+import dev.mayaqq.createestrogen.content.CreateEstrogenBlocks
 import dev.mayaqq.createestrogen.content.recipes.CentrifugingRecipe
 import dev.mayaqq.estrogen.client.content.textures.RecipeTextures
 import dev.mayaqq.estrogen.compat.recipeviewers.api.CRVIngredient
@@ -21,7 +22,7 @@ class CentrifugingRvRecipe(recipe: CentrifugingRecipe) : CRVRecipe<CentrifugingR
         addSlot(outputs[0], 110, 51, Role.OUTPUT)
 
         addDrawable(55, 40, GuiBlockRenderer(
-            EstrogenBlocks.Centrifuge.defaultBlockState(),
+            CreateEstrogenBlocks.Centrifuge.defaultBlockState(),
             null,
             0, 0, 0,
             Vec3(22.5, 45.0, 0.0),
@@ -32,7 +33,7 @@ class CentrifugingRvRecipe(recipe: CentrifugingRecipe) : CRVRecipe<CentrifugingR
 
     override val outputs: List<CRVIngredient> = listOf(CRVIngredient.of(recipe.result.fluid))
 
-    override val catalysts: List<CRVIngredient> = listOf(CRVIngredient.of(EstrogenBlocks.Centrifuge.asItem().defaultInstance))
+    override val catalysts: List<CRVIngredient> = listOf(CRVIngredient.of(CreateEstrogenBlocks.Centrifuge.asItem().defaultInstance))
 
     companion object : ViewerInfo<CentrifugingRecipe, CentrifugingRvRecipe>(
         CentrifugingRecipe,

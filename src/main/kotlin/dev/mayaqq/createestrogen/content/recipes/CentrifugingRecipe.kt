@@ -152,7 +152,7 @@ class CentrifugingRecipe(val _id: ResourceLocation,
         )
 
         override val display: ItemStack
-            get() = CreateEstrogenBlocks.Centrifuge.value.asItem().defaultInstance
+            get() = CreateEstrogenBlocks.Centrifuge.asItem().defaultInstance
         override val catalyst: ItemStack
             get() = Items.AIR.defaultInstance
         override val id: ResourceLocation

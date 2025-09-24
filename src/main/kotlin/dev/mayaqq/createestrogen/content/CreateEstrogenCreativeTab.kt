@@ -10,10 +10,10 @@ import uwu.serenity.kritter.stdlib.creativeTab
 object CreateEstrogenCreativeTab: Registrar<CreativeModeTab> by CreateEstrogen..Registries.CREATIVE_MODE_TAB {
     val CreateEstrogen = creativeTab("createestrogen") {
         title = Component.translatable("itemGroup.createestrogen.createestrogen")
-        icon { CreateEstrogenBlocks.Centrifuge.value.asItem().defaultInstance }
+        icon { CreateEstrogenBlocks.Centrifuge.asItem().defaultInstance }
         displayItems {
-            accept(CreateEstrogenBlocks.Centrifuge.value)
-            accept(CreateEstrogenBlocks.MothSeat.value)
+            accept(CreateEstrogenBlocks.Centrifuge)
+            accept(CreateEstrogenBlocks.MothSeat)
             acceptAll(CreateEstrogenItems.allEstrogenPillBoxes.map { it.value.defaultInstance })
         }
     }

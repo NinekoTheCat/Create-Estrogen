@@ -12,8 +12,8 @@ class CreateEstrogenLanguageProvider(output: PackOutput, locale: String) :
         add(CreateEstrogenItems.IncompleteEstrogenPatch, "Incomplete Estrogen Patch")
         add(CreateEstrogenItems.IncompleteUwU, "Incomplete UwU")
 
-        add(CreateEstrogenBlocks.Centrifuge.value, "Centrifuge")
-        add(CreateEstrogenBlocks.MothSeat.value, "Rosy Maple Seat")
+        add(CreateEstrogenBlocks.Centrifuge, "Centrifuge")
+        add(CreateEstrogenBlocks.MothSeat, "Rosy Maple Seat")
         add("itemGroup.createestrogen.createestrogen", "Create: Estrogen")
         add("createestrogen.recipe.centrifuging", "Centrifuging")
         add("emi.category.createestrogen.centrifuging", "Centrifuging")
