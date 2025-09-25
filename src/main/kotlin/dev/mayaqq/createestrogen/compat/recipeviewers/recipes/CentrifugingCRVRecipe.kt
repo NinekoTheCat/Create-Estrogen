@@ -7,13 +7,8 @@ import dev.mayaqq.estrogen.compat.recipeviewers.api.CRVIngredient
 import dev.mayaqq.estrogen.compat.recipeviewers.api.CRVRecipe
 import dev.mayaqq.estrogen.compat.recipeviewers.api.Role
 import dev.mayaqq.estrogen.compat.recipeviewers.api.ViewerInfo
-import dev.mayaqq.estrogen.compat.recipeviewers.api.elements.GuiBlockRenderer
-import dev.mayaqq.estrogen.content.EstrogenBlocks
-import net.minecraft.world.phys.Vec3
 
-
-class CentrifugingRvRecipe(recipe: CentrifugingRecipe) : CRVRecipe<CentrifugingRecipe>(recipe) {
-
+class CentrifugingCRVRecipe(recipe: CentrifugingRecipe) : CRVRecipe<CentrifugingRecipe>(recipe) {
     override fun init() {
         addTexture(RecipeTextures.JEI_LONG_ARROW, 31, 51);
         addTexture(RecipeTextures.JEI_SHADOW, 40, 36);
@@ -21,12 +16,7 @@ class CentrifugingRvRecipe(recipe: CentrifugingRecipe) : CRVRecipe<CentrifugingR
         addSlot(inputs[0], 5, 51, Role.INPUT)
         addSlot(outputs[0], 110, 51, Role.OUTPUT)
 
-        addDrawable(55, 40, GuiBlockRenderer(
-            CreateEstrogenBlocks.Centrifuge.defaultBlockState(),
-            null,
-            0, 0, 0,
-            Vec3(22.5, 45.0, 0.0),
-            20.0))
+        addDrawable(55, 40, CentrifugeBlockElement())
     }
 
     override val inputs: List<CRVIngredient> = listOf(CRVIngredient.of(recipe.inputs.first().fluid))
@@ -35,9 +25,9 @@ class CentrifugingRvRecipe(recipe: CentrifugingRecipe) : CRVRecipe<CentrifugingR
 
     override val catalysts: List<CRVIngredient> = listOf(CRVIngredient.of(CreateEstrogenBlocks.Centrifuge.asItem().defaultInstance))
 
-    companion object : ViewerInfo<CentrifugingRecipe, CentrifugingRvRecipe>(
+    companion object : ViewerInfo<CentrifugingRecipe, CentrifugingCRVRecipe>(
         CentrifugingRecipe,
-        { CentrifugingRvRecipe(it as CentrifugingRecipe) },
+        { CentrifugingCRVRecipe(it as CentrifugingRecipe) },
         CentrifugingRecipe::class
     )
 }
