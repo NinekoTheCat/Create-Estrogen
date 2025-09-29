@@ -11,6 +11,7 @@ class CreateEstrogenLanguageProvider(output: PackOutput, locale: String) :
     override fun addTranslations() {
         add(CreateEstrogenItems.IncompleteEstrogenPatch, "Incomplete Estrogen Patch")
         add(CreateEstrogenItems.IncompleteUwU, "Incomplete UwU")
+        add(CreateEstrogenItems.UsedFilter, "Used Filter")
 
         add(CreateEstrogenBlocks.Centrifuge, "Centrifuge")
         add(CreateEstrogenBlocks.MothSeat, "Rosy Maple Seat")
@@ -27,6 +28,8 @@ class CreateEstrogenLanguageProvider(output: PackOutput, locale: String) :
         add("createestrogen.ponder.basic.text_2", "You can input fluids from the bottom")
         add("createestrogen.ponder.basic.text_3", "And output fluids from the top")
         add(CreateEstrogenItems.allEstrogenPillBoxes[0].value, "Estrogen Pill Package")
+
+        add("create.tooltip.speedRequirement.max", "Max")
     }
 
 }

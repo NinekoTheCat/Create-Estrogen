@@ -32,11 +32,10 @@ object CreateEstrogenBlocks: Registrar<Block> by CreateEstrogen..Registries.BLOC
         renderType = RenderType::cutoutMipped
         onRegister {
             BlockStressValues.IMPACTS.register(it) {
-                256.0
+                8.0
             }
         }
         simpleItem()
-
     }
     val MothSeat by block("moth_seat", { SeatBlock(it, null) }) {
         copyProperties(Blocks::STRIPPED_SPRUCE_WOOD)

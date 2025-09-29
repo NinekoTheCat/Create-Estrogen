@@ -62,7 +62,7 @@ class CentrifugeBlock(properties: Properties) : KineticBlock(properties), IBE<Ce
     override fun hasShaftTowards(world: LevelReader?, pos: BlockPos?, state: BlockState?, face: Direction): Boolean {
         return face == Direction.DOWN
     }
-    override fun getMinimumRequiredSpeedLevel(): IRotate.SpeedLevel = IRotate.SpeedLevel.of(256f)
+    override fun getMinimumRequiredSpeedLevel(): IRotate.SpeedLevel = IRotate.SpeedLevel.valueOf("MAX")
 
     override fun <S : BlockEntity?> getTicker(
         level: Level,
