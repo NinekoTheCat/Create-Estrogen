@@ -1,11 +1,14 @@
-package dev.mayaqq.createestrogen.mixin;
+package dev.mayaqq.createestrogen.forge.mixin;
 
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import dev.mayaqq.createestrogen.content.packages.CreateEstrogenPackageStyles;
+import dev.mayaqq.createestrogen.generics.CreateEstrogenItemHandler;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,7 +24,7 @@ public class PackageItemMixin {
 
     @Inject(method = "containing(Lnet/minecraftforge/items/ItemStackHandler;)Lnet/minecraft/world/item/ItemStack;", at = @At("HEAD"), cancellable = true)
     private static void containing(ItemStackHandler stacks, CallbackInfoReturnable<ItemStack> cir) {
-        var contained = CreateEstrogenPackageStyles.containing(stacks);
+        var contained = CreateEstrogenPackageStyles.containing(new ItemHandlerWrapper(stacks));
         if (contained != null) {
             cir.setReturnValue(contained);
         }
@@ -44,5 +47,23 @@ public class PackageItemMixin {
     @Overwrite
     public String getDescriptionId() {
         return "item." + style.getItemId().getNamespace() + (style.rare() ? ".rare_package" : ".package");
+    }
+}
+
+record ItemHandlerWrapper(ItemStackHandler handler) implements CreateEstrogenItemHandler {
+
+    @Override
+    public int getSlots() {
+        return handler.getSlots();
+    }
+
+    @Override
+    public @NotNull ItemStack getStackInSlot(int slot) {
+        return handler.getStackInSlot(slot);
+    }
+
+    @Override
+    public CompoundTag serializeNBT() {
+        return handler.serializeNBT();
     }
 }

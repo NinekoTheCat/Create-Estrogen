@@ -6,8 +6,7 @@ import dev.mayaqq.cynosure.utils.colors.Color
 import dev.mayaqq.estrogen.api.EstrogenEntrypoint
 import dev.mayaqq.estrogen.api.EstrogenFlag
 import dev.mayaqq.estrogen.api.EstrogenModule
-import dev.mayaqq.estrogen.client.content.screen.EstrogenMenuScreen
-import dev.mayaqq.estrogen.client.content.screen.config.ConfigCategorySelectionScreen
+import dev.mayaqq.estrogen.client.content.screen.modules.ModulesScreen
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
@@ -36,5 +35,5 @@ object CreateEstrogen : Logger by LoggerFactory.getLogger(MOD_NAME), RegistryMan
     override val flags: Array<EstrogenFlag> = arrayOf(EstrogenFlag.DISABLES_CAULDRON_ESTROGEN)
 
     //TODO: config categories here
-    override fun createConfigScreen(): (Screen) -> Screen = { ConfigCategorySelectionScreen(it, listOf()) }
+    override fun createConfigScreen(): (Screen) -> Screen = { ModulesScreen(it) }
 }

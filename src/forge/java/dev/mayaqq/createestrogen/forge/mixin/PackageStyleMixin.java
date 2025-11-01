@@ -1,4 +1,4 @@
-package dev.mayaqq.createestrogen.mixin;
+package dev.mayaqq.createestrogen.forge.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.logistics.box.PackageStyles;
