@@ -1,4 +1,4 @@
-package dev.myaqq.createestrogen.datagen
+package dev.mayaqq.createestrogen.datagen
 
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.ResourceLocation

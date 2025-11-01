@@ -1,4 +1,4 @@
-package dev.myaqq.createestrogen.datagen.recipe
+package dev.mayaqq.createestrogen.datagen.recipe
 
 import com.simibubi.create.api.data.recipe.EmptyingRecipeGen
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe

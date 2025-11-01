@@ -1,4 +1,4 @@
-package dev.myaqq.createestrogen.datagen
+package dev.mayaqq.createestrogen.datagen
 
 import com.simibubi.create.AllTags
 import com.simibubi.create.content.logistics.box.PackageItem

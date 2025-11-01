@@ -1,4 +1,4 @@
-package dev.myaqq.createestrogen.datagen.recipe
+package dev.mayaqq.createestrogen.datagen.recipe
 
 import dev.mayaqq.createestrogen.MOD_ID
 import dev.mayaqq.estrogen.content.EstrogenFluids

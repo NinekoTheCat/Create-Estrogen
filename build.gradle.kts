@@ -71,7 +71,6 @@ cloche {
         contributor("https://github.com/MayaqqDev/Estrogen/wiki/Credits")
         dependency{
             modId = "create"
-            required = true
             version {
                 start = "6.0.7"
                 end = "6.1.0"
@@ -79,13 +78,11 @@ cloche {
         }
         dependency {
             modId = "cynosure"
-            required = true
             version {
                 start = "0.1.0"
             }
         }
         dependency {
-            required = true
             modId = "botarium"
             version {
                 start = "2.3.4"
@@ -93,21 +90,18 @@ cloche {
         }
 
         dependency {
-            required = true
             modId="flywheel"
             version {
                 start = "1.0.5"
             }
         }
         dependency {
-            required = true
             modId = "estrogen"
             version {
                 start = "5.0"
             }
         }
         dependency {
-            required = true
             modId = "ponder"
             version {
                 start="1.0"
@@ -160,7 +154,6 @@ cloche {
     fabric {
         mixins.from(file("src/main/createestrogen.mixins.json"), file("src/fabric/createestrogen-fabric.mixins.json"))
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
-
         loaderVersion = libs.versions.fabric
         minecraftVersion = libs.versions.minecraft
 
@@ -213,10 +206,7 @@ cloche {
                 )
             }
         }
-
         dependencies {
-
-
             include(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
             include(libs.fabric.kritter)
             include(libs.mixinConstrains)

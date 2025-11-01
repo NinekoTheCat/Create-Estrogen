@@ -1,7 +1,6 @@
-package dev.myaqq.createestrogen.datagen.recipe
+package dev.mayaqq.createestrogen.datagen.recipe
 
 import com.simibubi.create.api.data.recipe.BaseRecipeProvider
-import com.simibubi.create.api.data.recipe.BaseRecipeProvider.GeneratedRecipe
 import dev.mayaqq.createestrogen.utils.recipe.CreateEstrogenCentrifugingRecipeBuilder
 import net.minecraft.data.PackOutput
 

@@ -1,7 +1,7 @@
 package dev.mayaqq.createestrogen
 
+import dev.mayaqq.createestrogen.datagen.recipe.CreateEstrogenRecipeProvider
 import dev.myaqq.createestrogen.datagen.*
-import dev.myaqq.createestrogen.datagen.recipe.CreateEstrogenRecipeProvider
 import net.minecraftforge.data.event.GatherDataEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod

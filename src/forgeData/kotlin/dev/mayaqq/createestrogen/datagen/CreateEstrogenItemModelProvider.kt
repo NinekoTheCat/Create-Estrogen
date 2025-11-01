@@ -1,4 +1,4 @@
-package dev.myaqq.createestrogen.datagen
+package dev.mayaqq.createestrogen.datagen
 
 import dev.mayaqq.createestrogen.MOD_ID
 import dev.mayaqq.createestrogen.content.CreateEstrogenItems

@@ -1,4 +1,4 @@
-package dev.myaqq.createestrogen.datagen.recipe
+package dev.mayaqq.createestrogen.datagen.recipe
 
 import com.simibubi.create.AllBlocks
 import com.simibubi.create.AllItems
