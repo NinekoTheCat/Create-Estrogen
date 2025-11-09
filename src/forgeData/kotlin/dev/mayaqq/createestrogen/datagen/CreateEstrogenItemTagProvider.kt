@@ -22,9 +22,9 @@ class CreateEstrogenItemTagProvider(
 ) : ItemTagsProvider(packOutput, lookupProvider, p_275322_, MOD_ID, existingFileHelper) {
     override fun addTags(provider: HolderLookup.Provider) {
         tag(AllTags.AllItemTags.SEATS.tag)
-            .add(CreateEstrogenBlocks.MothSeat.value.asItem())
+            .add(CreateEstrogenBlocks.MothSeat.asItem())
         tag(EstrogenTags.Items.NON_RECOLORABLE)
-            .add(CreateEstrogenBlocks.MothSeat.value.asItem())
+            .add(CreateEstrogenBlocks.MothSeat.asItem())
 
         tag(AllTags.AllItemTags.PACKAGES.tag)
             .add(*CreateEstrogenItems.allEstrogenPillBoxes.map(RegistryEntry<PackageItem>::value).toTypedArray())

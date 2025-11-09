@@ -147,8 +147,6 @@ cloche {
 
             implementation(libs.mixinConstrains)
             modCompileOnly(libs.forge.registrate)
-
-
         }
     }
     fabric {
@@ -293,7 +291,6 @@ cloche {
 //            }
             server()
         }
-        data()
 
         dependencies {
             include(libs.forge.baubly) { exclude(group = "me.shedaniel") }

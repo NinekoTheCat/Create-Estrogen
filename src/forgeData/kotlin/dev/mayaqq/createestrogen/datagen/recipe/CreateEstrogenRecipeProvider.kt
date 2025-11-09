@@ -4,9 +4,9 @@ import com.simibubi.create.AllBlocks
 import com.simibubi.create.AllItems
 import com.simibubi.create.api.data.recipe.BaseRecipeProvider
 import dev.mayaqq.createestrogen.content.CreateEstrogenBlocks
+import dev.mayaqq.createestrogen.datagen.getCommonTag
 import dev.mayaqq.estrogen.content.EstrogenBlocks
 import dev.mayaqq.estrogen.content.EstrogenItems
-import dev.myaqq.createestrogen.datagen.getCommonTag
 import net.minecraft.data.CachedOutput
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.DataProvider

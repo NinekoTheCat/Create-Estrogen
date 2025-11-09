@@ -6,9 +6,9 @@ import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe
 import com.simibubi.create.content.kinetics.press.PressingRecipe
 import dev.mayaqq.createestrogen.MOD_ID
 import dev.mayaqq.createestrogen.content.CreateEstrogenItems
+import dev.mayaqq.createestrogen.datagen.getFluidAmount
 import dev.mayaqq.estrogen.content.EstrogenFluids
 import dev.mayaqq.estrogen.content.EstrogenItems
-import dev.myaqq.createestrogen.datagen.getFluidAmount
 import net.minecraft.data.PackOutput
 import net.minecraft.world.item.Items
 
