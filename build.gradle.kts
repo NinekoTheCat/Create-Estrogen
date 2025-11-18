@@ -247,17 +247,9 @@ cloche {
                 adapter.set("kotlin")
                 value.set("dev.mayaqq.createestrogen.fabric.client.CreateEstrogenClientFabric::init")
             }
-            entrypoint("emi") {
+            entrypoint("crv") {
                 adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.compat.emi.EmiCreateEstrogenPlugin")
-            }
-            entrypoint("rei_client") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.compat.rei.ReiCreateEstrogenPlugin")
-            }
-            entrypoint("jei_mod_plugin") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.compat.jei.JeiCreateEstrogenPlugin")
+                value.set("dev.mayaqq.createestrogen.compat.recipeviewers.CreateEstrogenCRVPlugin")
             }
         }
     }
