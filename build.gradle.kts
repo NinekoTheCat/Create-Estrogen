@@ -161,17 +161,9 @@ cloche {
 
         includedClient() // includedClient() is not a run
         runs {
-            val paths = listOf(
-                "build/classes/java/fabric",
-                "build/classes/kotlin/fabric",
-                "build/generated/ksp/fabric/classes",
-                "build/resources/fabric"
-            ).joinToString(if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":") { project.file(it).absolutePath }
             client {
-                jvmArgs("-Dfabric.classPathGroups=$paths")
             }
             server {
-                jvmArgs("-Dfabric.classPathGroups=$paths")
             }
         }
 
@@ -339,7 +331,6 @@ dependencies {
         }
     }
 }
-tasks.named { it == "kspFabricKotlin" || it == "kspForgeKotlin"}.configureEach { enabled = false }
 configurations.named("forgeRuntimeClasspath") {
     attributes {
         attribute(fixedAttribute, true)
