@@ -135,8 +135,8 @@ cloche {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.coroutines.core)
             api(libs.flywheel.api)
-            modImplementation(libs.baubly)
-            modCompileOnly(libs.createNewAge)
+//            modImplementation(libs.baubly)
+//            modCompileOnly(libs.createNewAge)
 //            modImplementation(libs.kittyconfig)
             implementation(libs.mixinExtras)
             annotationProcessor(libs.mixinExtras)
@@ -197,13 +197,13 @@ cloche {
             }
         }
         dependencies {
-            include(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
+//            include(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
             include(libs.fabric.kritter)
             include(libs.mixinConstrains)
             fabricApi(libs.versions.fapi)
             modApi(libs.fabric.kotlin)
             modApi.bundle(libs.bundles.fabric.cardinalComponents)
-            modImplementation(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
+//            modImplementation(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
             modCompileOnly(libs.fabric.emi)
             modCompileOnly(libs.fabric.rei)
             modCompileOnly(libs.fabric.jei)
