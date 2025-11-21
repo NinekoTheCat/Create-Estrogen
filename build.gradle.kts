@@ -150,6 +150,7 @@ cloche {
         }
     }
     fabric {
+        data()
         mixins.from(file("src/main/createestrogen.mixins.json"), file("src/fabric/createestrogen-fabric.mixins.json"))
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
         loaderVersion = libs.versions.fabric
@@ -164,6 +165,11 @@ cloche {
             client {
             }
             server {
+            }
+            data {
+                jvmArgs("-Dfabric-api.datagen.output-dir=${file("build/generated/resources/main")}")
+                jvmArgs("-Destrogen.datagen.fabric-output-dir=${file("build/generated/resources/fabric")}")
+                jvmArgs("-Destrogen.datagen.forge-output-dir=${file("build/generated/resources/forge")}")
             }
         }
 
@@ -243,6 +249,14 @@ cloche {
                 adapter.set("kotlin")
                 value.set("dev.mayaqq.createestrogen.compat.recipeviewers.CreateEstrogenCRVPlugin")
             }
+            entrypoint("estrogen") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.CreateEstrogen")
+            }
+            entrypoint("fabric-datagen") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.datagen.CreateEstrogenDatagen")
+            }
         }
     }
     forge {
@@ -320,6 +334,10 @@ cloche {
 val fixedAttribute = Attribute.of("fixed-jar", Boolean::class.javaObjectType)
 
 dependencies {
+    implementation(project(":"))
+    implementation(project(":"))
+    implementation(project(":"))
+    implementation(project(":"))
     registerTransform(FixMultiRelease::class) {
         from.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE).attribute(fixedAttribute, false)
         to.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE).attribute(fixedAttribute, true)
