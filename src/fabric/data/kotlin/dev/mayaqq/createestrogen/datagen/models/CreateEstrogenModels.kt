@@ -23,7 +23,7 @@ class CreateEstrogenModels(output: FabricDataOutput) : FabricModelProvider(outpu
         val textureMapping = TextureMapping.particle(id("item/package/estrogen_cardboard_particle"))
             .put(TextureSlot.LAYER0, id("item/package/estrogen_cardboard"))
         for (styleItem in CreateEstrogenItems.allEstrogenPillBoxes) {
-            CreateEstrogen.info("creating item model for ${styleItem.value.style.itemId}")
+            CreateEstrogen.debug("creating item model for {}", styleItem.value.style.itemId)
             val style = styleItem.value.style
             val size = "_${style.width}x${style.height}"
             val template = ModelTemplate(
