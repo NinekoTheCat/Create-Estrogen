@@ -2,7 +2,6 @@
 
 import dev.mayaqq.multijarfixer.FixMultiRelease
 import net.msrandom.stubs.GenerateStubApi
-import org.apache.tools.ant.taskdefs.condition.Os
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -167,7 +166,8 @@ cloche {
             server {
             }
             data {
-                jvmArgs("-Dfabric-api.datagen.output-dir=${file("build/generated/resources/main")}")
+
+            jvmArgs("-Dfabric-api.datagen.output-dir=${file("build/generated/resources/main")}")
                 jvmArgs("-Destrogen.datagen.fabric-output-dir=${file("build/generated/resources/fabric")}")
                 jvmArgs("-Destrogen.datagen.forge-output-dir=${file("build/generated/resources/forge")}")
             }

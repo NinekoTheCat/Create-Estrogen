@@ -15,7 +15,7 @@ import uwu.serenity.kritter.RegistryManager
 
 const val MOD_ID = "createestrogen"
 const val MOD_NAME = "Create: Estrogen"
-internal inline fun id(path: String) = ResourceLocation(MOD_ID, path)
+fun id(path: String) = ResourceLocation(MOD_ID, path)
 
 @EstrogenEntrypoint
 @EventSubscriber
