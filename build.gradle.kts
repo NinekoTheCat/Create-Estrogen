@@ -134,9 +134,6 @@ cloche {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.coroutines.core)
             api(libs.flywheel.api)
-//            modImplementation(libs.baubly)
-//            modCompileOnly(libs.createNewAge)
-//            modImplementation(libs.kittyconfig)
             implementation(libs.mixinExtras)
             annotationProcessor(libs.mixinExtras)
             modCompileOnly(libs.kritter)
@@ -203,13 +200,10 @@ cloche {
             }
         }
         dependencies {
-//            include(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
-            include(libs.fabric.kritter)
-            include(libs.mixinConstrains)
             fabricApi(libs.versions.fapi)
             modApi(libs.fabric.kotlin)
             modApi.bundle(libs.bundles.fabric.cardinalComponents)
-//            modImplementation(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
+            modImplementation(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
             modCompileOnly(libs.fabric.emi)
             modCompileOnly(libs.fabric.rei)
             modCompileOnly(libs.fabric.jei)
@@ -291,11 +285,6 @@ cloche {
         }
 
         dependencies {
-            include(libs.forge.baubly) { exclude(group = "me.shedaniel") }
-
-            include(libs.forge.mixinExtras)
-            include(libs.forge.kritter)
-            include(libs.mixinConstrains)
             modImplementation(libs.forge.kotlin)
             modCompileOnlyApi(libs.forge.flywheel.api)
             modImplementation(libs.forge.flywheel)
@@ -334,6 +323,7 @@ cloche {
 val fixedAttribute = Attribute.of("fixed-jar", Boolean::class.javaObjectType)
 
 dependencies {
+    implementation(project(":"))
     implementation(project(":"))
     implementation(project(":"))
     implementation(project(":"))
