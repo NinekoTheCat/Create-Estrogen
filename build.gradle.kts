@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.cloche)
     kotlin("jvm") version libs.versions.kotlin
     kotlin("plugin.serialization") version libs.versions.kotlin
+    alias(libs.plugins.kittyconfig)
 }
 
 
@@ -140,6 +141,7 @@ cloche {
             modCompileOnly(libs.cynosure)
             modCompileOnly(libs.ponder)
             modCompileOnly(libs.estrogen)
+            modImplementation(libs.kittyconfig)
 
             implementation(libs.mixinConstrains)
             modCompileOnly(libs.forge.registrate)
@@ -177,7 +179,7 @@ cloche {
                         "links" to mapOf(
                             "estrogen.credits" to "https://github.com/MayaqqDev/Estrogen/wiki/Credits",
                             "modmenu.discord" to "https://discord.gg/hue",
-                            "modmenu.kofi" to "https://ko-fi.com/mayaqq",
+                            "modmenu.patreon" to "https://patreon.com/mayaqq",
                             "modmenu.curseforge" to "https://www.curseforge.com/minecraft/mc-mods/createestrogen",
                             "modmenu.modrinth" to "https://modrinth.com/mod/createestrogen",
                             "modmenu.wiki" to "https://github.com/MayaqqDev/Estrogen/wiki"
@@ -217,7 +219,6 @@ cloche {
             modImplementation(libs.fabric.kritter)
             modImplementation(libs.fabric.estrogen)
             modApi(libs.fabric.botarium)
-            //modApi(libs.fabric.kittyconfig)
 
             when (item_viewer) {
                 "REI" -> modRuntimeOnly(libs.fabric.rei) { exclude(group = "net.fabricmc") }
@@ -250,6 +251,10 @@ cloche {
             entrypoint("fabric-datagen") {
                 adapter.set("kotlin")
                 value.set("dev.mayaqq.createestrogen.datagen.CreateEstrogenDatagen")
+            }
+            entrypoint("modmenu") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.fabric.compat.ModMenuIntegration")
             }
         }
     }
@@ -305,7 +310,6 @@ cloche {
             modApi(libs.forge.botarium)
             modImplementation(libs.forge.ponder)
             modImplementation(libs.forge.registrate)
-            //modApi(libs.forge.kittyconfig)
 
             when(item_viewer) {
                 "EMI" -> modRuntimeOnly(libs.forge.emi)
