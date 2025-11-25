@@ -2,12 +2,12 @@ package dev.mayaqq.createestrogen.content.packages
 
 import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle
 import dev.mayaqq.createestrogen.content.CreateEstrogenItems
+import dev.mayaqq.createestrogen.generics.CreateEstrogenItemHandler
 import dev.mayaqq.estrogen.content.EstrogenBlocks
 import dev.mayaqq.estrogen.content.EstrogenItems
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
-import net.minecraftforge.items.ItemStackHandler
 
 object CreateEstrogenPackageStyles {
 
@@ -26,7 +26,7 @@ object CreateEstrogenPackageStyles {
     }
 
     @JvmStatic
-    fun containing(stacks: ItemStackHandler): ItemStack? {
+    fun containing(stacks: CreateEstrogenItemHandler): ItemStack? {
         if (isMajorityOfItemsEstrogenItems(stacks)) {
             val box = ItemStack(CreateEstrogenItems.allEstrogenPillBoxes.random().value)
             val compound = CompoundTag()
@@ -36,7 +36,7 @@ object CreateEstrogenPackageStyles {
         } else return null
     }
 
-    private fun isMajorityOfItemsEstrogenItems(stacks: ItemStackHandler): Boolean {
+    private fun isMajorityOfItemsEstrogenItems(stacks: CreateEstrogenItemHandler): Boolean {
         val itemToAmount = mutableMapOf<Item, Int>()
 
         for (i in 0..<stacks.slots) {

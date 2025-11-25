@@ -1,6 +1,5 @@
 package dev.mayaqq.createestrogen.forge.test
 
-import dev.mayaqq.createestrogen.test.CentrifugeTests
 import net.minecraftforge.event.RegisterGameTestsEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod

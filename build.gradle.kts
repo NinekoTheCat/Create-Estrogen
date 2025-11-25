@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.cloche)
     kotlin("jvm") version libs.versions.kotlin
     kotlin("plugin.serialization") version libs.versions.kotlin
+    alias(libs.plugins.kittyconfig)
 }
 
 
@@ -43,6 +44,8 @@ repositories {
     maven(url = "https://maven.msrandom.net/repository/root") { name = "Ashley"}
     maven(url = "https://maven.figuramc.org/releases") { name = "Figura Maven"; description = "Figura" } // Second last cs figura misconfigured their maven
     maven(url = "https://jitpack.io/") { name = "Jitpack maven"; description = "Mixin Extras & Fabric ASM" } //NOTE: LEAVE THIS AS LAST
+    maven(url = "https://mvn.devos.one/releases/") { name = "Create Fabric Porting Lib" }
+    maven(url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven") { name = "Forge Config API PORT" }
     mavenLocal()
     mavenCentral()
 }
@@ -68,21 +71,18 @@ cloche {
         contributor("https://github.com/MayaqqDev/Estrogen/wiki/Credits")
         dependency{
             modId = "create"
-            required = true
             version {
-                start = "6.0.6"
+                start = "6.0.7"
                 end = "6.1.0"
             }
         }
         dependency {
             modId = "cynosure"
-            required = true
             version {
                 start = "0.1.0"
             }
         }
         dependency {
-            required = true
             modId = "botarium"
             version {
                 start = "2.3.4"
@@ -90,21 +90,18 @@ cloche {
         }
 
         dependency {
-            required = true
             modId="flywheel"
             version {
-                start = "1.0"
+                start = "1.0.5"
             }
         }
         dependency {
-            required = true
             modId = "estrogen"
             version {
                 start = "5.0"
             }
         }
         dependency {
-            required = true
             modId = "ponder"
             version {
                 start="1.0"
@@ -138,148 +135,140 @@ cloche {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.coroutines.core)
             api(libs.flywheel.api)
-            modImplementation(libs.baubly)
-            modCompileOnly(libs.createNewAge)
-//            modImplementation(libs.kittyconfig)
             implementation(libs.mixinExtras)
             annotationProcessor(libs.mixinExtras)
             modCompileOnly(libs.kritter)
             modCompileOnly(libs.cynosure)
             modCompileOnly(libs.ponder)
             modCompileOnly(libs.estrogen)
+            modImplementation(libs.kittyconfig)
 
             implementation(libs.mixinConstrains)
-            modCompileOnly(libs.forge.create) {
-                artifact {
-                    classifier = "slim"
-                }
-                isTransitive = false
-            }
             modCompileOnly(libs.forge.registrate)
-
-
         }
     }
-    // UNCOMMENT WHEN CREATE FABRIC 6.0 HAPPENS!!
-    // MOVE DATAGENS TO FABRIC WHEN CREATE 6.0 HAPPENS!!
-//    fabric {
-////        mixins.from(file("src/main/createestrogen.mixins.json"))
-//        accessWideners.from(file("src/main/createestrogen.accessWidener"))
-//
-//        loaderVersion = libs.versions.fabric
-//        minecraftVersion = libs.versions.minecraft
-//
-//        include(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
-//        include(libs.fabric.kritter)
-//        include(libs.fabric.flywheel)
-//        //include(libs.fabric.kittyconfig)
-//
-//        include(libs.mixinConstrains)
-//
-//        includedClient() // includedClient() is not a run
-//        runs {
-//            val paths = listOf(
-//                "build/classes/java/fabric",
-//                "build/classes/kotlin/fabric",
-//                "build/generated/ksp/fabric/classes",
-//                "build/resources/fabric"
-//            ).joinToString(if (Os.isFamily(Os.FAMILY_WINDOWS)) ";" else ":") { project.file(it).absolutePath }
-//            client {
-//                jvmArgs("-Dfabric.classPathGroups=$paths")
-//            }
-//            server {
-//                jvmArgs("-Dfabric.classPathGroups=$paths")
-//            }
-//        }
-//
-//        metadata {
-//            metadata {
-//                custom("modmenu", mapOf(
-//                    "links" to mapOf(
-//                        "estrogen.credits" to "https://github.com/MayaqqDev/Estrogen/wiki/Credits",
-//                        "modmenu.discord" to "https://discord.gg/hue",
-//                        "modmenu.kofi" to "https://ko-fi.com/mayaqq",
-//                        "modmenu.curseforge" to "https://www.curseforge.com/minecraft/mc-mods/createestrogen",
-//                        "modmenu.modrinth" to "https://modrinth.com/mod/createestrogen",
-//                        "modmenu.wiki" to "https://github.com/MayaqqDev/Estrogen/wiki"
-//                    )
-//                ))
-//                custom("cynosure", mapOf(
-//                    "autosubscription" to true
-//                ))
-//                custom("catalogue", mapOf(
-//                    "icon" to mapOf("item" to "estrogen:estrogen_pill"),
-//                    "banner" to "icon.png",
-//                    "background" to "estrogen_background.png",
-//                    "configFactory" to "dev.mayaqq.createestrogen.fabric.integrations.catalogue.CatalogueCompat"
-//                ))
-//            }
-//        }
-//
-//        dependencies {
-//            fabricApi(libs.versions.fapi)
-//            modApi(libs.fabric.kotlin)
-//            modApi.bundle(libs.bundles.fabric.cardinalComponents)
-//            modImplementation(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
-//            modImplementation(libs.fabric.trinkets)
-//            modCompileOnly(libs.fabric.emi)
-//            modCompileOnly(libs.fabric.rei)
-//            modCompileOnly(libs.fabric.jei)
-//            modImplementation(libs.fabric.modmenu)
-//            modCompileOnly(libs.fabric.iris)
-//            modCompileOnly(libs.ponder)
-//            modCompileOnlyApi(libs.fabric.flywheel.api)
-//            modImplementation(libs.fabric.flywheel)
-//            modImplementation(libs.fabric.cynosure)
-//            modImplementation(libs.fabric.kritter)
-//            modApi(libs.fabric.botarium)
-//            //modApi(libs.fabric.kittyconfig)
-//
-//            when(item_viewer) {
-//                "REI" -> modRuntimeOnly(libs.fabric.rei) { exclude(group = "net.fabricmc") }
-//                "EMI" -> modRuntimeOnly(libs.fabric.emi)
-//                "JEI" -> modRuntimeOnly(libs.fabric.jei)
-//                "disabled" -> {}
-//                else -> error("Invalid item viewer for Fabric: $item_viewer")
-//            }
-//
-//            if (devauth_enabled.toBoolean()) modRuntimeOnly(libs.fabric.devauth)
-//        }
-//
-//        metadata {
-//            entrypoint("main") {
-//                adapter.set("kotlin")
-//                value.set("dev.mayaqq.createestrogen.fabric.CreateEstrogenFabric::init")
-//            }
-//            entrypoint("client") {
-//                adapter.set("kotlin")
-//                value.set("dev.mayaqq.createestrogen.fabric.client.CreateEstrogenClientFabric::init")
-//            }
-//            entrypoint("emi") {
-//                adapter.set("kotlin")
-//                value.set("dev.mayaqq.createestrogen.compat.emi.EmiCreateEstrogenPlugin")
-//            }
-//            entrypoint("rei_client") {
-//                adapter.set("kotlin")
-//                value.set("dev.mayaqq.createestrogen.compat.rei.ReiCreateEstrogenPlugin")
-//            }
-//            entrypoint("jei_mod_plugin") {
-//                adapter.set("kotlin")
-//                value.set("dev.mayaqq.createestrogen.compat.jei.JeiCreateEstrogenPlugin")
-//            }
-//        }
-//    }
+    fabric {
+        data()
+        mixins.from(file("src/main/createestrogen.mixins.json"), file("src/fabric/createestrogen-fabric.mixins.json"))
+        accessWideners.from(file("src/main/createestrogen.accessWidener"))
+        loaderVersion = libs.versions.fabric
+        minecraftVersion = libs.versions.minecraft
+
+
+        //include(libs.fabric.kittyconfig)
+
+
+        includedClient() // includedClient() is not a run
+        runs {
+            client {
+            }
+            server {
+            }
+            data {
+
+            jvmArgs("-Dfabric-api.datagen.output-dir=${file("build/generated/resources/main")}")
+                jvmArgs("-Destrogen.datagen.fabric-output-dir=${file("build/generated/resources/fabric")}")
+                jvmArgs("-Destrogen.datagen.forge-output-dir=${file("build/generated/resources/forge")}")
+            }
+        }
+
+        metadata {
+            metadata {
+                custom(
+                    "modmenu", mapOf(
+                        "links" to mapOf(
+                            "estrogen.credits" to "https://github.com/MayaqqDev/Estrogen/wiki/Credits",
+                            "modmenu.discord" to "https://discord.gg/hue",
+                            "modmenu.patreon" to "https://patreon.com/mayaqq",
+                            "modmenu.curseforge" to "https://www.curseforge.com/minecraft/mc-mods/createestrogen",
+                            "modmenu.modrinth" to "https://modrinth.com/mod/createestrogen",
+                            "modmenu.wiki" to "https://github.com/MayaqqDev/Estrogen/wiki"
+                        )
+                    )
+                )
+                custom(
+                    "cynosure", mapOf(
+                        "autosubscription" to true
+                    )
+                )
+                custom(
+                    "catalogue", mapOf(
+                        "icon" to mapOf("item" to "estrogen:estrogen_pill"),
+                        "banner" to "icon.png",
+                        "background" to "estrogen_background.png",
+                        "configFactory" to "dev.mayaqq.createestrogen.fabric.integrations.catalogue.CatalogueCompat"
+                    )
+                )
+            }
+        }
+        dependencies {
+            fabricApi(libs.versions.fapi)
+            modApi(libs.fabric.kotlin)
+            modApi.bundle(libs.bundles.fabric.cardinalComponents)
+            modImplementation(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
+            modCompileOnly(libs.fabric.emi)
+            modCompileOnly(libs.fabric.rei)
+            modCompileOnly(libs.fabric.jei)
+            modImplementation(libs.fabric.modmenu)
+            modCompileOnly(libs.fabric.iris)
+            modCompileOnly(libs.fabric.ponder)
+            modImplementation(libs.fabric.create)
+            modCompileOnlyApi(libs.fabric.flywheel.api)
+            modImplementation(libs.fabric.flywheel)
+            modImplementation(libs.fabric.cynosure)
+            modImplementation(libs.fabric.kritter)
+            modImplementation(libs.fabric.estrogen)
+            modApi(libs.fabric.botarium)
+
+            when (item_viewer) {
+                "REI" -> modRuntimeOnly(libs.fabric.rei) { exclude(group = "net.fabricmc") }
+                "EMI" -> modRuntimeOnly(libs.fabric.emi)
+                "JEI" -> modRuntimeOnly(libs.fabric.jei)
+                "disabled" -> {}
+                else -> error("Invalid item viewer for Fabric: $item_viewer")
+            }
+
+            if (devauth_enabled.toBoolean()) modRuntimeOnly(libs.fabric.devauth)
+        }
+
+        metadata {
+            entrypoint("main") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.fabric.CreateEstrogenFabric::init")
+            }
+            entrypoint("client") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.fabric.client.CreateEstrogenClientFabric::init")
+            }
+            entrypoint("crv") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.compat.recipeviewers.CreateEstrogenCRVPlugin")
+            }
+            entrypoint("estrogen") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.CreateEstrogen")
+            }
+            entrypoint("fabric-datagen") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.datagen.CreateEstrogenDatagen")
+            }
+            entrypoint("modmenu") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.fabric.compat.ModMenuIntegration")
+            }
+        }
+    }
     forge {
         data()
 //        test()
-        mixins.from(file("src/main/createestrogen.mixins.json"))
+        mixins.from(file("src/main/createestrogen.mixins.json"), file("src/forge/createestrogen-forge.mixins.json"))
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
 
         loaderVersion = libs.versions.forge.get()
         minecraftVersion = libs.versions.minecraft.get()
 
         metadata {
-            modLoader = "klf"
+            modLoader = "kotlinforforge"
             loaderVersion {
                 startInclusive = true
                 start = "1"
@@ -299,15 +288,9 @@ cloche {
 //            }
             server()
         }
-        data()
 
         dependencies {
-            include(libs.forge.baubly) { exclude(group = "me.shedaniel") }
-
-            include(libs.forge.mixinExtras)
-            include(libs.forge.kritter)
-            include(libs.mixinConstrains)
-            modImplementation(libs.forge.kotlin.lang)
+            modImplementation(libs.forge.kotlin)
             modCompileOnlyApi(libs.forge.flywheel.api)
             modImplementation(libs.forge.flywheel)
             modImplementation(libs.forge.baubly) { exclude(group = "me.shedaniel") }
@@ -327,7 +310,6 @@ cloche {
             modApi(libs.forge.botarium)
             modImplementation(libs.forge.ponder)
             modImplementation(libs.forge.registrate)
-            //modApi(libs.forge.kittyconfig)
 
             when(item_viewer) {
                 "EMI" -> modRuntimeOnly(libs.forge.emi)
@@ -345,6 +327,11 @@ cloche {
 val fixedAttribute = Attribute.of("fixed-jar", Boolean::class.javaObjectType)
 
 dependencies {
+    implementation(project(":"))
+    implementation(project(":"))
+    implementation(project(":"))
+    implementation(project(":"))
+    implementation(project(":"))
     registerTransform(FixMultiRelease::class) {
         from.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE).attribute(fixedAttribute, false)
         to.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE).attribute(fixedAttribute, true)
@@ -356,7 +343,6 @@ dependencies {
         }
     }
 }
-tasks.named { it == "kspFabricKotlin" || it == "kspForgeKotlin"}.configureEach { enabled = false }
 configurations.named("forgeRuntimeClasspath") {
     attributes {
         attribute(fixedAttribute, true)

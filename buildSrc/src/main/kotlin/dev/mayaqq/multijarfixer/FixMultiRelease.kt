@@ -25,9 +25,6 @@ abstract class FixMultiRelease : TransformAction<TransformParameters.None> {
     override
     fun transform(outputs: TransformOutputs) {
         val file = inputFile.get().asFile
-        if (file.name == "minecraft-1.20.1-patched-client-extra.jar"){
-            return
-        }
         if (isMultiReleaseJar(file) != true) {
             outputs.file(file)
         } else {
@@ -61,7 +58,7 @@ abstract class FixMultiRelease : TransformAction<TransformParameters.None> {
     }
 
     private fun isMultiReleaseJar(file: File): Boolean? = JarInputStream(FileInputStream(file)).use {
-        if (it.manifest.mainAttributes.getValue("Multi-Release") == "true") {
+        if (it.manifest?.mainAttributes?.getValue("Multi-Release") == "true") {
             var entry = it.nextEntry
             while (entry != null) {
                 if (entry.name.startsWith("META-INF/versions/")) {
