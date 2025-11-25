@@ -8,10 +8,10 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 
 //TODO: this for custom recipe gen i think
 class EstrogenRecipeGen(
-    output: FabricDataOutput, val helper: PlatformRecipeHelper, val recipeType: IRecipeTypeInfo
+    output: FabricDataOutput, val helper: PlatformRecipeHelper, val recipeTypeInfo: IRecipeTypeInfo
 ) : ProcessingRecipeGen(
     output,
     MOD_ID,
 ) {
-    override fun getRecipeType(): IRecipeTypeInfo = recipeType
+    override fun getRecipeType(): IRecipeTypeInfo = recipeTypeInfo
 }

@@ -263,7 +263,7 @@ cloche {
 //        test()
         mixins.from(file("src/main/createestrogen.mixins.json"), file("src/forge/createestrogen-forge.mixins.json"))
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
-
+        datagenDirectory.set(file("build/generated/resources/forge"))
         loaderVersion = libs.versions.forge.get()
         minecraftVersion = libs.versions.minecraft.get()
 
@@ -353,6 +353,10 @@ tasks.compileJava {
     options.compilerArgs.add("-AgenerateExpectStubs")
 }
 
+tasks.named("runForgeData") {
+    enabled = false
+}
+
 tasks.withType<KotlinCompile> {
 //    explicitApiMode = org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode.Warning
     compilerOptions {
@@ -372,4 +376,5 @@ tasks.named("createCommonApiStub", GenerateStubApi::class) {
     excludes.add(libs.kritter.get().group)
     excludes.add(libs.cynosure.get().group)
     excludes.add(libs.estrogen.get().group)
+    excludes.add(libs.kittyconfig.get().group)
 }
