@@ -327,11 +327,6 @@ cloche {
 val fixedAttribute = Attribute.of("fixed-jar", Boolean::class.javaObjectType)
 
 dependencies {
-    implementation(project(":"))
-    implementation(project(":"))
-    implementation(project(":"))
-    implementation(project(":"))
-    implementation(project(":"))
     registerTransform(FixMultiRelease::class) {
         from.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE).attribute(fixedAttribute, false)
         to.attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, ArtifactTypeDefinition.JAR_TYPE).attribute(fixedAttribute, true)
