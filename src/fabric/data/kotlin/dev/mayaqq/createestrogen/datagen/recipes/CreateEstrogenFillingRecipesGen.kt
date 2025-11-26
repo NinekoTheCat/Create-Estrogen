@@ -65,12 +65,5 @@ class CreateEstrogenFillingRecipesGen(output: FabricDataOutput, prh: PlatformRec
                 .require(EstrogenFluids.GenderFluid.value, prh.fluidAmount(27000))
                 .output(EstrogenItems.GenderChangePotion)
         }
-
-        create<FillingRecipe>("blahaj") {
-            it.require(Items.LIGHT_BLUE_WOOL)
-                .require(EstrogenFluids.LiquidEstrogen.value, prh.fluidAmount(81))
-                .output(100f, ResourceLocation("blahaj", "blue_shark"), 1)
-                //TODO: Will need to implement the custom recipe gen again .whenModLoaded("blahaj")
-        }
     }
 }
