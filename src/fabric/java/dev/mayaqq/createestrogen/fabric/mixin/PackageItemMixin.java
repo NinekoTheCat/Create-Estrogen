@@ -3,6 +3,7 @@ package dev.mayaqq.createestrogen.fabric.mixin;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import dev.mayaqq.createestrogen.content.packages.CreateEstrogenPackageStyles;
+import dev.mayaqq.createestrogen.fabric.extensions.ItemHandlerWrapper;
 import dev.mayaqq.createestrogen.generics.CreateEstrogenItemHandler;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
 import net.minecraft.nbt.CompoundTag;
@@ -50,22 +51,4 @@ public class PackageItemMixin {
     }
 
 
-}
-
-record ItemHandlerWrapper(ItemStackHandler handler) implements CreateEstrogenItemHandler {
-
-    @Override
-    public int getSlots() {
-        return handler.getSlotCount();
-    }
-
-    @Override
-    public @NotNull ItemStack getStackInSlot(int slot) {
-        return handler.getStackInSlot(slot);
-    }
-
-    @Override
-    public CompoundTag serializeNBT() {
-        return handler.serializeNBT();
-    }
 }
