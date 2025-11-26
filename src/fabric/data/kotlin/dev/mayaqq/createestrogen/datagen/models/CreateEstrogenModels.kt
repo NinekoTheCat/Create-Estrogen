@@ -20,6 +20,7 @@ class CreateEstrogenModels(output: FabricDataOutput) : FabricModelProvider(outpu
     }
 
     override fun generateItemModels(img: ItemModelGenerators) {
+        /*
         val textureMapping = TextureMapping.particle(id("item/package/estrogen_cardboard_particle"))
             .put(TextureSlot.LAYER0, id("item/package/estrogen_cardboard"))
         for (styleItem in CreateEstrogenItems.allEstrogenPillBoxes) {
@@ -37,6 +38,7 @@ class CreateEstrogenModels(output: FabricDataOutput) : FabricModelProvider(outpu
             template.create(ModelLocationUtils.getModelLocation(styleItem.value), textureMapping, img.output)
             riggingTemplate.create(style.riggingModel, textureMapping, img.output)
         }
+         */
     }
 
     override fun getName(): String = "CreateEstrogenModelProvider"
