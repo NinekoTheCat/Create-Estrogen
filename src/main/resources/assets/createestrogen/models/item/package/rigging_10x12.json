@@ -1,5 +1,6 @@
 {
   "parent": "create:item/package/rigging_10x12",
+  "render_type": "cutout",
   "textures": {
     "0": "createestrogen:item/package/estrogen_cardboard",
     "particle": "createestrogen:item/package/estrogen_cardboard_particle"
