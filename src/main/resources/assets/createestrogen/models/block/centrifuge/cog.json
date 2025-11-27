@@ -3,7 +3,7 @@
 	"parent": "block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"2": "createestrogen:block/centrifuge/cog"
+		"2": "createestrogen:block/centrifuge/centrifuge_cog"
 	},
 	"elements": [
 		{
