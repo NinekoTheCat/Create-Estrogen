@@ -138,7 +138,7 @@ cloche {
             implementation(libs.mixinExtras)
             annotationProcessor(libs.mixinExtras)
             modCompileOnly(libs.kritter)
-            modCompileOnly(libs.cynosure)
+            modImplementation(libs.cynosure)
             modCompileOnly(libs.ponder)
             modCompileOnly(libs.estrogen)
             modImplementation(libs.kittyconfig)
@@ -215,7 +215,7 @@ cloche {
             modImplementation(libs.fabric.create)
             modCompileOnlyApi(libs.fabric.flywheel.api)
             modImplementation(libs.fabric.flywheel)
-            modImplementation(libs.fabric.cynosure)
+            //modImplementation(libs.fabric.cynosure)
             modImplementation(libs.fabric.kritter)
             modImplementation(libs.fabric.estrogen)
             modApi(libs.fabric.botarium)
@@ -298,7 +298,7 @@ cloche {
             implementation(libs.forge.mixinExtras)
             modCompileOnly(libs.forge.jei)
             modCompileOnly(libs.forge.emi)
-            modImplementation(libs.forge.cynosure)
+            //modImplementation(libs.forge.cynosure)
             modImplementation(libs.forge.kritter)
             modImplementation(libs.forge.create) {
                 artifact {
