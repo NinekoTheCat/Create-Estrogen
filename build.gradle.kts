@@ -311,6 +311,9 @@ cloche {
             modImplementation(libs.forge.ponder)
             modImplementation(libs.forge.registrate)
 
+            //TODO: remove when kff updates on mr
+            include(libs.forge.kotlin)
+
             when(item_viewer) {
                 "EMI" -> modRuntimeOnly(libs.forge.emi)
                 "REI" -> modRuntimeOnly(libs.forge.rei)
