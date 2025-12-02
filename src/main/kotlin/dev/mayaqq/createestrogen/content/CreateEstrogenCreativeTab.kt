@@ -15,6 +15,7 @@ object CreateEstrogenCreativeTab: Registrar<CreativeModeTab> by CreateEstrogen..
             accept(CreateEstrogenBlocks.Centrifuge)
             accept(CreateEstrogenBlocks.MothSeat)
             acceptAll(CreateEstrogenItems.allEstrogenPillBoxes.map { it.value.defaultInstance })
+            accept(CreateEstrogenItems.UsedFilter)
         }
     }
 }
