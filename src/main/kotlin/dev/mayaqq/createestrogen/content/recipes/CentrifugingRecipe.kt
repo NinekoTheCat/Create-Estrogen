@@ -29,7 +29,7 @@ import net.minecraft.world.level.material.Fluid
  * Container for centrifuges, throws [UnsupportedOperationException] if any methods from [Container] are used
  * @param input fluid that is input into this recipe
  */
-data class CentrifugingContainer(val input :FluidContainer) : Container {
+data class CentrifugingContainer(val input: FluidContainer) : Container {
     override fun clearContent() = throw UnsupportedOperationException()
 
     override fun getContainerSize(): Int = throw UnsupportedOperationException()
@@ -126,10 +126,10 @@ class CentrifugingRecipe(val _id: ResourceLocation,
     }
 
     override fun getId(): ResourceLocation = _id
-    override fun assemble(p0: CentrifugingContainer, p1: RegistryAccess): ItemStack = throw UnsupportedOperationException()
+    override fun assemble(container: CentrifugingContainer, registry: RegistryAccess): ItemStack = result.fluid.bucket.defaultInstance
 
-    override fun canCraftInDimensions(p0: Int, p1: Int): Boolean = throw UnsupportedOperationException()
-    override fun getResultItem(p0: RegistryAccess): ItemStack = throw UnsupportedOperationException()
+    override fun canCraftInDimensions(x: Int, y: Int): Boolean = true
+    override fun getResultItem(registry: RegistryAccess): ItemStack = result.fluid.bucket.defaultInstance
 
 
     override fun getSerializer(): RecipeSerializer<*> = CreateEstrogenRecipes.Serializers.CENTRIFUGING_SERIALIZER
