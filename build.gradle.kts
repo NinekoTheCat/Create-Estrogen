@@ -43,9 +43,9 @@ repositories {
     maven(url = "https://maven.squiddev.cc") { name = "Squid Maven"; description = "Create needs CC: Tweaked for some reason" }
     maven(url = "https://maven.msrandom.net/repository/root") { name = "Ashley"}
     maven(url = "https://maven.figuramc.org/releases") { name = "Figura Maven"; description = "Figura" } // Second last cs figura misconfigured their maven
-    maven(url = "https://jitpack.io/") { name = "Jitpack maven"; description = "Mixin Extras & Fabric ASM" } //NOTE: LEAVE THIS AS LAST
     maven(url = "https://mvn.devos.one/releases/") { name = "Create Fabric Porting Lib" }
     maven(url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven") { name = "Forge Config API PORT" }
+    maven(url = "https://jitpack.io/") { name = "Jitpack maven"; description = "Mixin Extras & Fabric ASM" } //NOTE: LEAVE THIS AS LAST
     mavenLocal()
     mavenCentral()
 }
@@ -271,7 +271,7 @@ cloche {
             modLoader = "kotlinforforge"
             loaderVersion {
                 startInclusive = true
-                start = "1"
+                start = "4.12.0"
             }
             blurLogo = false
 //            modProperty("catalogueItemIcon", "estrogen:estrogen_pill")
