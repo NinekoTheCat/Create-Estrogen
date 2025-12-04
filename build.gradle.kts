@@ -69,42 +69,22 @@ cloche {
         sources = "https://github.com/MayaqqDev/Create-Estrogen"
         author("Mayaqq")
         contributor("https://github.com/MayaqqDev/Estrogen/wiki/Credits")
-        dependency{
+        dependency {
             modId = "create"
             version {
-                start = "6.0.7"
-                end = "6.1.0"
+                start = "6.0.6"
             }
         }
         dependency {
             modId = "cynosure"
             version {
-                start = "0.1.0"
-            }
-        }
-        dependency {
-            modId = "botarium"
-            version {
-                start = "2.3.4"
-            }
-        }
-
-        dependency {
-            modId="flywheel"
-            version {
-                start = "1.0.5"
+                start = "0.1.6"
             }
         }
         dependency {
             modId = "estrogen"
             version {
                 start = "5.0"
-            }
-        }
-        dependency {
-            modId = "ponder"
-            version {
-                start="1.0"
             }
         }
     }
@@ -173,32 +153,60 @@ cloche {
         }
 
         metadata {
-            metadata {
-                custom(
-                    "modmenu", mapOf(
-                        "links" to mapOf(
-                            "estrogen.credits" to "https://github.com/MayaqqDev/Estrogen/wiki/Credits",
-                            "modmenu.discord" to "https://discord.gg/hue",
-                            "modmenu.patreon" to "https://patreon.com/mayaqq",
-                            "modmenu.curseforge" to "https://www.curseforge.com/minecraft/mc-mods/createestrogen",
-                            "modmenu.modrinth" to "https://modrinth.com/mod/createestrogen",
-                            "modmenu.wiki" to "https://github.com/MayaqqDev/Estrogen/wiki"
-                        )
+            entrypoint("main") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.fabric.CreateEstrogenFabric::init")
+            }
+            entrypoint("client") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.fabric.client.CreateEstrogenClientFabric::init")
+            }
+            entrypoint("crv") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.compat.recipeviewers.CreateEstrogenCRVPlugin")
+            }
+            entrypoint("estrogen") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.CreateEstrogen")
+            }
+            entrypoint("fabric-datagen") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.datagen.CreateEstrogenDatagen")
+            }
+            entrypoint("modmenu") {
+                adapter.set("kotlin")
+                value.set("dev.mayaqq.createestrogen.fabric.compat.ModMenuIntegration")
+            }
+            custom(
+                "modmenu", mapOf(
+                    "links" to mapOf(
+                        "estrogen.credits" to "https://github.com/MayaqqDev/Estrogen/wiki/Credits",
+                        "modmenu.discord" to "https://discord.gg/hue",
+                        "modmenu.patreon" to "https://patreon.com/mayaqq",
+                        "modmenu.curseforge" to "https://www.curseforge.com/minecraft/mc-mods/createestrogen",
+                        "modmenu.modrinth" to "https://modrinth.com/mod/createestrogen",
+                        "modmenu.wiki" to "https://github.com/MayaqqDev/Estrogen/wiki"
                     )
                 )
-                custom(
-                    "cynosure", mapOf(
-                        "autosubscription" to true
-                    )
+            )
+            custom(
+                "cynosure", mapOf(
+                    "autosubscription" to true
                 )
-                custom(
-                    "catalogue", mapOf(
-                        "icon" to mapOf("item" to "estrogen:estrogen_pill"),
-                        "banner" to "icon.png",
-                        "background" to "estrogen_background.png",
-                        "configFactory" to "dev.mayaqq.createestrogen.fabric.integrations.catalogue.CatalogueCompat"
-                    )
+            )
+            custom(
+                "catalogue", mapOf(
+                    "icon" to mapOf("item" to "estrogen:estrogen_pill"),
+                    "banner" to "icon.png",
+                    "background" to "estrogen_background.png",
+                    "configFactory" to "dev.mayaqq.createestrogen.fabric.integrations.catalogue.CatalogueCompat"
                 )
+            )
+            dependency {
+                modId = "create"
+                version {
+                    start = "6.0.8"
+                }
             }
         }
         dependencies {
@@ -230,33 +238,6 @@ cloche {
 
             if (devauth_enabled.toBoolean()) modRuntimeOnly(libs.fabric.devauth)
         }
-
-        metadata {
-            entrypoint("main") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.fabric.CreateEstrogenFabric::init")
-            }
-            entrypoint("client") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.fabric.client.CreateEstrogenClientFabric::init")
-            }
-            entrypoint("crv") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.compat.recipeviewers.CreateEstrogenCRVPlugin")
-            }
-            entrypoint("estrogen") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.CreateEstrogen")
-            }
-            entrypoint("fabric-datagen") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.datagen.CreateEstrogenDatagen")
-            }
-            entrypoint("modmenu") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.fabric.compat.ModMenuIntegration")
-            }
-        }
     }
     forge {
         data()
@@ -276,6 +257,12 @@ cloche {
             blurLogo = false
 //            modProperty("catalogueItemIcon", "estrogen:estrogen_pill")
 //            modProperty("catalogueBackground", "estrogen_background.png")
+            dependency {
+                modId = "create"
+                version {
+                    start = "6.0.6"
+                }
+            }
         }
 
         runs {
