@@ -12,7 +12,6 @@ import net.minecraft.gametest.framework.GameTestHelper
 import net.minecraftforge.gametest.GameTestHolder
 import net.minecraftforge.gametest.PrefixGameTestTemplate
 
-// TODO: make cross mod loader
 @GameTestHolder(MOD_ID)
 class CentrifugeTests {
     @PrefixGameTestTemplate(false)

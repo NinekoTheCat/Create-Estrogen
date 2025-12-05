@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.state.BlockState
 import java.rmi.UnexpectedException
 import kotlin.math.absoluteValue
 
-// TODO: Register impact with BlockStressValues.java
 class CentrifugeBlockEntity(type: BlockEntityType<*>, pos: BlockPos, state: BlockState) :
     KineticBlockEntity(type, pos, state) {
     override fun tick() {

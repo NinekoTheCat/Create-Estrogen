@@ -46,7 +46,6 @@ object CreateEstrogenBlocks: Registrar<Block> by CreateEstrogen..Registries.BLOC
             MovingInteractionBehaviour.REGISTRY.register(it,SeatInteractionBehaviour())
             MovementBehaviour.REGISTRY.register(it,SeatMovementBehaviour())
         }
-        //TODO: check that this works
         onSetup {
             DisplaySource.BY_BLOCK.register(it, listOf(AllDisplaySources.ENTITY_NAME.get()))
         }
