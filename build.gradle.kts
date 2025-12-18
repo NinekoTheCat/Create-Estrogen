@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    alias(libs.plugins.modpublish)
     alias(libs.plugins.cloche)
     kotlin("jvm") version libs.versions.kotlin
     kotlin("plugin.serialization") version libs.versions.kotlin
@@ -51,6 +52,8 @@ repositories {
 }
 
 val item_viewer: String by project
+val modVersion = providers.gradleProperty("version").get()
+val mod_name: String by project
 
 val devauth_enabled: String by project
 
@@ -78,7 +81,7 @@ cloche {
         dependency {
             modId = "cynosure"
             version {
-                start = "0.1.6"
+                start = "0.1.9"
             }
         }
         dependency {
@@ -365,3 +368,64 @@ tasks.named("createCommonApiStub", GenerateStubApi::class) {
     excludes.add(libs.estrogen.get().group)
     excludes.add(libs.kittyconfig.get().group)
 }
+
+publishMods {
+    val loaders = arrayOf(
+        PublishMetadata(
+            "Fabric",
+            arrayOf("fabric", "quilt"),
+            arrayOf("estrogen", "create-fabric"),
+            cloche.targets["fabric"].finalJar.flatMap(Jar::getArchiveFile),
+            "-fabric"
+        ),
+        PublishMetadata(
+            "Forge",
+            arrayOf("forge"),
+            arrayOf("estrogen", "create"),
+            cloche.targets["forge"].finalJar.flatMap(Jar::getArchiveFile),
+            "-forge"
+        )
+    )
+    val mcVersion = "1.20.1"
+    changelog = file("CHANGELOG.md").readText().replace("@VERSION@", modVersion)
+    type = ALPHA
+
+    val optionsCurseforge = curseforgeOptions {
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        minecraftVersions.add(mcVersion)
+        projectId = "1272015"
+        javaVersions.add(JavaVersion.VERSION_17)
+        clientRequired = true
+        serverRequired = true
+    }
+
+    val optionsModrinth = modrinthOptions {
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        projectId = "OEAJaSuI"
+        minecraftVersions.add(mcVersion)
+    }
+
+    loaders.forEach { loader ->
+        loader.apply {
+            curseforge("curseforge$loaderName") {
+                from(optionsCurseforge)
+                modLoaders.addAll(*modloaders)
+                file = jar
+                displayName = "$mod_name $modVersion $loaderName"
+                version = "$modVersion$suffix"
+                requires(*requires)
+            }
+
+            modrinth("modrinth$loaderName") {
+                from(optionsModrinth)
+                modLoaders.addAll(*modloaders)
+                file = jar
+                displayName = "$mod_name $modVersion $loaderName"
+                version = "$modVersion$suffix"
+                requires(*requires)
+            }
+        }
+    }
+}
+
+class PublishMetadata(val loaderName: String, val modloaders: Array<String>, val requires: Array<String>, val jar: Provider<RegularFile>, val suffix: String)
