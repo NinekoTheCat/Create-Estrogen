@@ -30,7 +30,7 @@
 > **[EMI](https://modrinth.com/mod/emi)/[JEI](https://modrinth.com/mod/jei)/[REI](https://modrinth.com/mod/rei)** is highly recommended to be installed with this mod to see all the recipes and
 > progression!
 
-"Create mod" module for the Estrogen mod! Adding unique mechanics and interactions with the Create mod!
+"Create mod" module for the Estrogen mod! Adding unique mechanics and interactions with the Create mod and it's machines!
 
 
 ### `Main Features`
