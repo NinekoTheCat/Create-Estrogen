@@ -247,6 +247,8 @@ cloche {
                 else -> error("Invalid item viewer for Fabric: $item_viewer")
             }
 
+            if (kubejs_enabled.toBoolean()) modRuntimeOnly(libs.fabric.kubejs)
+
             if (devauth_enabled.toBoolean()) modRuntimeOnly(libs.fabric.devauth)
         }
     }
