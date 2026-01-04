@@ -47,6 +47,12 @@ repositories {
     maven(url = "https://mvn.devos.one/releases/") { name = "Create Fabric Porting Lib" }
     maven(url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven") { name = "Forge Config API PORT" }
     maven(url = "https://jitpack.io/") { name = "Jitpack maven"; description = "Mixin Extras & Fabric ASM" } //NOTE: LEAVE THIS AS LAST
+    maven(url ="https://maven.latvian.dev/releases") {
+        content {
+            includeGroup("dev.latvian.mods")
+            includeGroup ("dev.latvian.apps")
+        }
+    }
     mavenLocal()
     mavenCentral()
 }
@@ -55,6 +61,7 @@ val item_viewer: String by project
 val modVersion = providers.gradleProperty("version").get()
 val mod_name: String by project
 
+val kubejs_enabled: String by project
 val devauth_enabled: String by project
 
 
@@ -125,7 +132,7 @@ cloche {
             modCompileOnly(libs.ponder)
             modCompileOnly(libs.estrogen)
             modImplementation(libs.kittyconfig)
-
+            modCompileOnly(libs.kubejs)
             implementation(libs.mixinConstrains)
             modCompileOnly(libs.forge.registrate)
         }
@@ -230,6 +237,7 @@ cloche {
             modImplementation(libs.fabric.kritter)
             modImplementation(libs.fabric.estrogen)
             modApi(libs.fabric.botarium)
+            modCompileOnly(libs.fabric.kubejs)
 
             when (item_viewer) {
                 "REI" -> modRuntimeOnly(libs.fabric.rei) { exclude(group = "net.fabricmc") }
@@ -296,6 +304,7 @@ cloche {
                 }
                 isTransitive = false
             }
+            modCompileOnly(libs.forge.kubejs)
             modImplementation(libs.forge.estrogen)
             modApi(libs.forge.botarium)
             modImplementation(libs.forge.ponder)
@@ -308,6 +317,7 @@ cloche {
                 "disabled" -> {}
                 else -> error("Invalid item viewer for Forge: $item_viewer")
             }
+            if (kubejs_enabled.toBoolean()) modRuntimeOnly(libs.forge.kubejs)
 
             if (devauth_enabled.toBoolean()) modRuntimeOnly(libs.forge.devauth)
         }
