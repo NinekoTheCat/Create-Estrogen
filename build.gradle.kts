@@ -83,13 +83,13 @@ cloche {
         dependency {
             modId = "cynosure"
             version {
-                start = "0.1.9"
+                start = "0.1.15"
             }
         }
         dependency {
             modId = "estrogen"
             version {
-                start = "5.0"
+                start = "5.0.8"
             }
         }
     }
@@ -395,7 +395,7 @@ publishMods {
     )
     val mcVersion = "1.20.1"
     changelog = file("CHANGELOG.md").readText().replace("@VERSION@", modVersion)
-    type = ALPHA
+    type = STABLE
 
     val optionsCurseforge = curseforgeOptions {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
