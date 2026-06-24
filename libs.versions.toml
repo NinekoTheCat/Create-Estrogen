@@ -1,8 +1,8 @@
 [versions]
 
 # Stuff
-kotlin = "2.0.0"
-cloche = "0.16.22"
+kotlin = "2.2.10"
+cloche = "0.18.15"
 
 # Minecraft
 minecraft = "1.20.1"

@@ -11,6 +11,7 @@ plugins {
     kotlin("jvm") version libs.versions.kotlin
     kotlin("plugin.serialization") version libs.versions.kotlin
     alias(libs.plugins.kittyconfig)
+    id("com.google.devtools.ksp") version "2.2.10-2.0.2"
 }
 
 
@@ -103,15 +104,9 @@ cloche {
         data {
 
         }
-        test {
-
-        }
-        kotlin {
-            sourceSets.main {
-                kotlin.srcDir("build/generated/ksp/main/kotlin")
-                kotlin.srcDir("build/generated/ksp/main/stubs")
-            }
-        }
+//        test {
+//
+//        }
         mixins.from(file("src/main/createestrogen.mixins.json"))
 
         accessWideners.from(file("src/main/createestrogen.accessWidener"))
