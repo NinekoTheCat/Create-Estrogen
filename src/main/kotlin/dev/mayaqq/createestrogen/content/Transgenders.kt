@@ -4,10 +4,12 @@ package dev.mayaqq.createestrogen.content
 import dev.engine_room.flywheel.api.visual.BlockEntityVisual
 import dev.engine_room.flywheel.api.visualization.VisualizationContext
 import dev.engine_room.flywheel.lib.visualization.SimpleBlockEntityVisualizer
+import dev.mayaqq.cynosure.tooltips.DescriptionTooltip
+import invoke.kitty.kritter.registry.blockEntity.BlockEntityBuilder
+import invoke.kitty.kritter.registry.item.ItemBuilder
+import invoke.kitty.kritter.utils.clientOnly
 import net.minecraft.world.level.block.entity.BlockEntity
-import uwu.serenity.kritter.client.stdlib.clientOnly
-import uwu.serenity.kritter.stdlib.BlockEntityBuilder
-
+import dev.mayaqq.cynosure.items.extensions.registerExtension
 // Block entities
 // these need to be inline/crossinline for server-side safety
 inline fun <BE : BlockEntity> BlockEntityBuilder<BE>.visual(crossinline factory: (VisualizationContext, BE, Float) -> BlockEntityVisual<in BE>, noinline predicate: (BE) -> Boolean = { true }) {
@@ -20,5 +22,9 @@ inline fun <BE : BlockEntity> BlockEntityBuilder<BE>.visual(crossinline factory:
         }
     }
 }
-
+fun ItemBuilder<*>.standardTooltip() {
+    onRegister {
+        it.registerExtension(DescriptionTooltip(DescriptionTooltip.Theme.Default))
+    }
+}
 val matchIdRegex = Regex("[A-Za-z]+:.*")

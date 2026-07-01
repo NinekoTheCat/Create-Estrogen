@@ -9,10 +9,9 @@ import dev.mayaqq.createestrogen.content.CreateEstrogenPonderPlugin
 import dev.mayaqq.createestrogen.content.packages.CreateEstrogenPackageStyles
 import net.createmod.ponder.foundation.PonderIndex
 import net.minecraft.resources.ResourceLocation
-import uwu.serenity.kittyconfig.load
 
 fun createEstrogenClient() {
-    CreateEstrogenClientConfig.load()
+    CreateEstrogenClientConfig.initialize();
 
     PonderIndex.addPlugin(CreateEstrogenPonderPlugin)
     for (style in CreateEstrogenPackageStyles.estrogenPillStyles) {

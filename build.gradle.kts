@@ -10,14 +10,14 @@ plugins {
     alias(libs.plugins.cloche)
     kotlin("jvm") version libs.versions.kotlin
     kotlin("plugin.serialization") version libs.versions.kotlin
-    alias(libs.plugins.kittyconfig)
-    id("com.google.devtools.ksp") version "2.2.10-2.0.2"
+//    alias(libs.plugins.kittyconfig)
+//    id("com.google.devtools.ksp") version "2.2.10-2.0.2"
 }
 
 
 
 repositories {
-    cloche.librariesMinecraft()
+        cloche.librariesMinecraft()
     maven("https://repo.nyon.dev/releases")
     maven(url = "https://maven.parchmentmc.org") { name = "Parchment" }
     maven(url = "https://maven.fabricmc.net") { name = "FabricMC" }
@@ -53,12 +53,12 @@ repositories {
     mavenCentral()
 }
 
-val item_viewer: String by project
+val item_viewer: String = providers.gradleProperty("item_viewer").get()
 val modVersion = providers.gradleProperty("version").get()
-val mod_name: String by project
+val mod_name: String  = providers.gradleProperty("mod_name").get()
 
-val kubejs_enabled: String by project
-val devauth_enabled: String by project
+val kubejs_enabled: String = providers.gradleProperty("kubejs_enabled").get()
+val devauth_enabled: String = providers.gradleProperty("devauth_enabled").get()
 
 
 dependencies {
@@ -84,7 +84,7 @@ cloche {
         dependency {
             modId = "cynosure"
             version {
-                start = "0.1.15"
+                start = "0.1.16"
             }
         }
         dependency {
@@ -101,15 +101,13 @@ cloche {
     }
 
     common {
-        data {
-
-        }
+        data{}
 //        test {
 //
 //        }
         mixins.from(file("src/main/createestrogen.mixins.json"))
 
-        accessWideners.from(file("src/main/createestrogen.accessWidener"))
+//        accessWideners.from(file("src/main/createestrogen.accessWidener"))
         dependencies {
             compileOnly(libs.mixin)
             implementation(libs.kotlinx.serialization.json)
@@ -117,20 +115,22 @@ cloche {
             api(libs.flywheel.api)
             implementation(libs.mixinExtras)
             annotationProcessor(libs.mixinExtras)
-            modCompileOnly(libs.kritter)
-            modImplementation(libs.cynosure)
-            modCompileOnly(libs.ponder)
-            modCompileOnly(libs.estrogen)
-            modImplementation(libs.kittyconfig)
-            modCompileOnly(libs.kubejs)
+            modApi(libs.nullevt)
+            modApi(libs.cynosure)
+            modApi(libs.ponder)
+            modApi(libs.estrogen)
+//            modImplementation(libs.kittyconfig)
+            modApi(libs.kubejs)
             implementation(libs.mixinConstrains)
             modCompileOnly(libs.forge.registrate)
+
+            include("dev.eav.tomlkt:tomlkt:0.6.0")
         }
     }
     fabric {
-        data()
+        data ()
         mixins.from(file("src/main/createestrogen.mixins.json"), file("src/fabric/createestrogen-fabric.mixins.json"))
-        accessWideners.from(file("src/main/createestrogen.accessWidener"))
+//        accessWideners.from(file("src/main/createestrogen.accessWidener"))
         loaderVersion = libs.versions.fabric
         minecraftVersion = libs.versions.minecraft
 
@@ -220,7 +220,7 @@ cloche {
             modImplementation(libs.fabric.modmenu)
             modCompileOnly(libs.fabric.iris)
             modCompileOnly(libs.fabric.ponder)
-            modImplementation(libs.fabric.create)
+            modApi(libs.fabric.create)
             modCompileOnlyApi(libs.fabric.flywheel.api)
             modImplementation(libs.fabric.flywheel)
             //modImplementation(libs.fabric.cynosure)
@@ -228,7 +228,6 @@ cloche {
             modImplementation(libs.fabric.estrogen)
             modApi(libs.fabric.botarium)
             modCompileOnly(libs.fabric.kubejs)
-
             when (item_viewer) {
                 "REI" -> modRuntimeOnly(libs.fabric.rei) { exclude(group = "net.fabricmc") }
                 "EMI" -> modRuntimeOnly(libs.fabric.emi)
@@ -246,7 +245,7 @@ cloche {
         data()
 //        test()
         mixins.from(file("src/main/createestrogen.mixins.json"), file("src/forge/createestrogen-forge.mixins.json"))
-        accessWideners.from(file("src/main/createestrogen.accessWidener"))
+//        accessWideners.from(file("src/main/createestrogen.accessWidener"))
         datagenDirectory.set(file("build/generated/resources/forge"))
         loaderVersion = libs.versions.forge.get()
         minecraftVersion = libs.versions.minecraft.get()
@@ -289,8 +288,8 @@ cloche {
             modCompileOnly(libs.forge.jei)
             modCompileOnly(libs.forge.emi)
             //modImplementation(libs.forge.cynosure)
-            modImplementation(libs.forge.kritter)
-            modImplementation(libs.forge.create) {
+            modImplementation(skipIncludeTransformation(libs.forge.kritter))
+            modApi(libs.forge.create) {
                 artifact {
                     classifier = "slim"
                 }
@@ -349,27 +348,27 @@ tasks.named("runForgeData") {
     enabled = false
 }
 
-tasks.withType<KotlinCompile> {
-//    explicitApiMode = org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode.Warning
-    compilerOptions {
-        languageVersion = KotlinVersion.KOTLIN_2_0
-        freeCompilerArgs = listOf("-Xmulti-platform", "-Xno-check-actual", "-Xexpect-actual-classes")
-    }
-}
 kotlin {
     compilerOptions {
-        languageVersion = KotlinVersion.KOTLIN_2_0
-        freeCompilerArgs = listOf("-Xmulti-platform", "-Xno-check-actual", "-Xexpect-actual-classes")
+        languageVersion = KotlinVersion.KOTLIN_2_2
+        freeCompilerArgs.addAll(
+            "-Xjvm-default=all-compatibility",
+            "-Xcontext-receivers",
+            "-Xmulti-platform",
+            "-Xno-check-actual",
+            "-Xexpect-actual-classes",
+            "-XXLanguage:+ExpectRefinement"
+        )
     }
     jvmToolchain(17)
 }
 
-tasks.named("createCommonApiStub", GenerateStubApi::class) {
-    excludes.add(libs.kritter.get().group)
-    excludes.add(libs.cynosure.get().group)
-    excludes.add(libs.estrogen.get().group)
-    excludes.add(libs.kittyconfig.get().group)
-}
+//tasks.named("createCommonApiStub", GenerateStubApi::class) {
+//    excludes.add(libs.kritter.get().group)
+//    excludes.add(libs.cynosure.get().group)
+//    excludes.add(libs.estrogen.get().group)
+//    excludes.add(libs.kittyconfig.get().group)
+//}
 
 publishMods {
     val loaders = arrayOf(
