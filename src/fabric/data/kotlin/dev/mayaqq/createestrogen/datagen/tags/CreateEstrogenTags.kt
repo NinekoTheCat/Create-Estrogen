@@ -11,7 +11,7 @@ import net.minecraft.tags.BlockTags
 import java.util.concurrent.CompletableFuture
 import dev.mayaqq.createestrogen.content.CreateEstrogenBlocks
 import dev.mayaqq.createestrogen.content.CreateEstrogenItems
-import uwu.serenity.kritter.api.entry.RegistryEntry
+import invoke.kitty.kritter.registry.api.entry.RegistryEntry
 
 class CreateEstrogenBlockTags(
     data: FabricDataOutput,

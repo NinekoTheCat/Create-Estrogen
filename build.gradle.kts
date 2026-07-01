@@ -224,8 +224,8 @@ cloche {
             modCompileOnlyApi(libs.fabric.flywheel.api)
             modImplementation(libs.fabric.flywheel)
             //modImplementation(libs.fabric.cynosure)
-            modImplementation(libs.fabric.kritter)
-            modImplementation(libs.fabric.estrogen)
+            modApi(libs.fabric.kritter)
+            modApi(libs.fabric.estrogen)
             modApi(libs.fabric.botarium)
             modCompileOnly(libs.fabric.kubejs)
             when (item_viewer) {
@@ -288,7 +288,7 @@ cloche {
             modCompileOnly(libs.forge.jei)
             modCompileOnly(libs.forge.emi)
             //modImplementation(libs.forge.cynosure)
-            modImplementation(skipIncludeTransformation(libs.forge.kritter))
+            modApi(skipIncludeTransformation(libs.forge.kritter))
             modApi(libs.forge.create) {
                 artifact {
                     classifier = "slim"
