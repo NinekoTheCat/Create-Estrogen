@@ -11,14 +11,14 @@ import invoke.kitty.kritter.config.formats.TomlFormat
 import invoke.kitty.kritter.config.validation.types.range
 
 
-object CreateEstrogenClientConfig : Config("$MOD_ID/client", TomlFormat.Default) {
+object CreateEstrogenClientConfig : Config("$MOD_ID/client", Json5Format.Default) {
 
 }
 
-object CreateEstrogenCommonConfig : SyncedConfig("$MOD_ID/common", TomlFormat.Default) {
+object CreateEstrogenCommonConfig : SyncedConfig("$MOD_ID/common", Json5Format.Default) {
 
 }
 
-object CreateEstrogenServerConfig : Config("$MOD_ID/server", TomlFormat.Default) {
+object CreateEstrogenServerConfig : Config("$MOD_ID/server", Json5Format.Default) {
 
 }

@@ -22,9 +22,3 @@ inline fun <BE : BlockEntity> BlockEntityBuilder<BE>.visual(crossinline factory:
         }
     }
 }
-fun ItemBuilder<*>.standardTooltip() {
-    onRegister {
-        it.registerExtension(DescriptionTooltip(DescriptionTooltip.Theme.Default))
-    }
-}
-val matchIdRegex = Regex("[A-Za-z]+:.*")

@@ -1,16 +1,15 @@
 package dev.mayaqq.createestrogen.content.packages
 
+import com.simibubi.create.AllDataComponents
 import com.simibubi.create.content.logistics.box.PackageStyles.PackageStyle
+import com.simibubi.create.foundation.item.ItemHelper
 import dev.mayaqq.createestrogen.content.CreateEstrogenItems
-import dev.mayaqq.createestrogen.generics.CreateEstrogenItemHandler
-import dev.mayaqq.estrogen.content.EstrogenBlocks
-import dev.mayaqq.estrogen.content.EstrogenItems
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.nbt.CompoundTag
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ItemLike
+import net.neoforged.neoforge.items.ItemStackHandler
 
 object CreateEstrogenPackageStyles {
 
@@ -25,7 +24,7 @@ object CreateEstrogenPackageStyles {
     private val estrogenPillBlock by lazy {  BuiltInRegistries.ITEM.get(ResourceLocation.tryParse("estrogen:estrogen_pill_block")!!)}
 
     private val allowedItemsToBeCounted by lazy {
-        setOf<Item>(
+        setOf(
             estrogenPill,
             crystalEstrogenPill,
             estrogenPillBlock,
@@ -33,17 +32,15 @@ object CreateEstrogenPackageStyles {
     }
 
     @JvmStatic
-    fun containing(stacks: CreateEstrogenItemHandler): ItemStack? {
+    fun containing(stacks: ItemStackHandler): ItemStack? {
         if (isMajorityOfItemsEstrogenItems(stacks)) {
             val box = ItemStack(CreateEstrogenItems.allEstrogenPillBoxes.random().value as ItemLike)
-            val compound = CompoundTag()
-            compound.put("Items", stacks.serializeNBT())
-            box.tag = compound
+            box.set(AllDataComponents.PACKAGE_CONTENTS, ItemHelper.containerContentsFromHandler(stacks))
             return box
         } else return null
     }
 
-    private fun isMajorityOfItemsEstrogenItems(stacks: CreateEstrogenItemHandler): Boolean {
+    private fun isMajorityOfItemsEstrogenItems(stacks: ItemStackHandler): Boolean {
         val itemToAmount = mutableMapOf<Item, Int>()
 
         for (i in 0..<stacks.slots) {

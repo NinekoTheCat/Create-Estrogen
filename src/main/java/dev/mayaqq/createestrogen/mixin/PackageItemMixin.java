@@ -1,34 +1,31 @@
-package dev.mayaqq.createestrogen.fabric.mixin;
+package dev.mayaqq.createestrogen.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.logistics.box.PackageItem;
 import com.simibubi.create.content.logistics.box.PackageStyles;
 import dev.mayaqq.createestrogen.content.packages.CreateEstrogenPackageStyles;
-import dev.mayaqq.createestrogen.fabric.extensions.ItemHandlerWrapper;
-import dev.mayaqq.createestrogen.generics.CreateEstrogenItemHandler;
-import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PackageItem.class)
 public class PackageItemMixin {
     @Shadow
     public PackageStyles.PackageStyle style;
 
-    @Inject(method = "Lcom/simibubi/create/content/logistics/box/PackageItem;containing(Lio/github/fabricators_of_create/porting_lib/transfer/item/ItemStackHandler;)Lnet/minecraft/world/item/ItemStack;", at = @At("HEAD"), cancellable = true)
-    private static void containing(ItemStackHandler stacks, CallbackInfoReturnable<ItemStack> cir) {
-        var contained = CreateEstrogenPackageStyles.containing(new ItemHandlerWrapper(stacks));
+    @ModifyReturnValue(method = "containing(Lnet/neoforged/neoforge/items/ItemStackHandler;)Lnet/minecraft/world/item/ItemStack;", at = @At("RETURN"))
+    private static ItemStack containing(ItemStack original, @Local(argsOnly = true) ItemStackHandler stacks) {
+        var contained = CreateEstrogenPackageStyles.containing(stacks);
         if (contained != null) {
-            cir.setReturnValue(contained);
+            return contained;
         }
+        return original;
     }
 
     /**
@@ -45,10 +42,13 @@ public class PackageItemMixin {
      * @author Niko Dale
      * @reason create estrogen's custom translations
      */
-    @Overwrite
-    public String getDescriptionId() {
-        return "item." + style.getItemId().getNamespace() + (style.rare() ? ".rare_package" : ".package");
+    @ModifyReturnValue(
+            method = "getDescriptionId",
+            at = @At("RETURN")
+    )
+    private String modifyDescriptionId(String original) {
+        if (!this.style.getItemId().getNamespace().equals("create")) {
+            return original.replaceAll("create", this.style.getItemId().getNamespace());
+        } else return original;
     }
-
-
 }
