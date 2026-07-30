@@ -49,30 +49,11 @@ cloche {
         url = "https://github.com/MayaqqDev/Create-Estrogen"
         sources = "https://github.com/MayaqqDev/Create-Estrogen"
         author("Mayaqq")
-        contributor("https://github.com/MayaqqDev/Estrogen/wiki/Credits")
-        dependency {
-            modId = "create"
-            version {
-                start = "6.0.6"
-            }
-        }
-        dependency {
-            modId = "cynosure"
-            version {
-                start = "0.1.16"
-            }
-        }
-        dependency {
-            modId = "estrogen"
-            version {
-                start = "5.0.8"
-            }
-        }
-        dependency {
-            modId = "create"
-            version {
-                start = "6.0.6"
-            }
+        contributor("https://modded.wiki/w/Estrogen:Credits")
+        dependency { modId = "create"; version { start = "6.0.6" } }
+        dependency { modId = "cynosure"; version { start = "0.1.16" } }
+        dependency { modId = "estrogen"; version { start = "5.0.8" } }
+        dependency { modId = "create"; version { start = "6.0.6" }
         }
     }
 
@@ -81,150 +62,6 @@ cloche {
         parchment(libs.versions.parchment)
     }
 
-    /*
-    common {
-        data{}
-//        test {
-//
-//        }
-        mixins.from(file("src/main/createestrogen.mixins.json"))
-
-//        accessWideners.from(file("src/main/createestrogen.accessWidener"))
-        dependencies {
-            compileOnly(libs.mixin)
-            implementation(libs.kotlinx.serialization.json)
-            implementation(libs.kotlinx.coroutines.core)
-            api(libs.flywheel.api)
-            implementation(libs.mixinExtras)
-            annotationProcessor(libs.mixinExtras)
-            modApi(libs.nullevt)
-            modApi(libs.cynosure)
-            modApi(libs.ponder)
-            modApi(libs.estrogen)
-//            modImplementation(libs.kittyconfig)
-            modApi(libs.kubejs)
-            implementation(libs.mixinConstrains)
-            modCompileOnly(libs.forge.registrate)
-
-            include("dev.eav.tomlkt:tomlkt:0.6.0")
-        }
-    }*/
-    /*
-    fabric {
-        data ()
-        mixins.from(file("src/main/createestrogen.mixins.json"), file("src/fabric/createestrogen-fabric.mixins.json"))
-//        accessWideners.from(file("src/main/createestrogen.accessWidener"))
-        loaderVersion = libs.versions.fabric
-        minecraftVersion = libs.versions.minecraft
-
-
-        //include(libs.fabric.kittyconfig)
-
-
-        includedClient() // includedClient() is not a run
-        runs {
-            client {
-            }
-            server {
-            }
-            data {
-
-            jvmArgs("-Dfabric-api.datagen.output-dir=${file("build/generated/resources/main")}")
-                jvmArgs("-Destrogen.datagen.fabric-output-dir=${file("build/generated/resources/fabric")}")
-                jvmArgs("-Destrogen.datagen.forge-output-dir=${file("build/generated/resources/forge")}")
-            }
-        }
-
-        metadata {
-            entrypoint("main") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.fabric.CreateEstrogenFabric::init")
-            }
-            entrypoint("client") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.fabric.client.CreateEstrogenClientFabric::init")
-            }
-            entrypoint("crv") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.compat.recipeviewers.CreateEstrogenCRVPlugin")
-            }
-            entrypoint("estrogen") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.CreateEstrogen")
-            }
-            entrypoint("fabric-datagen") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.datagen.CreateEstrogenDatagen")
-            }
-            entrypoint("modmenu") {
-                adapter.set("kotlin")
-                value.set("dev.mayaqq.createestrogen.fabric.compat.ModMenuIntegration")
-            }
-            custom(
-                "modmenu", mapOf(
-                    "links" to mapOf(
-                        "estrogen.credits" to "https://github.com/MayaqqDev/Estrogen/wiki/Credits",
-                        "modmenu.discord" to "https://discord.gg/hue",
-                        "modmenu.patreon" to "https://patreon.com/mayaqq",
-                        "modmenu.curseforge" to "https://www.curseforge.com/minecraft/mc-mods/createestrogen",
-                        "modmenu.modrinth" to "https://modrinth.com/mod/createestrogen",
-                        "modmenu.wiki" to "https://github.com/MayaqqDev/Estrogen/wiki"
-                    )
-                )
-            )
-            custom(
-                "cynosure", mapOf(
-                    "autosubscription" to true
-                )
-            )
-            custom(
-                "catalogue", mapOf(
-                    "icon" to mapOf("item" to "estrogen:estrogen_pill"),
-                    "banner" to "icon.png",
-                    "background" to "estrogen_background.png",
-                    "configFactory" to "dev.mayaqq.createestrogen.fabric.integrations.catalogue.CatalogueCompat"
-                )
-            )
-            dependency {
-                modId = "create"
-                version {
-                    start = "6.0.8"
-                }
-            }
-        }
-        dependencies {
-            fabricApi(libs.versions.fapi)
-            modApi(libs.fabric.kotlin)
-            modApi.bundle(libs.bundles.fabric.cardinalComponents)
-            modImplementation(libs.fabric.baubly) { exclude(group = "me.shedaniel") }
-            modCompileOnly(libs.fabric.emi)
-            modCompileOnly(libs.fabric.rei)
-            modCompileOnly(libs.fabric.jei)
-            modImplementation(libs.fabric.modmenu)
-            modCompileOnly(libs.fabric.iris)
-            modCompileOnly(libs.fabric.ponder)
-            modApi(libs.fabric.create)
-            modCompileOnlyApi(libs.fabric.flywheel.api)
-            modImplementation(libs.fabric.flywheel)
-            //modImplementation(libs.fabric.cynosure)
-            modApi(libs.fabric.kritter)
-            modApi(libs.fabric.estrogen)
-            modApi(libs.fabric.botarium)
-            modCompileOnly(libs.fabric.kubejs)
-            when (item_viewer) {
-                "REI" -> modRuntimeOnly(libs.fabric.rei) { exclude(group = "net.fabricmc") }
-                "EMI" -> modRuntimeOnly(libs.fabric.emi)
-                "JEI" -> modRuntimeOnly(libs.fabric.jei)
-                "disabled" -> {}
-                else -> error("Invalid item viewer for Fabric: $item_viewer")
-            }
-
-            if (kubejs_enabled.toBoolean()) modRuntimeOnly(libs.fabric.kubejs)
-
-            if (devauth_enabled.toBoolean()) modRuntimeOnly(libs.fabric.devauth)
-        }
-    }
-     */
     singleTarget {
         neoforge {
             mixins.from(file("src/main/createestrogen.mixins.json"), file("src/forge/createestrogen-forge.mixins.json"))
@@ -243,7 +80,7 @@ cloche {
 
             data {
                 dependencies {
-                    compileOnly("dev.mayaqq:estrogen:6.0.0+1.21.1-alpha.1:neoforge")
+                    compileOnly("dev.mayaqq:estrogen:neoforge")
                 }
             }
             runs {
@@ -282,7 +119,7 @@ cloche {
                     "REI" -> modRuntimeOnly(libs.forge.rei)
                     "JEI" -> modRuntimeOnly(libs.forge.jei)
                     "disabled" -> {}
-                    else -> error("Invalid item viewer for Forge: $item_viewer")
+                    else -> error("Invalid item viewer for NeoForge: $item_viewer")
                 }
                 if (kubejs_enabled.toBoolean()) modRuntimeOnly(libs.forge.kubejs)
 
@@ -297,9 +134,6 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
     withSourcesJar()
-}
-tasks.compileJava {
-    options.compilerArgs.add("-AgenerateExpectStubs")
 }
 
 kotlin {
@@ -318,64 +152,33 @@ kotlin {
 
 /*
 publishMods {
-    val loaders = arrayOf(
-        /*
-        PublishMetadata(
-            "Fabric",
-            arrayOf("fabric", "quilt"),
-            arrayOf("estrogen", "create-fabric"),
-            cloche.targets["fabric"].finalJar.flatMap(Jar::getArchiveFile),
-            "-fabric"
-        ),*/
-        PublishMetadata(
-            "NeoForge",
-            arrayOf("neoforge"),
-            arrayOf("estrogen", "create"),
-            cloche.targets["neoforge"].finalJar.flatMap(Jar::getArchiveFile),
-            "-neoforge"
-        )
-    )
-    val mcVersion = "1.21.1"
     changelog = file("CHANGELOG.md").readText().replace("@VERSION@", modVersion)
     type = STABLE
+    val loader = "neoforge"
+    val jar = cloche.targets["A"].finalJar.flatMap(Jar::getArchiveFile)
 
-    val optionsCurseforge = curseforgeOptions {
+    curseforge("curseforge") {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-        minecraftVersions.add(mcVersion)
+        minecraftVersions.add("1.21.1")
         projectId = "1272015"
         javaVersions.add(JavaVersion.VERSION_21)
         clientRequired = true
         serverRequired = true
+        modLoaders.add(loader)
+        file = jar
+        displayName = "$mod_name $modVersion NeoForge"
+        version = "$modVersion-$loader"
+        requires("estrogen", "create")
     }
 
-    val optionsModrinth = modrinthOptions {
+    modrinth("modrinth") {
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
         projectId = "OEAJaSuI"
-        minecraftVersions.add(mcVersion)
+        minecraftVersions.add("1.21.1")
+        modLoaders.add(loader)
+        file = jar
+        displayName = "$mod_name $modVersion NeoForge"
+        version = "$modVersion-$loader"
+        requires("estrogen", "create")
     }
-
-    loaders.forEach { loader ->
-        loader.apply {
-            curseforge("curseforge$loaderName") {
-                from(optionsCurseforge)
-                modLoaders.addAll(*modloaders)
-                file = jar
-                displayName = "$mod_name $modVersion $loaderName"
-                version = "$modVersion$suffix"
-                requires(*requires)
-            }
-
-            modrinth("modrinth$loaderName") {
-                from(optionsModrinth)
-                modLoaders.addAll(*modloaders)
-                file = jar
-                displayName = "$mod_name $modVersion $loaderName"
-                version = "$modVersion$suffix"
-                requires(*requires)
-            }
-        }
-    }
-}
-
-class PublishMetadata(val loaderName: String, val modloaders: Array<String>, val requires: Array<String>, val jar: Provider<RegularFile>, val suffix: String)
- */
+}*/
