@@ -64,8 +64,8 @@ cloche {
 
     singleTarget {
         neoforge {
-            mixins.from(file("src/main/createestrogen.mixins.json"), file("src/forge/createestrogen-forge.mixins.json"))
-            datagenDirectory.set(file("build/generated/resources/forge"))
+            mixins.from(file("src/main/createestrogen.mixins.json"))
+            datagenDirectory.set(file("build/generated/resources/neoforge"))
             loaderVersion = libs.versions.neoforge.get()
             minecraftVersion = libs.versions.minecraft.get()
 
