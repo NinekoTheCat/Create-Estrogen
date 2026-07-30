@@ -81,7 +81,7 @@ cloche {
         parchment(libs.versions.parchment)
     }
 
-/*
+    /*
     common {
         data{}
 //        test {
@@ -241,7 +241,11 @@ cloche {
                 blurLogo = false
             }
 
-            data()
+            data {
+                dependencies {
+                    modApi(libs.estrogen)
+                }
+            }
             runs {
                 data()
                 client()
@@ -253,8 +257,6 @@ cloche {
                 compileOnly(libs.mixin)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.mixinExtras)
-                annotationProcessor(libs.mixinExtras)
                 modApi(libs.cynosure)
                 modApi(libs.estrogen)
                 modApi(libs.kubejs)
@@ -265,7 +267,6 @@ cloche {
                 modCompileOnlyApi(libs.forge.flywheel.api)
                 modImplementation(libs.forge.flywheel)
                 modCompileOnly(libs.forge.rei)
-                implementation(libs.forge.mixinExtras)
                 modCompileOnly(libs.forge.jei)
                 modCompileOnly(libs.forge.emi)
                 modApi(libs.forge.kritter)

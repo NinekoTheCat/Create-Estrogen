@@ -1,10 +1,10 @@
 package dev.mayaqq.createestrogen.datagen.models
 
 import dev.mayaqq.createestrogen.CreateEstrogen
+import dev.mayaqq.createestrogen.MOD_ID
 import dev.mayaqq.createestrogen.content.CreateEstrogenItems
 import dev.mayaqq.createestrogen.id
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
+import net.minecraft.data.PackOutput
 import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
 import net.minecraft.data.models.model.ModelLocationUtils
@@ -12,14 +12,12 @@ import net.minecraft.data.models.model.ModelTemplate
 import net.minecraft.data.models.model.TextureMapping
 import net.minecraft.data.models.model.TextureSlot
 import net.minecraft.resources.ResourceLocation
+import net.neoforged.neoforge.client.model.generators.ItemModelProvider
+import net.neoforged.neoforge.common.data.ExistingFileHelper
 import java.util.*
 
-class CreateEstrogenModels(output: FabricDataOutput) : FabricModelProvider(output) {
-    override fun generateBlockStateModels(blockModelGenerators: BlockModelGenerators) {
-
-    }
-
-    override fun generateItemModels(img: ItemModelGenerators) {
+class CreateEstrogenItemModels(output: PackOutput, efh: ExistingFileHelper) : ItemModelProvider(output, MOD_ID, efh) {
+    override fun registerModels() {
         /*
         val textureMapping = TextureMapping.particle(id("item/package/estrogen_cardboard_particle"))
             .put(TextureSlot.LAYER0, id("item/package/estrogen_cardboard"))
@@ -40,6 +38,4 @@ class CreateEstrogenModels(output: FabricDataOutput) : FabricModelProvider(outpu
         }
          */
     }
-
-    override fun getName(): String = "CreateEstrogenModelProvider"
 }

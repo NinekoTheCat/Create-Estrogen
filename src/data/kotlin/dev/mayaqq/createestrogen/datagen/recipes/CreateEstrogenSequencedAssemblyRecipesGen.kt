@@ -8,27 +8,28 @@ import dev.mayaqq.createestrogen.MOD_ID
 import dev.mayaqq.createestrogen.content.CreateEstrogenItems
 import dev.mayaqq.estrogen.content.EstrogenFluids
 import dev.mayaqq.estrogen.content.EstrogenItems
-import dev.mayaqq.estrogen.datagen.api.platform.PlatformRecipeHelper
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
+import net.minecraft.core.HolderLookup
+import net.minecraft.data.PackOutput
 import net.minecraft.world.item.Items
+import java.util.concurrent.CompletableFuture
 
-class CreateEstrogenSequencedAssemblyRecipesGen(output: FabricDataOutput, prh: PlatformRecipeHelper) :
-    SequencedAssemblyRecipeGen(output, MOD_ID) {
+class CreateEstrogenSequencedAssemblyRecipesGen(output: PackOutput, lookup: CompletableFuture<HolderLookup.Provider>) :
+    SequencedAssemblyRecipeGen(output, lookup, MOD_ID) {
     init {
         create("estrogen_patch") {
             it.require(Items.PAPER)
                 .transitionTo(CreateEstrogenItems.IncompleteEstrogenPatch)
-                .addOutput(EstrogenItems.EstrogenPatches.getFullStack(), 120f)
+                .addOutput(EstrogenItems.EstrogenPatches.get().getFullStack(), 120f)
                 .addOutput(EstrogenItems.EstrogenPill, 16f)
                 .addOutput(Items.PAPER, 5f)
                 .addOutput(Items.SLIME_BALL, 5f)
                 .addOutput(EstrogenItems.HorseUrineBottle, 4f)
                 .loops(5)
-                .addStep(::FillingRecipe) { rb -> rb.require(EstrogenFluids.MoltenSlime.value, prh.fluidAmount(27000)) }
+                .addStep(::FillingRecipe) { rb -> rb.require(EstrogenFluids.MoltenSlime.value, 250) }
                 .addStep(::FillingRecipe) { rb ->
                     rb.require(
                         EstrogenFluids.LiquidEstrogen.value,
-                        prh.fluidAmount(27000)
+                        250
                     )
                 }
                 .addStep(::DeployerApplicationRecipe) { rb -> rb.require(Items.PAPER) }

@@ -2,67 +2,63 @@ package dev.mayaqq.createestrogen.datagen.recipes
 
 import com.simibubi.create.AllItems
 import com.simibubi.create.api.data.recipe.FillingRecipeGen
-import com.simibubi.create.content.fluids.transfer.FillingRecipe
 import dev.mayaqq.createestrogen.MOD_ID
 import dev.mayaqq.createestrogen.content.CreateEstrogenItems
 import dev.mayaqq.estrogen.content.EstrogenFluids
 import dev.mayaqq.estrogen.content.EstrogenItems
 import dev.mayaqq.estrogen.content.EstrogenPotions
-import dev.mayaqq.estrogen.datagen.api.platform.PlatformRecipeHelper
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
-import net.minecraft.resources.ResourceLocation
+import invoke.kitty.kritter.registry.api.entry.holder
+import net.minecraft.core.HolderLookup
+import net.minecraft.data.PackOutput
 import net.minecraft.world.item.Items
-import net.minecraft.world.item.alchemy.PotionUtils
+import net.minecraft.world.item.alchemy.PotionContents
 import net.minecraft.world.level.material.Fluids
+import java.util.concurrent.CompletableFuture
 
 
-class CreateEstrogenFillingRecipesGen(output: FabricDataOutput, prh: PlatformRecipeHelper) : FillingRecipeGen(output, MOD_ID) {
+@Suppress("UnstableApiUsage")
+class CreateEstrogenFillingRecipesGen(output: PackOutput, lookup: CompletableFuture<HolderLookup.Provider>) : FillingRecipeGen(output, lookup, MOD_ID) {
     init {
-        create<FillingRecipe>(
+        create(
             "crystal_estrogen_pill"
         ) { builder ->
             builder
                 .require(EstrogenItems.EstrogenPill)
-                .require(EstrogenFluids.MoltenAmethyst.value, prh.fluidAmount(27000))
+                .require(EstrogenFluids.MoltenAmethyst.value, 250)
                 .output(EstrogenItems.CrystalEstrogenPill, 1)
         }
 
-        create<FillingRecipe>(
+        create(
             "estrogen_pill"
         ) { builder ->
             builder
                 .require(Items.COOKIE)
-                .require(EstrogenFluids.LiquidEstrogen.value, prh.fluidAmount(27000))
+                .require(EstrogenFluids.LiquidEstrogen.value, 250)
                 .output(EstrogenItems.EstrogenPill, 1)
         }
 
-        create<FillingRecipe>(
+        create(
             "filter"
         ) { builder ->
             builder
                 .require(CreateEstrogenItems.UsedFilter)
-                .require(Fluids.WATER, prh.fluidAmount(27000))
+                .require(Fluids.WATER, 250)
                 .output(AllItems.FILTER, 1)
         }
 
-        create<FillingRecipe>(
+        create(
             "estrogen_tipped_arrow"
         ) { builder ->
             builder
                 .require(Items.ARROW)
-                .require(EstrogenFluids.LiquidEstrogen.value, prh.fluidAmount(27000))
-                .output(Items.TIPPED_ARROW.defaultInstance.also {
-                    PotionUtils.setPotion(
-                        it,
-                        EstrogenPotions.EstrogenPotion
-                    )
-                })
+                .require(EstrogenFluids.LiquidEstrogen.value, 250)
+                .output(PotionContents.createItemStack(Items.TIPPED_ARROW, EstrogenPotions.EstrogenPotion.holder))
         }
 
-        create<FillingRecipe>("gender_change_potion") { builder ->
+        create("gender_change_potion") { builder ->
             builder
                 .require(Items.GLASS_BOTTLE)
-                .require(EstrogenFluids.GenderFluid.value, prh.fluidAmount(27000))
+                .require(EstrogenFluids.GenderFluid.value, 250)
                 .output(EstrogenItems.GenderChangePotion)
         }
     }
