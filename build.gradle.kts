@@ -243,7 +243,7 @@ cloche {
 
             data {
                 dependencies {
-                    modApi(libs.estrogen)
+                    compileOnly("dev.mayaqq:estrogen:6.0.0+1.21.1-alpha.1:neoforge")
                 }
             }
             runs {
