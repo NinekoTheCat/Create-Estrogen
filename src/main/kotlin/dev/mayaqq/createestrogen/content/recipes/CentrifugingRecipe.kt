@@ -6,15 +6,17 @@ import com.teamresourceful.bytecodecs.base.ByteCodec
 import com.teamresourceful.bytecodecs.base.`object`.ObjectByteCodec
 import dev.mayaqq.createestrogen.content.CreateEstrogenBlocks
 import dev.mayaqq.createestrogen.content.CreateEstrogenRecipes
+import dev.mayaqq.createestrogen.content.FluidContainer
 import dev.mayaqq.createestrogen.id
 import dev.mayaqq.cynosure.core.bytecodecs.ByteCodecs
 import dev.mayaqq.cynosure.core.bytecodecs.toByteCodec
 import dev.mayaqq.cynosure.core.codecs.fieldOf
-import net.minecraft.core.RegistryAccess
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource
+import earth.terrarium.common_storage_lib.storage.base.StorageSlot
+import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.Container
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.crafting.Recipe
@@ -43,7 +45,6 @@ data class RatioFluidIngredient(
     val fluid: Fluid,
     val amountPerTick: Long
 ) {
-    val holder get() = FluidHolder.of(fluid,amountPerTick)
 
     companion object {
         fun codec(): Codec<RatioFluidIngredient> = RecordCodecBuilder.create {instance ->
@@ -72,8 +73,6 @@ data class RatioFluidOutput(
     val fluid: Fluid,
     val amountPerTick: Long
 ) {
-
-    val holder get() = FluidHolder.of(fluid,amountPerTick)
     companion object {
         fun codec(): Codec<RatioFluidOutput> = RecordCodecBuilder.create {instance ->
             instance.group(
@@ -89,16 +88,33 @@ data class RatioFluidOutput(
     }
 
 }
+@Suppress("Unused")
+private operator fun FluidContainer.iterator() = object : Iterator<StorageSlot<FluidResource>> {
+    var currentIdx = 0
+    val inner = this@iterator
+    override fun next(): StorageSlot<FluidResource> {
+        currentIdx++
+        if (!hasNext()) {
+            throw NoSuchElementException()
+        }
+        return inner[currentIdx]
+    }
+
+    override fun hasNext(): Boolean =
+        currentIdx < inner.size()
+
+
+}
 class CentrifugingRecipe(val _id: ResourceLocation,
                          val inputs: List<RatioFluidIngredient>,
                          val result: RatioFluidOutput) : Recipe<CentrifugingContainer>{
     override fun matches(circumstance: CentrifugingContainer, p1: Level): Boolean {
         /// this is assuming that .fluids always returns merged fluids
         val actualFluidAmounts = mutableMapOf<Fluid,Long>()
-        for (fluidHolder in circumstance.input.fluids) {
-            if (fluidHolder.isEmpty) continue
-            val fluidAmount = fluidHolder.fluidAmount
-            actualFluidAmounts.compute(fluidHolder.fluid) {_,actualAmount ->
+        for (fluidHolder in circumstance.input) {
+            if (fluidHolder.amount <= 0) continue
+            val fluidAmount = fluidHolder.amount
+            actualFluidAmounts.compute(fluidHolder.resource.type) {_,actualAmount ->
                 if (actualAmount == null) return@compute fluidAmount
                 /// crash if overflow
                 return@compute  Math.addExact(fluidAmount,actualAmount)
@@ -109,11 +125,10 @@ class CentrifugingRecipe(val _id: ResourceLocation,
         return inputs.all { ingredient -> ingredient.amountPerTick <= actualFluidAmounts.getOrDefault(ingredient.fluid,0) }
     }
 
-    override fun getId(): ResourceLocation = _id
-    override fun assemble(container: CentrifugingContainer, registry: RegistryAccess): ItemStack = result.fluid.bucket.defaultInstance
+    override fun assemble(container: CentrifugingContainer, registries: HolderLookup.Provider): ItemStack = result.fluid.bucket.defaultInstance
 
     override fun canCraftInDimensions(x: Int, y: Int): Boolean = true
-    override fun getResultItem(registry: RegistryAccess): ItemStack = result.fluid.bucket.defaultInstance
+    override fun getResultItem(registries: HolderLookup.Provider): ItemStack = result.fluid.bucket.defaultInstance
 
 
     override fun getSerializer(): RecipeSerializer<*> = CreateEstrogenRecipes.Serializers.CENTRIFUGING_SERIALIZER

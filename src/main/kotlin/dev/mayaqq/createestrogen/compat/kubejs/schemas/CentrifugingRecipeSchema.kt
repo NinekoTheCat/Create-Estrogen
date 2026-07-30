@@ -23,7 +23,7 @@ interface CentrifugingRecipeSchema {
             override fun parentComponent(): RecipeComponent<Array<InputFluid>> =
                 FluidComponents.INPUT_ARRAY
             override fun write(p0: RecipeJS, p1: Array<InputFluid>): JsonElement {
-                val inputs = p1.map { it as FluidStackJS }.map { RatioFluidIngredient(BuiltInRegistries.FLUID.get(ResourceLocation(it.id)),it.amount) }
+                val inputs = p1.map { it as FluidStackJS }.map { RatioFluidIngredient(BuiltInRegistries.FLUID.get(ResourceLocation.parse(it.id)),it.amount) }
                 return JsonOps.INSTANCE.createList(inputs.map { RatioFluidIngredient.codec().encodeStart(JsonOps.INSTANCE,it).result().orElseThrow() }.stream())
             }
             override fun toString(): String {
@@ -34,7 +34,7 @@ interface CentrifugingRecipeSchema {
             override fun parentComponent(): RecipeComponent<OutputFluid> = FluidComponents.OUTPUT
             override fun write(p0: RecipeJS?, p1: OutputFluid?): JsonElement {
                 p1 as FluidStackJS
-                val realOutput = RatioFluidOutput(BuiltInRegistries.FLUID.get(ResourceLocation(p1.id)),p1.amount)
+                val realOutput = RatioFluidOutput(BuiltInRegistries.FLUID.get(ResourceLocation.parse(p1.id)),p1.amount)
                 return RatioFluidOutput.codec().encodeStart(JsonOps.INSTANCE,realOutput).result().orElseThrow()
             }
 

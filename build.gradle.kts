@@ -242,7 +242,6 @@ cloche {
             }
 
             data()
-
             runs {
                 data()
                 client()
@@ -307,7 +306,6 @@ kotlin {
         languageVersion = KotlinVersion.KOTLIN_2_4
         freeCompilerArgs.addAll(
             "-Xjvm-default=all-compatibility",
-            "-Xcontext-receivers",
             "-Xmulti-platform",
             "-Xno-check-actual",
             "-Xexpect-actual-classes",

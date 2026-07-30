@@ -2,6 +2,8 @@ package dev.mayaqq.createestrogen.forge.test
 
 import dev.mayaqq.createestrogen.MOD_ID
 import dev.mayaqq.estrogen.content.EstrogenFluids
+import earth.terrarium.common_storage_lib.fluid.FluidApi
+import earth.terrarium.common_storage_lib.resources.fluid.FluidResource
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.gametest.framework.GameTest
@@ -18,17 +20,18 @@ class CentrifugeTests {
         gameTestHelper.absolutePos(BlockPos(0, 3, 0))
         val centrifugeInputTankPosition = gameTestHelper.absolutePos(BlockPos(0, 2, 0))
         val centrifugeOutputTankPosition = gameTestHelper.absolutePos(BlockPos(0, 4, 0))
-        val inputTank = FluidContainer.of(gameTestHelper.level, centrifugeInputTankPosition, Direction.UP)!!
+        val inputTank = FluidApi.BLOCK.find(gameTestHelper.level, centrifugeInputTankPosition, Direction.UP)!!
 
-        val outputTank = FluidContainer.of(gameTestHelper.level, centrifugeOutputTankPosition, Direction.DOWN)!!
-        inputTank.insertFluid(FluidHolder.of(EstrogenFluids.FiltratedHorseUrine.value, 81), false)
+        val outputTank = FluidApi.BLOCK.find(gameTestHelper.level, centrifugeOutputTankPosition, Direction.DOWN)!!
+        inputTank.insert(FluidResource.of(EstrogenFluids.FiltratedHorseUrine.value!!),81, false)
         gameTestHelper.succeedWhen {
-            if (outputTank.extractFluid(
-                    FluidHolder.of(EstrogenFluids.LiquidEstrogen.value, 81),
+            if (outputTank.extract(
+                    FluidResource.of(EstrogenFluids.LiquidEstrogen.value!!),
+                    81,
                     true
-                ).fluidAmount == 81L
+                ) == 81L
             ) {
-                gameTestHelper.assertTrue(inputTank.isEmpty, "Input tank has to have been used up")
+                gameTestHelper.assertTrue(inputTank.size() == 0, "Input tank has to have been used up")
             } else {
                 throw GameTestAssertPosException(
                     "output tank hasn't got any estrogen!",
