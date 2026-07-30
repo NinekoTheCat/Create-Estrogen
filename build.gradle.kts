@@ -80,7 +80,7 @@ cloche {
 
             data {
                 dependencies {
-                    compileOnly("dev.mayaqq:estrogen:neoforge")
+                    compileOnly("dev.mayaqq:estrogen:${libs.versions.estrogen}:neoforge")
                 }
             }
             runs {
