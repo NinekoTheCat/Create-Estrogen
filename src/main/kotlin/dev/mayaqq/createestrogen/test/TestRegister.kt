@@ -1,4 +1,4 @@
-package dev.mayaqq.createestrogen.forge.test
+package dev.mayaqq.createestrogen.test
 
 import invoke.kitty.kritter.platform.Mod
 import invoke.kitty.kritter.platform.forge.EntrypointHandler

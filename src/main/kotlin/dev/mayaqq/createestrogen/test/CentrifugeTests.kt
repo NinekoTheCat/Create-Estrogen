@@ -1,4 +1,4 @@
-package dev.mayaqq.createestrogen.forge.test
+package dev.mayaqq.createestrogen.test
 
 import dev.mayaqq.createestrogen.MOD_ID
 import dev.mayaqq.estrogen.content.EstrogenFluids

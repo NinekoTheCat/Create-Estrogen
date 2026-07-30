@@ -27,7 +27,6 @@ fun init() {
     CreateEstrogenServerConfig.initialize();
 
     CreateEstrogenRecipes.register()
-    CreateEstrogenRecipes.Serializers.register()
     CreateEstrogenBlocks.register()
     CreateEstrogenBlockEntities.register()
     CreateEstrogenItems.register()

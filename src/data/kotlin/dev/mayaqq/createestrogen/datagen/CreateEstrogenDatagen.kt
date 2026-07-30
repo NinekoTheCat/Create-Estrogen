@@ -1,5 +1,6 @@
 package dev.mayaqq.createestrogen.datagen
 
+import dev.latvian.mods.kubejs.recipe.RecipeSchemaProvider
 import dev.mayaqq.createestrogen.datagen.loottables.CreateEstrogenLoottables
 import dev.mayaqq.createestrogen.datagen.models.CreateEstrogenItemModels
 import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenCentrifugingRecipesGen
@@ -17,6 +18,7 @@ import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenSplashingRecipesG
 import dev.mayaqq.createestrogen.datagen.tags.CreateEstrogenBlockTags
 import dev.mayaqq.createestrogen.datagen.tags.CreateEstrogenItemTags
 import dev.mayaqq.createestrogen.datagen.translations.CreateEstrogenTranslations
+import dev.mayaqq.createestrogen.id
 import invoke.kitty.kritter.platform.Mod
 import invoke.kitty.kritter.platform.forge.EntrypointHandler
 import invoke.kitty.kritter.platform.forge.eventBus
@@ -24,6 +26,7 @@ import net.minecraft.core.HolderLookup
 import net.minecraft.data.DataGenerator
 import net.minecraft.data.DataProvider
 import net.minecraft.data.PackOutput
+import net.minecraft.resources.ResourceLocation
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.neoforge.data.event.GatherDataEvent
 import java.util.concurrent.CompletableFuture
@@ -40,7 +43,12 @@ object CreateEstrogenDatagen {
         val generator = event.generator
         val efh = event.existingFileHelper
         val lookup = event.lookupProvider
-
+//        event.addProvider(object: RecipeSchemaProvider("Create: Estrogen Recipe Schema Provider",event) {
+//            override fun add(lookup: HolderLookup.Provider?) {
+//                add(id("centrifuging")) { builder ->
+//                }
+//            }
+//        })
         event.includeClient().apply {
             generator.addProvider(this, ::CreateEstrogenTranslations)
             generator.addProvider(this) { output -> CreateEstrogenItemModels(output, efh) }
@@ -49,6 +57,7 @@ object CreateEstrogenDatagen {
             val blockTags = generator.addProvider(this) { output -> CreateEstrogenBlockTags(output, lookup, efh) }
             generator.addProvider(this) { output -> CreateEstrogenItemTags(output, lookup, blockTags.contentsGetter(), efh) }
             generator.addProvider(this) { output -> CreateEstrogenLoottables(output, lookup) }
+
 
             // Recipes
             event.addProvider(this, ::CreateEstrogenRecipes)
@@ -63,6 +72,7 @@ object CreateEstrogenDatagen {
             event.addProvider(this, ::CreateEstrogenSandpaperPolishingRecipesGen)
             event.addProvider(this, ::CreateEstrogenSequencedAssemblyRecipesGen)
             event.addProvider(this, ::CreateEstrogenSplashingRecipesGen)
+
         }
     }
 

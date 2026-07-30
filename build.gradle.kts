@@ -28,6 +28,11 @@ repositories {
     maven(url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1") { name = "DevAuth maven"; description = "DevAuth" }
     maven(url ="https://maven.latvian.dev/releases") {name = "latvian.dev"; description = "KubeJS" }
     maven(url = "https://maven.shedaniel.me") { name = "Shedaniel" }
+    maven(url = "https://jitpack.io"){
+        content {
+            includeGroup("com.github.rtyley")
+        }
+    }
     mavenLocal()
     mavenCentral()
 }
@@ -80,7 +85,7 @@ cloche {
 
             data {
                 dependencies {
-                    compileOnly("dev.mayaqq:estrogen:${libs.versions.estrogen}:neoforge")
+                    modApi("dev.mayaqq:estrogen:${libs.versions.estrogen}:neoforge")
                 }
             }
             runs {
@@ -95,8 +100,10 @@ cloche {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kotlinx.coroutines.core)
                 modApi(libs.cynosure)
-                modApi(libs.estrogen)
-                modApi(libs.kubejs)
+                modApi(libs.estrogen) {
+                    this.artifact { classifier = "neoforge" }
+                }
+                modApi(libs.forge.kubejs)
                 modCompileOnly(libs.forge.registrate)
 
                 // Neoforge
@@ -108,7 +115,6 @@ cloche {
                 modCompileOnly(libs.forge.emi)
                 modApi(libs.forge.kritter)
                 modApi(libs.forge.create)
-                modCompileOnly(libs.forge.kubejs)
                 modApi(libs.forge.rlib)
                 modApi(libs.forge.csr)
                 modApi(libs.forge.ponder)
