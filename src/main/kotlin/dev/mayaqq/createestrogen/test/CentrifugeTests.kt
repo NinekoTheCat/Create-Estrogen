@@ -2,15 +2,13 @@ package dev.mayaqq.createestrogen.forge.test
 
 import dev.mayaqq.createestrogen.MOD_ID
 import dev.mayaqq.estrogen.content.EstrogenFluids
-import earth.terrarium.botarium.common.fluid.base.FluidContainer
-import earth.terrarium.botarium.common.fluid.base.FluidHolder
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
 import net.minecraft.gametest.framework.GameTest
 import net.minecraft.gametest.framework.GameTestAssertPosException
 import net.minecraft.gametest.framework.GameTestHelper
-import net.minecraftforge.gametest.GameTestHolder
-import net.minecraftforge.gametest.PrefixGameTestTemplate
+import net.neoforged.neoforge.gametest.GameTestHolder
+import net.neoforged.neoforge.gametest.PrefixGameTestTemplate
 
 @GameTestHolder(MOD_ID)
 class CentrifugeTests {

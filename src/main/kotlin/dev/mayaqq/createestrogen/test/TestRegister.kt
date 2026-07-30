@@ -1,11 +1,15 @@
 package dev.mayaqq.createestrogen.forge.test
 
-import net.minecraftforge.event.RegisterGameTestsEvent
-import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.minecraftforge.fml.common.Mod
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus
+import invoke.kitty.kritter.platform.Mod
+import invoke.kitty.kritter.platform.forge.EntrypointHandler
+import invoke.kitty.kritter.platform.forge.eventBus
+import net.neoforged.bus.api.SubscribeEvent
+import net.neoforged.neoforge.event.RegisterGameTestsEvent
 
-@Mod.EventBusSubscriber(bus = Bus.MOD)
+@EntrypointHandler("init")
+fun init(mod: Mod) {
+    mod.eventBus.register(TestRegister)
+}
 object TestRegister {
     @SubscribeEvent
     fun registerTests(event: RegisterGameTestsEvent) {

@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer
 import dev.mayaqq.createestrogen.content.blockEntities.CentrifugeBlockEntity
-import earth.terrarium.botarium.common.fluid.base.FluidContainer
 import net.createmod.catnip.platform.CatnipServices
 import net.createmod.catnip.render.CachedBuffers
 import net.createmod.catnip.render.SuperByteBuffer
