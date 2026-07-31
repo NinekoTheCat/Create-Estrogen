@@ -32,7 +32,7 @@ object CreateEstrogenBlocks: Registrar<Block> by Registrar(MOD_ID, Registries.BL
             requiresCorrectToolForDrops()
             mapColor(MapColor.COLOR_ORANGE).noOcclusion()
         }
-        renderType = BlockRenderType.CUTOUT_MIPPED;
+        renderType = BlockRenderType.CUTOUT_MIPPED
         onRegister {
             BlockStressValues.IMPACTS.register(it) {
                 8.0

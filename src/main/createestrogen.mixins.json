@@ -8,7 +8,7 @@
     "ConfigModListScreenMixin",
     "PackageItemMixin",
     "PackageStyleMixin",
-    "CreativeTabsMixin"
+    "CreativeModeTabsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
