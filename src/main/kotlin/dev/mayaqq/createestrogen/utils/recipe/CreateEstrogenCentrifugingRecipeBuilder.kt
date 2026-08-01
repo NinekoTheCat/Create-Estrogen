@@ -27,7 +27,7 @@ class CreateEstrogenCentrifugingRecipeBuilder(val _id: ResourceLocation) : Recip
         return this
     }
 
-    fun build(): CentrifugingRecipe = CentrifugingRecipe(_id, recipeInputs, recipeOutput!!)
+    fun build(): CentrifugingRecipe = CentrifugingRecipe(recipeInputs, recipeOutput!!)
 
 
     override fun unlockedBy(
@@ -52,6 +52,10 @@ class CreateEstrogenCentrifugingRecipeBuilder(val _id: ResourceLocation) : Recip
         val recipe = build()
         recipeOutput.accept(id, recipe, null, *conditions.toTypedArray())
     }
+
+    override fun save(recipeOutput: RecipeOutput) =
+        save(recipeOutput, _id)
+
 }
 
 

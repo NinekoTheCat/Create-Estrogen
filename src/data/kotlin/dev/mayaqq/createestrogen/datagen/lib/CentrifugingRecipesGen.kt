@@ -25,4 +25,5 @@ abstract class CentrifugingRecipesGen(output: PackOutput, lookup: CompletableFut
         return recipe
     }
 
+
 }

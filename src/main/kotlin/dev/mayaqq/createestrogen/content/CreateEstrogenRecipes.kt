@@ -18,6 +18,6 @@ object CreateEstrogenRecipes : Registrar<RecipeType<*>> by Registrar(MOD_ID, Reg
 object CreateEstrogenSerializers : Registrar<RecipeSerializer<*>> by Registrar(MOD_ID, Registries.RECIPE_SERIALIZER) {
     val CENTRIFUGING_SERIALIZER by codecSerializer(
         "centrifuging",
-        CentrifugingRecipe::codec, CentrifugingRecipe::netCodec
+        { CentrifugingRecipe.codec }, { CentrifugingRecipe.netCodec }
     ) {}
 }

@@ -9,7 +9,6 @@ import dev.mayaqq.createestrogen.content.CreateEstrogenRecipes
 import dev.mayaqq.createestrogen.content.CreateEstrogenSerializers
 import dev.mayaqq.createestrogen.content.FluidContainer
 import dev.mayaqq.createestrogen.id
-import dev.mayaqq.cynosure.core.bytecodecs.ByteCodecs
 import dev.mayaqq.cynosure.core.bytecodecs.toByteCodec
 import dev.mayaqq.cynosure.core.codecs.fieldOf
 import earth.terrarium.common_storage_lib.resources.fluid.FluidResource
@@ -107,7 +106,6 @@ private operator fun FluidContainer.iterator() = object : Iterator<StorageSlot<F
 
 }
 class CentrifugingRecipe(
-    @Suppress("Unused") val id: ResourceLocation,
                          val inputs: List<RatioFluidIngredient>,
                          val result: RatioFluidOutput) : Recipe<CentrifugingContainer>{
     override fun matches(circumstance: CentrifugingContainer, p1: Level): Boolean {
@@ -137,16 +135,14 @@ class CentrifugingRecipe(
 
     override fun getType(): RecipeType<*> = CreateEstrogenRecipes.CENTRIFUGING
     companion object RecipeViewerInfo : dev.mayaqq.estrogen.content.recipes.viewers.RecipeViewerInfo {
-        fun codec(id: ResourceLocation): Codec<CentrifugingRecipe> = RecordCodecBuilder.create { instance ->
+        val codec: Codec<CentrifugingRecipe> = RecordCodecBuilder.create { instance ->
             instance.group(
-                RecordCodecBuilder.point(id),
                 RatioFluidIngredient.codec().listOf().fieldOf("ingredients").forGetter(CentrifugingRecipe::inputs),
                RatioFluidOutput.codec().fieldOf("result").forGetter(CentrifugingRecipe::result)
             ).apply(instance,::CentrifugingRecipe)
         }
 
-        fun netCodec(id: ResourceLocation): ByteCodec<CentrifugingRecipe> = ObjectByteCodec.create(
-            ByteCodecs.constantFieldOf(id),
+        val netCodec: ByteCodec<CentrifugingRecipe> = ObjectByteCodec.create(
             RatioFluidIngredient.netCodec().listOf() fieldOf CentrifugingRecipe::inputs,
             RatioFluidOutput.netCodec() fieldOf CentrifugingRecipe::result,
             ::CentrifugingRecipe
