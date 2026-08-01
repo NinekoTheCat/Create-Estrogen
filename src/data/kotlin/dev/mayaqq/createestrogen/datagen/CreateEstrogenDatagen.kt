@@ -1,32 +1,17 @@
 package dev.mayaqq.createestrogen.datagen
 
-import dev.latvian.mods.kubejs.recipe.RecipeSchemaProvider
 import dev.mayaqq.createestrogen.datagen.loottables.CreateEstrogenLoottables
 import dev.mayaqq.createestrogen.datagen.models.CreateEstrogenItemModels
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenCentrifugingRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenCompactingRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenDeployingRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenEmptyingRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenFillingRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenItemApplicationRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenMillingRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenMixingRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenRecipes
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenSandpaperPolishingRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenSequencedAssemblyRecipesGen
-import dev.mayaqq.createestrogen.datagen.recipes.CreateEstrogenSplashingRecipesGen
+import dev.mayaqq.createestrogen.datagen.recipes.*
 import dev.mayaqq.createestrogen.datagen.tags.CreateEstrogenBlockTags
 import dev.mayaqq.createestrogen.datagen.tags.CreateEstrogenItemTags
 import dev.mayaqq.createestrogen.datagen.translations.CreateEstrogenTranslations
-import dev.mayaqq.createestrogen.id
 import invoke.kitty.kritter.platform.Mod
 import invoke.kitty.kritter.platform.forge.EntrypointHandler
 import invoke.kitty.kritter.platform.forge.eventBus
 import net.minecraft.core.HolderLookup
-import net.minecraft.data.DataGenerator
 import net.minecraft.data.DataProvider
 import net.minecraft.data.PackOutput
-import net.minecraft.resources.ResourceLocation
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.neoforge.data.event.GatherDataEvent
 import java.util.concurrent.CompletableFuture
@@ -37,7 +22,6 @@ fun init(mod: Mod) {
 }
 
 object CreateEstrogenDatagen {
-
     @SubscribeEvent
     fun onDatagenInit(event: GatherDataEvent) {
         val generator = event.generator

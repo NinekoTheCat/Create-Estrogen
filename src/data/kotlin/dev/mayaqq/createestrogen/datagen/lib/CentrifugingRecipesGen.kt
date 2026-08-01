@@ -12,14 +12,14 @@ abstract class CentrifugingRecipesGen(output: PackOutput, lookup: CompletableFut
         return "$modid's Centrifuging Recipes"
     }
     protected fun create(name: String, transform: CreateEstrogenCentrifugingRecipeBuilder.() -> CreateEstrogenCentrifugingRecipeBuilder) : GeneratedRecipe {
-        val recipe = GeneratedRecipe {
+        val recipe = GeneratedRecipe { out ->
             transform.invoke(
                 CreateEstrogenCentrifugingRecipeBuilder(
                     asResource(
                         name
                     )
                 )
-            ).build()
+            ).save(out)
         }
         all.add(recipe)
         return recipe

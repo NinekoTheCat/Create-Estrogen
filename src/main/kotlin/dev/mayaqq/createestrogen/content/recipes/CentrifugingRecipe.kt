@@ -6,6 +6,7 @@ import com.teamresourceful.bytecodecs.base.ByteCodec
 import com.teamresourceful.bytecodecs.base.`object`.ObjectByteCodec
 import dev.mayaqq.createestrogen.content.CreateEstrogenBlocks
 import dev.mayaqq.createestrogen.content.CreateEstrogenRecipes
+import dev.mayaqq.createestrogen.content.CreateEstrogenSerializers
 import dev.mayaqq.createestrogen.content.FluidContainer
 import dev.mayaqq.createestrogen.id
 import dev.mayaqq.cynosure.core.bytecodecs.ByteCodecs
@@ -105,7 +106,8 @@ private operator fun FluidContainer.iterator() = object : Iterator<StorageSlot<F
 
 
 }
-class CentrifugingRecipe(val _id: ResourceLocation,
+class CentrifugingRecipe(
+    @Suppress("Unused") val id: ResourceLocation,
                          val inputs: List<RatioFluidIngredient>,
                          val result: RatioFluidOutput) : Recipe<CentrifugingContainer>{
     override fun matches(circumstance: CentrifugingContainer, p1: Level): Boolean {
@@ -131,7 +133,7 @@ class CentrifugingRecipe(val _id: ResourceLocation,
     override fun getResultItem(registries: HolderLookup.Provider): ItemStack = result.fluid.bucket.defaultInstance
 
 
-    override fun getSerializer(): RecipeSerializer<*> = CreateEstrogenRecipes.Serializers.CENTRIFUGING_SERIALIZER
+    override fun getSerializer(): RecipeSerializer<*> = CreateEstrogenSerializers.CENTRIFUGING_SERIALIZER
 
     override fun getType(): RecipeType<*> = CreateEstrogenRecipes.CENTRIFUGING
     companion object RecipeViewerInfo : dev.mayaqq.estrogen.content.recipes.viewers.RecipeViewerInfo {
