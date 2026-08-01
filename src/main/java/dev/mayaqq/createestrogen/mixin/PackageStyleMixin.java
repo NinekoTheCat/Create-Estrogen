@@ -51,9 +51,8 @@ class PackageStyleMixin {
             )
     )
     ResourceLocation getRiggingModel(String path, Operation<ResourceLocation> original) {
-        var regex = createestrogen$IdRegex.matcher(type);
-        if (regex.matches()) {
-            return ResourceLocation.fromNamespaceAndPath(regex.group(0), path);
+        if (createestrogen$IdRegex.asMatchPredicate().test(type)) {
+            return ResourceLocation.fromNamespaceAndPath(ResourceLocation.parse(type).getNamespace(), path);
         } else return original.call(path);
     }
 }
