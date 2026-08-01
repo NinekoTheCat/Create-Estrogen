@@ -10,6 +10,7 @@ import dev.mayaqq.estrogen.api.EstrogenFlag
 import dev.mayaqq.estrogen.api.EstrogenModule
 import dev.mayaqq.estrogen.api.ScreenProvider
 import invoke.kitty.kritter.platform.forge.EntrypointHandler
+import invoke.kitty.kritter.utils.clientOnly
 import invoke.kitty.kritter.utils.color.Color
 import invoke.kitty.kritter.utils.color.rgb
 import net.minecraft.client.gui.screens.Screen
@@ -31,6 +32,7 @@ fun init() {
     CreateEstrogenBlockEntities.register()
     CreateEstrogenItems.register()
     CreateEstrogenCreativeTab.register()
+    clientOnly {  }
 }
 
 @EstrogenEntrypoint

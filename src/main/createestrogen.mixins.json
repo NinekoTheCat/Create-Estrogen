@@ -7,8 +7,7 @@
     "SpeedLevelMixin",
     "ConfigModListScreenMixin",
     "PackageItemMixin",
-    "PackageStyleMixin",
-    "CreativeModeTabsMixin"
+    "PackageStyleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

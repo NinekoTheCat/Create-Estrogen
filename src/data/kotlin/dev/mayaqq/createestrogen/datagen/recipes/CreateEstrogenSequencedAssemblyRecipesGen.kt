@@ -19,7 +19,7 @@ class CreateEstrogenSequencedAssemblyRecipesGen(output: PackOutput, lookup: Comp
         create("estrogen_patch") {
             it.require(Items.PAPER)
                 .transitionTo(CreateEstrogenItems.IncompleteEstrogenPatch)
-                .addOutput(EstrogenItems.EstrogenPatches.get().getFullStack(), 120f)
+                .addOutput(EstrogenItems.EstrogenPatch.get().getFullStack(), 120f)
                 .addOutput(EstrogenItems.EstrogenPill, 16f)
                 .addOutput(Items.PAPER, 5f)
                 .addOutput(Items.SLIME_BALL, 5f)
