@@ -89,9 +89,17 @@ cloche {
                 }
             }
             runs {
-                data()
-                client()
-                server()
+                this.data() {
+                    prop("neoforge.enabledGameTestNamespaces", "createestrogen")
+                }
+                client() {
+                    /// cloche is too dumb to do this for us, this makes it so that the run all tests command doesn't run create's tests
+                    prop("neoforge.enabledGameTestNamespaces", "createestrogen")
+
+                }
+                server() {
+                    prop("neoforge.enabledGameTestNamespaces", "createestrogen")
+                }
             }
 
             dependencies {

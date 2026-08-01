@@ -4,15 +4,10 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import com.teamresourceful.bytecodecs.base.ByteCodec
 import com.teamresourceful.bytecodecs.base.`object`.ObjectByteCodec
-import dev.mayaqq.createestrogen.content.CreateEstrogenBlocks
-import dev.mayaqq.createestrogen.content.CreateEstrogenRecipes
-import dev.mayaqq.createestrogen.content.CreateEstrogenSerializers
-import dev.mayaqq.createestrogen.content.FluidContainer
+import dev.mayaqq.createestrogen.content.*
 import dev.mayaqq.createestrogen.id
 import dev.mayaqq.cynosure.core.bytecodecs.toByteCodec
 import dev.mayaqq.cynosure.core.codecs.fieldOf
-import earth.terrarium.common_storage_lib.resources.fluid.FluidResource
-import earth.terrarium.common_storage_lib.storage.base.StorageSlot
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
@@ -88,23 +83,7 @@ data class RatioFluidOutput(
     }
 
 }
-@Suppress("Unused")
-private operator fun FluidContainer.iterator() = object : Iterator<StorageSlot<FluidResource>> {
-    var currentIdx = 0
-    val inner = this@iterator
-    override fun next(): StorageSlot<FluidResource> {
-        currentIdx++
-        if (!hasNext()) {
-            throw NoSuchElementException()
-        }
-        return inner[currentIdx]
-    }
 
-    override fun hasNext(): Boolean =
-        currentIdx < inner.size()
-
-
-}
 class CentrifugingRecipe(
                          val inputs: List<RatioFluidIngredient>,
                          val result: RatioFluidOutput) : Recipe<CentrifugingContainer>{
